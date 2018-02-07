@@ -1,3 +1,7 @@
+//***************************************************************************
+// mainwindow.h - Contains header elements specific to mainwindow.cpp.
+//***************************************************************************
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -15,8 +19,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_label_linkActivated(const QString &link);
+
 private:
     Ui::MainWindow *ui;
 };
 
-#endif // MAINWINDOW_H
+#endif

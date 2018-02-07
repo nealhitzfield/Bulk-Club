@@ -1,3 +1,7 @@
+//***************************************************************************
+// mainwindow.cpp: This file contains functions specific to GUI elements.
+//***************************************************************************
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
