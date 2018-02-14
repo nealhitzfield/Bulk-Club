@@ -11,6 +11,15 @@
 
 using namespace std;
 
+enum memberType
+{
+    REGULAR,
+    EXECUTIVE
+};
+
+#include "regMemberH.h"
+#include "execMemberH.h"
+
 /*Function Prototypes.
  *
  *
