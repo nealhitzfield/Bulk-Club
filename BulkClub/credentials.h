@@ -9,10 +9,10 @@ private:
     QString username;
     QString password;
 public:
-    Credentials();
     Credentials(QString usern, QString passw);
 
-    st
+    QString GetUsername() const;
+    QString GetPassword() const;
 };
 
 #endif // CREDENTIALS_H

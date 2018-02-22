@@ -3,21 +3,23 @@
 
 #include <QDate>
 
+enum MemberType {REGULAR, EXECUTIVE};
+
 class Member
 {
 private:
-    QString memberName;
-    int memberID;
-    QString membershipType;
-    QDate membershipExpiration;
-    double totalSpent;
-    double rebate;
+    QString     memberName;
+    int         memberID;
+    MemberType  membership;
+    QDate       expirationDate;
+    double      totalSpent;
+    double      rebate;
 public:
-    Member();
-    Member(QString name, int id, QString mType, QDate expDate);
+    Member(QString name, int id, MemberType mType, QDate expDate);
 
+    QString GetMemberName() const;
     int GetID() const;
-    QString GetMembershipType() const;
+    MemberType GetMembershipType() const;
     QDate GetExpirationDate() const;
     double GetTotalSpent() const;
     double GetRebate() const;
