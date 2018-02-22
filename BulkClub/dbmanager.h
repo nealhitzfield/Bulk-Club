@@ -1,18 +1,30 @@
 #ifndef DBMANAGER_H
 #define DBMANAGER_H
 
-#include <QObject>
-#include <QMainWindow>
+#include <QtSql>
+#include <QList>
+#include "member.h"
+#include "transaction.h"
+#include "item.h"
 
-class DBManager : public QMainWindow
+class DBManager
 {
-    Q_OBJECT
+private:
+    QSqlDatabase bulkdb;
 public:
-    explicit DBManager(QWidget *parent = nullptr);
+    DBManager(const QString& dbFilename);
 
-signals:
+    // Members
+    bool AddMember(const Member& newMember);
+    bool RemoveMember(const Member& member);
 
-public slots:
+    // Transactions
+    bool AddTransaction(const Transaction& newTransaction);
+
+    // Inventory
+    bool AddItem(const Item& newItem);
+    bool RemoveItem(const Item& item);
+
 };
 
 #endif // DBMANAGER_H

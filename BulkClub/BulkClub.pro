@@ -27,12 +27,18 @@ SOURCES += main.cpp\
         loginwindow.cpp \
     smwindow.cpp \
     adminwindow.cpp \
-    dbmanager.cpp
+    dbmanager.cpp \
+    member.cpp \
+    transaction.cpp \
+    item.cpp
 
 HEADERS  += loginwindow.h \
     smwindow.h \
     adminwindow.h \
-    dbmanager.h
+    dbmanager.h \
+    member.h \
+    transaction.h \
+    item.h
 
 FORMS    += loginwindow.ui \
     smwindow.ui \
