@@ -6,18 +6,18 @@
 class Member
 {
 private:
-    string memberName;
+    QString memberName;
     int memberID;
-    string membershipType;
+    QString membershipType;
     QDate membershipExpiration;
     double totalSpent;
     double rebate;
 public:
     Member();
-    Member(string name, int id, string mType, QDate expDate);
+    Member(QString name, int id, QString mType, QDate expDate);
 
     int GetID() const;
-    string GetMembershipType() const;
+    QString GetMembershipType() const;
     QDate GetExpirationDate() const;
     double GetTotalSpent() const;
     double GetRebate() const;

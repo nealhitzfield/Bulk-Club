@@ -14,6 +14,9 @@ private:
 public:
     DBManager(const QString& dbFilename);
 
+    // Login
+    bool VerifyLogin(const Credentials& credentials);
+
     // Members
     bool AddMember(const Member& newMember);
     bool RemoveMember(const Member& member);

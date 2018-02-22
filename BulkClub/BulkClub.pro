@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     dbmanager.cpp \
     member.cpp \
     transaction.cpp \
-    item.cpp
+    item.cpp \
+    credentials.cpp
 
 HEADERS  += loginwindow.h \
     smwindow.h \
@@ -38,7 +39,8 @@ HEADERS  += loginwindow.h \
     dbmanager.h \
     member.h \
     transaction.h \
-    item.h
+    item.h \
+    credentials.h
 
 FORMS    += loginwindow.ui \
     smwindow.ui \

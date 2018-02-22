@@ -1,6 +1,7 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#include <QObject>
 
 class Item
 {
@@ -9,9 +10,9 @@ private:
     double  itemPrice;
 public:
     Item();
-    Item(string name, double price);
+    Item(QString name, double price);
 
-    string GetItemName() const;
+    QString GetItemName() const;
     double GetItemPrice() const;
 };
 
