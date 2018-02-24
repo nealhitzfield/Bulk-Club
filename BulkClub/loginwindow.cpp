@@ -5,13 +5,12 @@
 
 LoginWindow::LoginWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::LoginWindow)
+    ui(new Ui::LoginWindow),
+    bulkdb(DBManager("bulkclub.db"))
 {
     ui->setupUi(this);
-    myDb = QSqlDatabase::addDatabase("QSQLITE");
-    myDb.setDatabaseName("bulkclub.db");
 
-    if(!myDb.open())
+    if(!bulkdb.isOpen())
     {
         ui->label_status->setText("Failed to connect to database");
     }
@@ -28,54 +27,26 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::on_pushButton_clicked()
 {
-    QString username;
-    QString password;
     QString employeeType;
-    QSqlQuery query;
     SMWindow smWin;
     AdminWindow adminWin;
 
-    username = ui->lineEdit_username->text();
-    password = ui->lineEdit_password->text();
-
-    if(!myDb.open())
+    if(bulkdb.VerifyLogin(Credentials(ui->lineEdit_username->text(),
+                                      ui->lineEdit_password->text()), employeeType))
     {
-        qDebug() << "Failed to verify credentials";
-        return;
-    }
-
-    query.prepare("SELECT username, password, employee_type FROM credentials WHERE username = :username AND password = :password");
-    query.bindValue(":username", username);
-    query.bindValue(":password", password);
-
-    if(query.exec())
-    {
-        if(query.next())
+        if(employeeType == "administrator")
         {
-            employeeType = query.value(2).toString();
-            if(employeeType == "administrator")
-            {
-                adminWin.setModal(true);
-                adminWin.exec();
-            }
-            else if(employeeType == "store manager")
-            {
-                smWin.setModal(true);
-                smWin.exec();
-            }
-            else
-            {
-                ui->label_status->setText("Unknown Employee Type");
-            }
-
+            adminWin.setModal(true);
+            adminWin.exec();
         }
-        else
+        else if(employeeType == "store manager")
         {
-            ui->label_status->setText("Invalid username/password");
+            smWin.setModal(true);
+            smWin.exec();
         }
     }
     else
     {
-        qDebug() << query.lastError();
+        ui->label_status->setText("Invalid username/password");
     }
 }
