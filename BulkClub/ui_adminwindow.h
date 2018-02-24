@@ -39,7 +39,7 @@ public:
     QWidget *InventoryTab;
     QHBoxLayout *horizontalLayout_5;
     QVBoxLayout *verticalLayout_2;
-    QTableView *tableView_2;
+    QTableView *itemsTable;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *addItemButton;
     QPushButton *removeItemButtton;
@@ -89,10 +89,10 @@ public:
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        tableView_2 = new QTableView(InventoryTab);
-        tableView_2->setObjectName(QStringLiteral("tableView_2"));
+        itemsTable = new QTableView(InventoryTab);
+        itemsTable->setObjectName(QStringLiteral("itemsTable"));
 
-        verticalLayout_2->addWidget(tableView_2);
+        verticalLayout_2->addWidget(itemsTable);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));

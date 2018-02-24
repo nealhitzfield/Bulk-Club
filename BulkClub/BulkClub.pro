@@ -32,9 +32,10 @@ SOURCES += main.cpp\
     transaction.cpp \
     item.cpp \
     credentials.cpp \
-    membermodel.cpp \
     addmemberwindow.cpp \
-    confirmremoval.cpp
+    confirmremoval.cpp \
+    addtransactionwindow.cpp \
+    models.cpp
 
 HEADERS  += loginwindow.h \
     smwindow.h \
@@ -44,12 +45,14 @@ HEADERS  += loginwindow.h \
     transaction.h \
     item.h \
     credentials.h \
-    membermodel.h \
     addmemberwindow.h \
-    confirmremoval.h
+    confirmremoval.h \
+    addtransactionwindow.h \
+    models.h
 
 FORMS    += loginwindow.ui \
     smwindow.ui \
     adminwindow.ui \
     addmemberwindow.ui \
-    confirmremoval.ui
+    confirmremoval.ui \
+    addtransactionwindow.ui

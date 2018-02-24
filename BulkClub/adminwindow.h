@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QTabWidget>
-#include "membermodel.h"
+#include "models.h"
 #include "dbmanager.h"
 #include "addmemberwindow.h"
 
@@ -31,7 +31,8 @@ signals:
     void sendModel(MemberModel *mod);
 private:
     Ui::AdminWindow *ui;
-    MemberModel *model;
+    MemberModel *mModel;
+    ItemModel *iModel;
     DBManager bulkdb;
     int selectedID;
 };

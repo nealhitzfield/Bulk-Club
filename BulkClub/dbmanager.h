@@ -33,6 +33,7 @@ public:
     // Inventory
     bool AddItem(const Item& newItem);
     bool RemoveItem(const Item& item);
+    QList<Item> GetAllItems();
 
     // Connection Test
     bool isOpen() const;

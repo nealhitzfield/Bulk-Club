@@ -11,8 +11,10 @@ AddMemberWindow::AddMemberWindow(QWidget *parent) :
     ui->mID->setMinimum(10000);
     ui->mID->setMaximum(99999);
     connect(ui->lineEdit_mName, SIGNAL(textChanged(QString)), this, SLOT(checkInput(QString)));
-    ui->addButton->setEnabled(false);
+    ui->addButton->setDisabled(true);
     ui->expiration_date->setMinimumDate(QDate::currentDate());
+    ui->yesButton->setDisabled(true);
+    ui->noButton->setDisabled(true);
 }
 
 AddMemberWindow::~AddMemberWindow()
@@ -23,7 +25,22 @@ AddMemberWindow::~AddMemberWindow()
 void AddMemberWindow::closeEvent(QCloseEvent *)
 {
     emit windowClosed();
-    qDebug() << "Emitting window closed";
+}
+
+void AddMemberWindow::lockInputs()
+{
+    ui->lineEdit_mName->setDisabled(true);
+    ui->mID->setDisabled(true);
+    ui->mTypes->setDisabled(true);
+    ui->expiration_date->setDisabled(true);
+}
+
+void AddMemberWindow::enableInputs()
+{
+    ui->lineEdit_mName->setEnabled(true);
+    ui->mID->setEnabled(true);
+    ui->mTypes->setEnabled(true);
+    ui->expiration_date->setEnabled(true);
 }
 
 void AddMemberWindow::checkInput(const QString &text)
@@ -56,7 +73,11 @@ void AddMemberWindow::on_addButton_clicked()
    {
        if(bulkdb.AddMember(Member(name, id, memberType, expDate)))
        {
-           ui->label_status->setText("Member added");
+           ui->label_status->setText("Add Transactions?");
+           lockInputs();
+           ui->addButton->setEnabled(false);
+           ui->yesButton->setEnabled(true);
+           ui->noButton->setEnabled(true);
        }
        else
        {
@@ -67,4 +88,26 @@ void AddMemberWindow::on_addButton_clicked()
    {
        ui->label_status->setText("Member ID exists");
    }
+}
+
+void AddMemberWindow::on_noButton_clicked()
+{
+    enableInputs();
+    ui->label_status->setText("Enter New Member");
+    ui->yesButton->setDisabled(true);
+    ui->noButton->setDefault(true);
+}
+
+void AddMemberWindow::on_yesButton_clicked()
+{
+    AddTransactionWindow *transWin;
+    int id;
+
+    transWin = new AddTransactionWindow;
+    id = ui->mID->value();
+    connect(this, SIGNAL(sendID(int)), transWin, SLOT(receiveID(int)));
+    emit sendID(id);
+    transWin->setModal(true);
+    transWin->exec();
+    delete transWin;
 }

@@ -7,7 +7,6 @@ DBManager::DBManager()
 DBManager::DBManager(const QString& dbFilename)
 {
     bulkdb = QSqlDatabase::addDatabase("QSQLITE");
-    qDebug() << "Connecting to " << dbFilename;
     bulkdb.setDatabaseName(dbFilename);
 
     if(!bulkdb.open())
@@ -237,4 +236,35 @@ QList<Member> DBManager::GetAllMembers()
 bool DBManager::isOpen() const
 {
     return bulkdb.isOpen();
+}
+
+QList<Item> DBManager::GetAllItems()
+{
+    QList<Item> itemList;
+    QString name;
+    double price;
+    int nameIndex;
+    int priceIndex;
+    QSqlQuery query;
+
+    query.prepare("SELECT item_name, price FROM inventory");
+
+    if(query.exec())
+    {
+        nameIndex = query.record().indexOf("item_name");
+        priceIndex = query.record().indexOf("price");
+        while(query.next())
+        {
+            name = query.value(nameIndex).toString();
+            price = query.value(priceIndex).toDouble();
+
+            itemList.append(Item(name, price));
+        }
+    }
+    else
+    {
+        qDebug() << "Error getting items: " << query.lastError();
+    }
+
+    return itemList;
 }

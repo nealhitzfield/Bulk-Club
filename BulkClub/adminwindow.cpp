@@ -8,9 +8,12 @@ AdminWindow::AdminWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    model = new MemberModel(bulkdb.GetAllMembers());
-    ui->membersTable->setModel(model);
+    mModel = new MemberModel(bulkdb.GetAllMembers());
+    iModel = new ItemModel(bulkdb.GetAllItems());
+    ui->membersTable->setModel(mModel);
+    ui->itemsTable->setModel(iModel);
     ui->membersTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->itemsTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->removeMemberButton->setEnabled(false);
     selectedID = 0;
 }
@@ -18,7 +21,7 @@ AdminWindow::AdminWindow(QWidget *parent) :
 AdminWindow::~AdminWindow()
 {
     delete ui;
-    delete model;
+    delete mModel;
 }
 
 void AdminWindow::on_addMemberButton_clicked()
@@ -28,7 +31,6 @@ void AdminWindow::on_addMemberButton_clicked()
     connect(addWin, SIGNAL(windowClosed()), this, SLOT(updateView()));
     addWin->setModal(true);
     addWin->exec();
-    qDebug() << "Deleting";
     delete addWin;
 }
 
@@ -50,15 +52,11 @@ void AdminWindow::on_removeMemberButton_clicked()
         delete tempModel;
         delete remWin;
     }
-
-
-
 }
 
 void AdminWindow::updateView()
 {
-    qDebug() << "Signal received";
-    model->setList(bulkdb.GetAllMembers());
+    mModel->setList(bulkdb.GetAllMembers());
 }
 
 void AdminWindow::removeMember()

@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QAbstractTableModel>
-#include "membermodel.h"
+#include "models.h"
 
 namespace Ui {
 class ConfirmRemoval;

@@ -8,12 +8,14 @@ INPUT(
 ./debug\transaction.o
 ./debug\item.o
 ./debug\credentials.o
-./debug\membermodel.o
 ./debug\addmemberwindow.o
 ./debug\confirmremoval.o
+./debug\addtransactionwindow.o
+./debug\models.o
 ./debug\moc_loginwindow.o
 ./debug\moc_smwindow.o
 ./debug\moc_adminwindow.o
 ./debug\moc_addmemberwindow.o
 ./debug\moc_confirmremoval.o
+./debug\moc_addtransactionwindow.o
 );
