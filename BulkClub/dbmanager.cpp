@@ -19,7 +19,6 @@ DBManager::DBManager(const QString& dbFilename)
     }
 }
 
-<<<<<<< HEAD
     bool DBManager::AddItem(const Item& newItem)
     {
         bool success = false;
@@ -89,7 +88,7 @@ DBManager::DBManager(const QString& dbFilename)
 
         return exists;
     }
-=======
+
 bool DBManager::VerifyLogin(const Credentials &credentials, QString& employeeType)
 {
     QSqlQuery query;
@@ -339,4 +338,4 @@ QList<Item> DBManager::GetAllItems()
 
     return itemList;
 }
->>>>>>> 43f24e40a20e2f08b95cb34e5f32d573491b9ff6
+

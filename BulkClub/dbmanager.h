@@ -14,10 +14,8 @@ private:
     QSqlDatabase bulkdb;
 public:
     DBManager();
-<<<<<<< HEAD
-=======
+
     DBManager(const QString& dbFilename);
->>>>>>> 43f24e40a20e2f08b95cb34e5f32d573491b9ff6
 
     // Login
     bool VerifyLogin(const Credentials& credentials, QString& employeeType);
@@ -36,11 +34,9 @@ public:
     // Inventory
     bool AddItem(const Item& newItem);
     bool RemoveItem(const Item& item);
-<<<<<<< HEAD
     bool ItemExists(const Item& item) const;
-=======
+
     QList<Item> GetAllItems();
->>>>>>> 43f24e40a20e2f08b95cb34e5f32d573491b9ff6
 
     // Connection Test
     bool isOpen() const;
