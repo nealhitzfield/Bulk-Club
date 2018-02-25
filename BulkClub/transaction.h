@@ -2,6 +2,7 @@
 #define TRANSACTION_H
 
 #include <QDate>
+#include "item.h"
 
 class Transaction
 {

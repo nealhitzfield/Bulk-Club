@@ -5,6 +5,8 @@
 #include <QtSql>
 #include <QDebug>
 #include <QFileInfo>
+#include "dbmanager.h"
+#include "credentials.h"
 
 namespace Ui {
 class LoginWindow;
@@ -23,7 +25,7 @@ private slots:
 
 private:
     Ui::LoginWindow *ui;
-    QSqlDatabase myDb;
+    DBManager bulkdb;
 };
 
 #endif // LOGINWINDOW_H

@@ -10,6 +10,16 @@ Member::Member(QString name, int id, MemberType mType, QDate expDate)
     rebate          = 0.00;
 }
 
+Member::Member(QString name, int id, MemberType mType, QDate expDate, double totSpent, double rebateAmt)
+{
+    memberName      = name;
+    memberID        = id;
+    membership      = mType;
+    expirationDate  = expDate;
+    totalSpent      = totSpent;
+    rebate          = rebateAmt;
+}
+
 QString Member::GetMemberName() const
 {
     return memberName;
@@ -20,22 +30,35 @@ int Member::GetID() const
     return memberID;
 }
 
-MemberType Member::GetMembershipType() const
+QString Member::GetMembershipTypeString() const
 {
-    return membership;
+    QString membershipType;
+
+    switch(membership)
+    {
+    case REGULAR:
+        membershipType = "Regular";
+        break;
+    case EXECUTIVE:
+        membershipType = "Executive";
+        break;
+    };
+
+    return membershipType;
 }
 
-QDate Member::GetExpirationDate() const
+QString Member::GetExpirationDateString() const
 {
-    return expirationDate;
+    return expirationDate.toString("MM/dd/yyyy");
 }
 
-double GetTotalSpent() const
+double Member::GetTotalSpent() const
 {
     return totalSpent;
 }
 
-double GetRebate() const
+double Member::GetRebate() const
 {
     return rebate;
 }
+

@@ -16,11 +16,12 @@ private:
     double      rebate;
 public:
     Member(QString name, int id, MemberType mType, QDate expDate);
+    Member(QString name, int id, MemberType mType, QDate expDate, double totSpent, double rebateAmt);
 
     QString GetMemberName() const;
     int GetID() const;
-    MemberType GetMembershipType() const;
-    QDate GetExpirationDate() const;
+    QString GetMembershipTypeString() const;
+    QString GetExpirationDateString() const;
     double GetTotalSpent() const;
     double GetRebate() const;
 };
