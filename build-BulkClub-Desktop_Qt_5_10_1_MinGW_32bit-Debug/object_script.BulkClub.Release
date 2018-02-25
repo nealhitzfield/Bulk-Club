@@ -1,0 +1,14 @@
+INPUT(
+./release\main.o
+./release\loginwindow.o
+./release\smwindow.o
+./release\adminwindow.o
+./release\dbmanager.o
+./release\member.o
+./release\transaction.o
+./release\item.o
+./release\credentials.o
+./release\moc_loginwindow.o
+./release\moc_smwindow.o
+./release\moc_adminwindow.o
+);

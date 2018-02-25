@@ -12,7 +12,7 @@ class DBManager
 private:
     QSqlDatabase bulkdb;
 public:
-    DBManager(const QString& dbFilename);
+    DBManager();
 
     // Login
     bool VerifyLogin(const Credentials& credentials);
@@ -27,6 +27,7 @@ public:
     // Inventory
     bool AddItem(const Item& newItem);
     bool RemoveItem(const Item& item);
+    bool ItemExists(const Item& item) const;
 
 };
 
