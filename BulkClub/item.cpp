@@ -1,11 +1,5 @@
 #include "item.h"
 
-Item::Item()
-{
-    itemName = "";
-    itemPrice = 0;
-}
-
 Item::Item(QString name, double price)
 {
     itemName = name;

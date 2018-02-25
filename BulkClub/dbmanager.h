@@ -14,6 +14,7 @@ private:
     QSqlDatabase bulkdb;
 public:
     DBManager();
+
     DBManager(const QString& dbFilename);
 
     // Login
@@ -33,6 +34,8 @@ public:
     // Inventory
     bool AddItem(const Item& newItem);
     bool RemoveItem(const Item& item);
+    bool ItemExists(const Item& item) const;
+
     QList<Item> GetAllItems();
 
     // Connection Test
