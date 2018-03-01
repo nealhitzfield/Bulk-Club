@@ -76,3 +76,12 @@ void AdminWindow::on_membersTable_clicked(const QModelIndex &index)
     ui->removeMemberButton->setEnabled(true);
 }
 
+void AdminWindow::on_addItemButton_clicked()
+{
+    additemwindow *addWin;
+    addWin = new additemwindow(this);
+    //connect(addWin, SIGNAL(windowClosed()), this, SLOT(updateView()));
+    addWin->setModal(true);
+    addWin->exec();
+    delete addWin;
+}

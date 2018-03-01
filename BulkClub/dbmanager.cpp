@@ -72,10 +72,11 @@ DBManager::DBManager(const QString& dbFilename)
 
     bool DBManager::ItemExists(const Item& item) const
     {
+        qDebug() << "inside itemexists";
         bool exists = false;
         QSqlQuery query;
         QString itemName = item.GetItemName();
-        query.prepare("SELECT FROM inventory WHERE item_name = (:name)");
+        query.prepare("SELECT item_name FROM inventory WHERE item_name = :name");
         query.bindValue(":name", itemName);
 
         if(query.exec())

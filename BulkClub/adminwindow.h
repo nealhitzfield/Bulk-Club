@@ -6,6 +6,7 @@
 #include "models.h"
 #include "dbmanager.h"
 #include "addmemberwindow.h"
+#include "additemwindow.h"
 
 namespace Ui {
 class AdminWindow;
@@ -25,6 +26,8 @@ private slots:
     void updateView();
     void removeMember();
     void on_membersTable_clicked(const QModelIndex &index);
+
+    void on_addItemButton_clicked();
 
 signals:
     void sendSelectedID(int id);
