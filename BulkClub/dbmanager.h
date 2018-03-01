@@ -3,13 +3,15 @@
 
 #include <QtSql>
 #include <QList>
+#include <QObject>
 #include "credentials.h"
 #include "member.h"
 #include "transaction.h"
 #include "item.h"
 
-class DBManager
+class DBManager : public QObject
 {
+    Q_OBJECT
 private:
     QSqlDatabase bulkdb;
 public:
@@ -40,6 +42,7 @@ public:
 
     // Connection Test
     bool isOpen() const;
+
 };
 
 #endif // DBMANAGER_H

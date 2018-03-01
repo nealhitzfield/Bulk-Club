@@ -6,7 +6,7 @@
 LoginWindow::LoginWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::LoginWindow),
-    bulkdb(DBManager("bulkclub.db"))
+    bulkdb("bulkclub.db")
 {
     ui->setupUi(this);
 

@@ -13,7 +13,9 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui->membersTable->setModel(mModel);
     ui->itemsTable->setModel(iModel);
     ui->membersTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->membersTable->setSelectionMode(QAbstractItemView::MultiSelection);
     ui->itemsTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->itemsTable->setSelectionMode(QAbstractItemView::MultiSelection);
     ui->removeMemberButton->setEnabled(false);
     selectedID = 0;
 }
@@ -28,7 +30,7 @@ void AdminWindow::on_addMemberButton_clicked()
 {
     AddMemberWindow *addWin;
     addWin = new AddMemberWindow(this);
-    connect(addWin, SIGNAL(windowClosed()), this, SLOT(updateView()));
+    connect(addWin, SIGNAL(memberAdded()), this, SLOT(updateMemberView()));
     addWin->setModal(true);
     addWin->exec();
     delete addWin;
@@ -54,16 +56,12 @@ void AdminWindow::on_removeMemberButton_clicked()
     }
 }
 
-void AdminWindow::updateView()
-{
-    mModel->setList(bulkdb.GetAllMembers());
-}
-
 void AdminWindow::removeMember()
 {
+
     if(bulkdb.RemoveMember(bulkdb.GetMember(selectedID)))
     {
-        updateView();
+        updateMemberView();
     }
 }
 
@@ -80,8 +78,20 @@ void AdminWindow::on_addItemButton_clicked()
 {
     additemwindow *addWin;
     addWin = new additemwindow(this);
-    //connect(addWin, SIGNAL(windowClosed()), this, SLOT(updateView()));
+    connect(addWin, SIGNAL(itemAdded()), this, SLOT(updateItemView()));
     addWin->setModal(true);
     addWin->exec();
     delete addWin;
+}
+
+void AdminWindow::updateItemView()
+{
+    qDebug() << "Received signal, updating item view";
+    iModel->setList(bulkdb.GetAllItems());
+}
+
+void AdminWindow::updateMemberView()
+{
+    qDebug() << "Received signal, updating member view";
+    mModel->setList(bulkdb.GetAllMembers());
 }
