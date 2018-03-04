@@ -29,9 +29,10 @@ public:
     Member GetMember(int memberID);
     QList<Member> GetAllMembers();
 
-
     // Transactions
     bool AddTransaction(const Transaction& newTransaction);
+    bool RemoveTransaction(const Transaction& transaction);
+    bool TransactionExists(const Transaction& transaction);
 
     // Inventory
     bool AddItem(const Item& newItem);
