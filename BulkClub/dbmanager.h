@@ -33,6 +33,7 @@ public:
     bool AddTransaction(const Transaction& newTransaction);
     bool RemoveTransaction(const Transaction& transaction);
     bool TransactionExists(const Transaction& transaction);
+    bool TransactionUpdateInventory(const Transaction newTransaction);
 
     // Inventory
     bool AddItem(const Item& newItem);
@@ -43,7 +44,6 @@ public:
 
     // Connection Test
     bool isOpen() const;
-
 };
 
 #endif // DBMANAGER_H

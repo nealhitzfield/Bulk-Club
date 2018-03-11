@@ -6,6 +6,25 @@ AddTransactionWindow::AddTransactionWindow(QWidget *parent) :
     ui(new Ui::AddTransactionWindow)
 {
     ui->setupUi(this);
+    QStringList itemNames;
+    QSqlQuery query;
+    int nameIndex;
+    QString name;
+    query.prepare("SELECT item_name FROM inventory");
+    if(query.exec())
+    {
+        nameIndex = query.record().indexOf("item_name");
+        while(query.next())
+        {
+            name = query.value(nameIndex).toString();
+            itemNames.append(name);
+        }
+    }
+    else
+    {
+        qDebug() << "Error getting items: " << query.lastError();
+    }
+    ui->comboBox->addItems(itemNames);
 }
 
 AddTransactionWindow::~AddTransactionWindow()
@@ -30,15 +49,25 @@ void AddTransactionWindow::on_purchaseAddButton_clicked()
     QString transItemName;
     double  transPrice;
     int     transQuantity;
+    QSqlQuery query;
+    int priceIndex;
 
     transDate = ui->purchaseDate->date();
     id = memberID;
-    transItemName = ui->purchaseItem->text();
-    transPrice = ui->purchasePrice->value();
+
+    transItemName = ui->comboBox->itemText(ui->comboBox->currentIndex());
     transQuantity = ui->purchaseQuantity->value();
 
-    Item transItem(transItemName, transPrice);
+    query.prepare("SELECT price FROM inventory WHERE item_name = :item_name");
+    query.bindValue(":item_name", transItemName);
+    if(query.next())
+    {
+        priceIndex = query.record().indexOf("price");
+        transPrice = query.value(priceIndex).toDouble();
+    }
+    qDebug() << "Added " << transItemName << " at $" << transPrice;
 
+    Item transItem(transItemName, transPrice);
     if (!bulkdb.TransactionExists(Transaction(transDate, id, transItem, transQuantity, transPrice)))
     {
         if (bulkdb.AddTransaction(Transaction(transDate, id, transItem, transQuantity, transPrice)))
@@ -51,4 +80,3 @@ void AddTransactionWindow::on_purchaseAddButton_clicked()
         }
     }
 }
-
