@@ -20,6 +20,8 @@ public:
 private slots:
     void on_addButton_clicked();
 
+signals:
+    void itemAdded();
 private:
     Ui::additemwindow *ui;
     DBManager db;

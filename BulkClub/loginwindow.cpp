@@ -6,7 +6,7 @@
 LoginWindow::LoginWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::LoginWindow),
-    bulkdb(DBManager("bulkclub.db"))
+    bulkdb("bulkclub.db")
 {
     ui->setupUi(this);
 
@@ -34,6 +34,7 @@ void LoginWindow::on_pushButton_clicked()
     if(bulkdb.VerifyLogin(Credentials(ui->lineEdit_username->text(),
                                       ui->lineEdit_password->text()), employeeType))
     {
+        ui->label_status->setText("Login accepted");
         if(employeeType == "administrator")
         {
             adminWin.setModal(true);

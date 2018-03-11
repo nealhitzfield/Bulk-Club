@@ -22,11 +22,6 @@ AddMemberWindow::~AddMemberWindow()
     delete ui;
 }
 
-void AddMemberWindow::closeEvent(QCloseEvent *)
-{
-    emit windowClosed();
-}
-
 void AddMemberWindow::lockInputs()
 {
     ui->lineEdit_mName->setDisabled(true);
@@ -73,6 +68,7 @@ void AddMemberWindow::on_addButton_clicked()
    {
        if(bulkdb.AddMember(Member(name, id, memberType, expDate)))
        {
+           emit memberAdded();
            ui->label_status->setText("Add Transactions?");
            lockInputs();
            ui->addButton->setEnabled(false);
@@ -95,7 +91,7 @@ void AddMemberWindow::on_noButton_clicked()
     enableInputs();
     ui->label_status->setText("Enter New Member");
     ui->yesButton->setDisabled(true);
-    ui->noButton->setDefault(true);
+    ui->noButton->setDisabled(true);
 }
 
 void AddMemberWindow::on_yesButton_clicked()

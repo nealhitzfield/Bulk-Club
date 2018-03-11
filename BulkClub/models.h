@@ -3,6 +3,7 @@
 
 #include <QAbstractTableModel>
 #include <QList>
+#include <QDebug>
 #include "member.h"
 #include "item.h"
 
@@ -33,7 +34,6 @@ public:
     int columnCount(const QModelIndex & /*parent*/) const;
     QVariant data(const QModelIndex &index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
-
 private:
     QList<Item> modItemList;
 };

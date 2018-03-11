@@ -23,12 +23,11 @@ public:
 private slots:
     void on_addMemberButton_clicked();
     void on_removeMemberButton_clicked();
-    void updateView();
     void removeMember();
     void on_membersTable_clicked(const QModelIndex &index);
-
     void on_addItemButton_clicked();
-
+    void updateItemView();
+    void updateMemberView();
 signals:
     void sendSelectedID(int id);
     void sendModel(MemberModel *mod);

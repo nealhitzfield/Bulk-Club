@@ -1,4 +1,8 @@
 *.pro.user
 *.pro.user.*
+Makefile*
+*.Debug
+*.Release
 BulkClub/debug/
+BulkClub/release/
 build-BulkClub-Desktop_Qt_5_10_1_MinGW_32bit-Debug/

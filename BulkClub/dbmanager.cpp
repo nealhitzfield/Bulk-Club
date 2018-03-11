@@ -19,19 +19,45 @@ DBManager::DBManager(const QString& dbFilename)
     }
 }
 
-    bool DBManager::AddItem(const Item& newItem)
+bool DBManager::AddItem(const Item& newItem)
+{
+    bool success = false;
+    QString itemName;
+    double price;
+
+    itemName = newItem.GetItemName();
+    price = newItem.GetItemPrice();
+
+    QSqlQuery query;
+    query.prepare("INSERT INTO inventory (item_name, price) VALUES (:iName, :iPrice)");
+    query.bindValue(":iName", itemName);
+    query.bindValue(":iPrice", price);
+
+    if(query.exec())
     {
-        bool success = false;
-        QString itemName;
-        double price;
+        success = true;
+    }
+    else
+    {
+        qDebug() << "addItem error:"
+                 << query.lastError();
+    }
 
-        itemName = newItem.GetItemName();
-        price = newItem.GetItemPrice();
+    return success;
+}
+bool DBManager::RemoveItem(const Item& item)
+{
+    QSqlQuery query;
+    bool success;
+    QString itemName;
 
-        QSqlQuery query;
-        query.prepare("INSERT INTO inventory (item_name, price) VALUES (:iName, :iPrice)");
-        query.bindValue(":iName", itemName);
-        query.bindValue(":iPrice", price);
+    success = false;
+    itemName = item.GetItemName();
+
+    if(ItemExists(item))
+    {
+        query.prepare("DELETE FROM inventory WHERE item_name = (:name)");
+        query.bindValue(":name", itemName);
 
         if(query.exec())
         {
@@ -39,56 +65,32 @@ DBManager::DBManager(const QString& dbFilename)
         }
         else
         {
-            qDebug() << "addItem error:"
+            qDebug() << "RemoveItem error:"
                      << query.lastError();
         }
-
-        return success;
     }
-    bool DBManager::RemoveItem(const Item& item)
+    return success;
+}
+
+bool DBManager::ItemExists(const Item& item) const
+{
+    bool exists;
+    QSqlQuery query;
+
+    query.prepare("SELECT item_name FROM inventory WHERE item_name = :name");
+    query.bindValue(":name", item.GetItemName());
+
+    exists = false;
+    if(query.exec())
     {
-
-            QSqlQuery query;
-            bool success = false;
-            QString itemName = item.GetItemName();
-
-        if(ItemExists(item))
-            {
-            query.prepare("DELETE FROM inventory WHERE item_name = (:name)");
-            query.bindValue(":name", itemName);
-
-            success = query.exec();
-
-            if(!success)
-            {
-                qDebug() << "RemoveItem error:"
-                         << query.lastError();
-            }
-
-        }
-
-            return success;
-    }
-
-    bool DBManager::ItemExists(const Item& item) const
-    {
-        qDebug() << "inside itemexists";
-        bool exists = false;
-        QSqlQuery query;
-        QString itemName = item.GetItemName();
-        query.prepare("SELECT item_name FROM inventory WHERE item_name = :name");
-        query.bindValue(":name", itemName);
-
-        if(query.exec())
+        if(query.next())
         {
-            if(query.next())
-            {
-                exists = true;
-            }
+            exists = true;
         }
-
-        return exists;
     }
+
+    return exists;
+}
 
 bool DBManager::VerifyLogin(const Credentials &credentials, QString& employeeType)
 {
@@ -120,6 +122,7 @@ bool DBManager::AddMember(const Member& newMember)
     QSqlQuery query;
     bool success;
 
+    success = false;
     query.prepare("INSERT INTO members (name, id, member_type, expiration_date)"
                   " VALUES (:name, :id, :member_type, :expiration_date)");
     query.bindValue(":name", newMember.GetMemberName());
@@ -127,9 +130,11 @@ bool DBManager::AddMember(const Member& newMember)
     query.bindValue(":member_type", newMember.GetMembershipTypeString());
     query.bindValue(":expiration_date", newMember.GetExpirationDateString());
 
-    success = query.exec();
-
-    if(!success)
+    if(query.exec())
+    {
+        success = true;
+    }
+    else
     {
         qDebug() << "Add Member Error: " << query.lastError();
     }
@@ -150,9 +155,11 @@ bool DBManager::RemoveMember(const Member& member)
         deleteQuery.bindValue(":name", member.GetMemberName());
         deleteQuery.bindValue(":id", member.GetID());
 
-        success = deleteQuery.exec();
-
-        if(!success)
+        if(deleteQuery.exec())
+        {
+            success = true;
+        }
+        else
         {
             qDebug() << "Remove Member Error: " << deleteQuery.lastError();
         }
@@ -340,3 +347,79 @@ QList<Item> DBManager::GetAllItems()
     return itemList;
 }
 
+bool DBManager::AddTransaction(const Transaction& newTransaction)
+{
+    QSqlQuery query;
+    bool success;
+
+    query.prepare("INSERT INTO transactions (transaction_date, id, item_name, price, quantity) \
+                  VALUES (:transaction_date, :id, :item_name, :price, :quantity)");
+    query.bindValue(":transaction_date", newTransaction.GetTransactionDate());
+    query.bindValue(":id", newTransaction.GetBuyersID());
+    query.bindValue(":item_name", newTransaction.GetItemName());
+    query.bindValue(":price", newTransaction.GetTransactionPrice());
+    query.bindValue(":quantity", newTransaction.GetQuantityPurchased());
+
+    if(query.exec())
+    {
+        success = true;
+    }
+    else
+    {
+       qDebug() << "Fail";
+    }
+    return success;
+}
+
+bool DBManager::RemoveTransaction(const Transaction& transaction)
+{
+    bool success;
+    QSqlQuery deleteQuery;
+
+    success = false;
+
+    if(TransactionExists(transaction))
+    {
+        deleteQuery.prepare("DELETE FROM transactions WHERE id = :id AND item_name = :item_name)");
+        deleteQuery.bindValue(":id", transaction.GetBuyersID());
+        deleteQuery.bindValue(":item_name", transaction.GetItemName());
+
+        success = deleteQuery.exec();
+
+        if(!success)
+        {
+            qDebug() << "Remove Transaction Error: " << deleteQuery.lastError();
+        }
+    }
+    else
+    {
+        qDebug() << "Transaction doesn't exist";
+    }
+
+    return success;
+}
+
+bool DBManager::TransactionExists(const Transaction& trans)
+{
+    bool transactionExists;
+    QSqlQuery checkQuery;
+
+    transactionExists = false;
+
+    checkQuery.prepare("SELECT id, item_name, price, quantity FROM transactions "
+                       "WHERE id = :id AND item_name = :item_name AND price = :price AND quantity = :quantity");
+    checkQuery.bindValue(":id", trans.GetBuyersID());
+    checkQuery.bindValue(":item_name", trans.GetItemName());
+    checkQuery.bindValue(":price", trans.GetTransactionPrice());
+    checkQuery.bindValue(":quantity", trans.GetQuantityPurchased());
+
+    if(checkQuery.exec())
+    {
+        if(checkQuery.next())
+        {
+            transactionExists = true;
+        }
+    }
+
+    return transactionExists;
+}

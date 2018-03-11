@@ -3,13 +3,15 @@
 
 #include <QtSql>
 #include <QList>
+#include <QObject>
 #include "credentials.h"
 #include "member.h"
 #include "transaction.h"
 #include "item.h"
 
-class DBManager
+class DBManager : public QObject
 {
+    Q_OBJECT
 private:
     QSqlDatabase bulkdb;
 public:
@@ -27,9 +29,10 @@ public:
     Member GetMember(int memberID);
     QList<Member> GetAllMembers();
 
-
     // Transactions
     bool AddTransaction(const Transaction& newTransaction);
+    bool RemoveTransaction(const Transaction& transaction);
+    bool TransactionExists(const Transaction& transaction);
 
     // Inventory
     bool AddItem(const Item& newItem);
@@ -40,6 +43,7 @@ public:
 
     // Connection Test
     bool isOpen() const;
+
 };
 
 #endif // DBMANAGER_H

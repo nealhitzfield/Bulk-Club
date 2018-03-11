@@ -91,6 +91,8 @@ public:
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         itemsTable = new QTableView(InventoryTab);
         itemsTable->setObjectName(QStringLiteral("itemsTable"));
+        itemsTable->setSelectionMode(QAbstractItemView::MultiSelection);
+        itemsTable->setSelectionBehavior(QAbstractItemView::SelectRows);
 
         verticalLayout_2->addWidget(itemsTable);
 

@@ -17,7 +17,6 @@ public:
     explicit AddMemberWindow(QWidget *parent = 0);
     ~AddMemberWindow();
 
-    void closeEvent(QCloseEvent *);
     void lockInputs();
     void enableInputs();
 private slots:
@@ -27,8 +26,8 @@ private slots:
     void on_yesButton_clicked();
 
 signals:
-    void windowClosed();
     void sendID(int id);
+    void memberAdded();
 
 private:
     Ui::AddMemberWindow *ui;

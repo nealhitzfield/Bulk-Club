@@ -18,6 +18,9 @@ public:
 
 private slots:
     void receiveID(int id);
+    void on_purchaseCancelButton_clicked();
+    void on_purchaseAddButton_clicked();
+
 private:
     Ui::AddTransactionWindow *ui;
     DBManager bulkdb;
