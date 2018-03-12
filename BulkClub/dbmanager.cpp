@@ -253,6 +253,40 @@ Member DBManager::GetMember(int memberID)
     return Member(name, id, membershipType, expirationDate, totalSpent, rebate);
 }
 
+Item DBManager::GetItem(QString itemName)
+{
+    QSqlQuery query;
+    int nameIndex;
+    int priceIndex;
+    QString name;
+    double price;
+
+    query.prepare("SELECT item_name, price FROM inventory WHERE item_name = :item_name");
+    query.bindValue(":item_name", itemName);
+
+    if(query.exec())
+    {
+        nameIndex       = query.record().indexOf("item_name");
+        priceIndex      = query.record().indexOf("price");
+
+        if(query.next())
+        {
+            name       = query.value(nameIndex).toString();
+            price      = query.value(priceIndex).toDouble();
+        }
+        else
+        {
+            qDebug() << "Can't find item";
+        }
+    }
+    else
+    {
+        qDebug() << "Get Item Error: " << query.lastError();
+    }
+
+    return Item(name, price);
+}
+
 QList<Member> DBManager::GetAllMembers()
 {
     QSqlQuery query;

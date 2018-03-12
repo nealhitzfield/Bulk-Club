@@ -19,6 +19,7 @@ public:
 
 private slots:
     void setMemberView(MemberModel *model);
+    void setItemView(ItemModel *model);
     void on_confirmButton_clicked();
 
     void on_cancelButton_clicked();

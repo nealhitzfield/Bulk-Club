@@ -39,6 +39,7 @@ public:
     bool AddItem(const Item& newItem);
     bool RemoveItem(const Item& item);
     bool ItemExists(const Item& item) const;
+    Item GetItem(QString itemName);
 
     QList<Item> GetAllItems();
 

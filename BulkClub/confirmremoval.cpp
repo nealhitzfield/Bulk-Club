@@ -19,6 +19,11 @@ void ConfirmRemoval::setMemberView(MemberModel *model)
     ui->tableView->setModel(model);
 }
 
+void ConfirmRemoval::setItemView(ItemModel *model)
+{
+    ui->tableView->setModel(model);
+}
+
 void ConfirmRemoval::on_confirmButton_clicked()
 {
     emit removalConfirmed();
