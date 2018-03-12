@@ -41,7 +41,17 @@ StoreManagerWindow::~StoreManagerWindow()
     delete ui;
 }
 
-void StoreManagerWindow::on_pushButton_clicked()
+void StoreManagerWindow::on_dateFilterButton_clicked()
 {
     pModel->setTransactionDate(ui->dateEdit->date());
+}
+
+void StoreManagerWindow::on_itemFilterButton_clicked()
+{
+    pModel->setItemName(ui->lineEdit_item->text());
+}
+
+void StoreManagerWindow::on_memberFilterButton_clicked()
+{
+    pModel->setBuyersID(ui->memberID->value());
 }

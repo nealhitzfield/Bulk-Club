@@ -18,7 +18,9 @@ public:
     ~StoreManagerWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_dateFilterButton_clicked();
+    void on_itemFilterButton_clicked();
+    void on_memberFilterButton_clicked();
 
 private:
     Ui::StoreManagerWindow *ui;

@@ -3,6 +3,7 @@
 
 #include <QAbstractTableModel>
 #include <QSortFilterProxyModel>
+#include <QStyledItemDelegate>
 #include <QList>
 #include <QDebug>
 #include <QObject>
@@ -57,6 +58,8 @@ private:
 };
 
 // Proxy Model used for sorting/filtering
+enum Filter {NO_FILTER, DATE, ITEM, MEMBER};
+
 class ProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
@@ -70,9 +73,14 @@ public slots:
     void setBuyersID(int buyersID);
     void setItemName(QString itemName);
 
+signals:
+    void updateTotal(double price);
+
 private:
+    Filter filterType;
     QDate tDate;
     int bID;
     QString iName;
 };
+
 #endif // MEMBERMODEL_H

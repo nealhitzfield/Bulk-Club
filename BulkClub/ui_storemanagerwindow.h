@@ -18,7 +18,9 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
@@ -29,16 +31,30 @@ QT_BEGIN_NAMESPACE
 class Ui_StoreManagerWindow
 {
 public:
-    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_7;
     QTabWidget *SMTabs;
     QWidget *daily;
+    QVBoxLayout *verticalLayout_4;
     QTableView *dailyView;
-    QWidget *widget;
+    QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_3;
+    QLabel *gross_sales;
+    QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
     QHBoxLayout *horizontalLayout;
     QDateEdit *dateEdit;
     QLabel *label_status;
-    QPushButton *pushButton;
+    QPushButton *dateFilterButton;
+    QHBoxLayout *horizontalLayout_4;
+    QHBoxLayout *horizontalLayout_3;
+    QLineEdit *lineEdit_item;
+    QLabel *label;
+    QPushButton *itemFilterButton;
+    QHBoxLayout *horizontalLayout_5;
+    QSpinBox *memberID;
+    QLabel *label_2;
+    QPushButton *memberFilterButton;
     QWidget *member;
     QWidget *item;
 
@@ -47,25 +63,44 @@ public:
         if (StoreManagerWindow->objectName().isEmpty())
             StoreManagerWindow->setObjectName(QStringLiteral("StoreManagerWindow"));
         StoreManagerWindow->resize(523, 414);
-        verticalLayout_2 = new QVBoxLayout(StoreManagerWindow);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        horizontalLayout_7 = new QHBoxLayout(StoreManagerWindow);
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         SMTabs = new QTabWidget(StoreManagerWindow);
         SMTabs->setObjectName(QStringLiteral("SMTabs"));
         daily = new QWidget();
         daily->setObjectName(QStringLiteral("daily"));
+        verticalLayout_4 = new QVBoxLayout(daily);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         dailyView = new QTableView(daily);
         dailyView->setObjectName(QStringLiteral("dailyView"));
-        dailyView->setGeometry(QRect(10, 10, 481, 192));
         dailyView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-        widget = new QWidget(daily);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(10, 210, 480, 25));
-        horizontalLayout_2 = new QHBoxLayout(widget);
+
+        verticalLayout_4->addWidget(dailyView);
+
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        label_3 = new QLabel(daily);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        horizontalLayout_6->addWidget(label_3);
+
+        gross_sales = new QLabel(daily);
+        gross_sales->setObjectName(QStringLiteral("gross_sales"));
+
+        horizontalLayout_6->addWidget(gross_sales);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_6);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        dateEdit = new QDateEdit(widget);
+        dateEdit = new QDateEdit(daily);
         dateEdit->setObjectName(QStringLiteral("dateEdit"));
         dateEdit->setMaximumSize(QSize(102, 20));
         dateEdit->setMaximumDateTime(QDateTime(QDate(2019, 2, 18), QTime(23, 59, 59)));
@@ -74,7 +109,7 @@ public:
 
         horizontalLayout->addWidget(dateEdit);
 
-        label_status = new QLabel(widget);
+        label_status = new QLabel(daily);
         label_status->setObjectName(QStringLiteral("label_status"));
 
         horizontalLayout->addWidget(label_status);
@@ -82,11 +117,75 @@ public:
 
         horizontalLayout_2->addLayout(horizontalLayout);
 
-        pushButton = new QPushButton(widget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setMaximumSize(QSize(110, 16777215));
+        dateFilterButton = new QPushButton(daily);
+        dateFilterButton->setObjectName(QStringLiteral("dateFilterButton"));
+        dateFilterButton->setMaximumSize(QSize(110, 16777215));
 
-        horizontalLayout_2->addWidget(pushButton);
+        horizontalLayout_2->addWidget(dateFilterButton);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        lineEdit_item = new QLineEdit(daily);
+        lineEdit_item->setObjectName(QStringLiteral("lineEdit_item"));
+        lineEdit_item->setMaximumSize(QSize(146, 16777215));
+
+        horizontalLayout_3->addWidget(lineEdit_item);
+
+        label = new QLabel(daily);
+        label->setObjectName(QStringLiteral("label"));
+
+        horizontalLayout_3->addWidget(label);
+
+
+        horizontalLayout_4->addLayout(horizontalLayout_3);
+
+        itemFilterButton = new QPushButton(daily);
+        itemFilterButton->setObjectName(QStringLiteral("itemFilterButton"));
+        itemFilterButton->setMinimumSize(QSize(110, 0));
+        itemFilterButton->setMaximumSize(QSize(110, 16777215));
+
+        horizontalLayout_4->addWidget(itemFilterButton);
+
+
+        verticalLayout->addLayout(horizontalLayout_4);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        memberID = new QSpinBox(daily);
+        memberID->setObjectName(QStringLiteral("memberID"));
+        memberID->setMinimumSize(QSize(70, 20));
+        memberID->setMaximumSize(QSize(70, 20));
+        memberID->setButtonSymbols(QAbstractSpinBox::NoButtons);
+        memberID->setMinimum(10000);
+        memberID->setMaximum(99999);
+
+        horizontalLayout_5->addWidget(memberID);
+
+        label_2 = new QLabel(daily);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        horizontalLayout_5->addWidget(label_2);
+
+        memberFilterButton = new QPushButton(daily);
+        memberFilterButton->setObjectName(QStringLiteral("memberFilterButton"));
+        memberFilterButton->setMinimumSize(QSize(110, 0));
+        memberFilterButton->setMaximumSize(QSize(110, 16777215));
+
+        horizontalLayout_5->addWidget(memberFilterButton);
+
+
+        verticalLayout->addLayout(horizontalLayout_5);
+
+
+        verticalLayout_3->addLayout(verticalLayout);
+
+
+        verticalLayout_4->addLayout(verticalLayout_3);
 
         SMTabs->addTab(daily, QString());
         member = new QWidget();
@@ -96,7 +195,7 @@ public:
         item->setObjectName(QStringLiteral("item"));
         SMTabs->addTab(item, QString());
 
-        verticalLayout_2->addWidget(SMTabs);
+        horizontalLayout_7->addWidget(SMTabs);
 
 
         retranslateUi(StoreManagerWindow);
@@ -110,11 +209,17 @@ public:
     void retranslateUi(QDialog *StoreManagerWindow)
     {
         StoreManagerWindow->setWindowTitle(QApplication::translate("StoreManagerWindow", "Dialog", nullptr));
+        label_3->setText(QApplication::translate("StoreManagerWindow", "Gross Sales", nullptr));
+        gross_sales->setText(QApplication::translate("StoreManagerWindow", "[+]Total", nullptr));
         label_status->setText(QApplication::translate("StoreManagerWindow", "[+]Status", nullptr));
-        pushButton->setText(QApplication::translate("StoreManagerWindow", "Get Transactions", nullptr));
-        SMTabs->setTabText(SMTabs->indexOf(daily), QApplication::translate("StoreManagerWindow", "Sales by day", nullptr));
-        SMTabs->setTabText(SMTabs->indexOf(member), QApplication::translate("StoreManagerWindow", "Sales by member", nullptr));
-        SMTabs->setTabText(SMTabs->indexOf(item), QApplication::translate("StoreManagerWindow", "Sales by item", nullptr));
+        dateFilterButton->setText(QApplication::translate("StoreManagerWindow", "Get Transactions", nullptr));
+        label->setText(QApplication::translate("StoreManagerWindow", "Enter Item Name", nullptr));
+        itemFilterButton->setText(QApplication::translate("StoreManagerWindow", "Get Transactions", nullptr));
+        label_2->setText(QApplication::translate("StoreManagerWindow", "Enter Member ID", nullptr));
+        memberFilterButton->setText(QApplication::translate("StoreManagerWindow", "Get Transactions", nullptr));
+        SMTabs->setTabText(SMTabs->indexOf(daily), QApplication::translate("StoreManagerWindow", "Sales", nullptr));
+        SMTabs->setTabText(SMTabs->indexOf(member), QApplication::translate("StoreManagerWindow", "Rebates", nullptr));
+        SMTabs->setTabText(SMTabs->indexOf(item), QApplication::translate("StoreManagerWindow", "Item Popularity", nullptr));
     } // retranslateUi
 
 };
