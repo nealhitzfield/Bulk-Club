@@ -397,10 +397,38 @@ bool DBManager::AddTransaction(const Transaction& newTransaction)
     if(query.exec())
     {
         success = true;
+        TransactionUpdateInventory(newTransaction);   // If transaction was successful, update the inventory details.
     }
     else
     {
-       qDebug() << "Fail";
+       qDebug() << "Failed to add transaction" << query.lastError();
+    }
+    return success;
+}
+
+bool DBManager::TransactionUpdateInventory(const Transaction newTransaction)
+{
+    QSqlQuery query;
+    bool success;
+    if(ItemExists(newTransaction.GetItem()))  // If the item exists, update it.
+    {
+        query.prepare("UPDATE inventory SET quantity_sold = quantity_sold + :transactionQuantity WHERE item_name = :item_name");
+        query.bindValue(":transactionQuantity", newTransaction.GetQuantityPurchased());
+        query.bindValue(":item_name", newTransaction.GetItemName());
+        if(query.exec())
+        {
+            success = true;
+            qDebug() << "Updated quantity sold.";
+        }
+        else
+        {
+            qDebug() << "Updating item in inventory failed." << query.lastError();
+        }
+     }
+    else  // If the item doesn't exist, return.
+    {
+        qDebug() << "Item did not exist";
+        success = false;
     }
     return success;
 }
