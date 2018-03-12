@@ -1,5 +1,5 @@
 #include "loginwindow.h"
-#include "smwindow.h"
+#include "storemanagerwindow.h"
 #include "adminwindow.h"
 #include "ui_loginwindow.h"
 
@@ -28,7 +28,7 @@ LoginWindow::~LoginWindow()
 void LoginWindow::on_pushButton_clicked()
 {
     QString employeeType;
-    SMWindow smWin;
+    StoreManagerWindow smWin;
     AdminWindow adminWin;
 
     if(bulkdb.VerifyLogin(Credentials(ui->lineEdit_username->text(),
@@ -40,7 +40,7 @@ void LoginWindow::on_pushButton_clicked()
             adminWin.setModal(true);
             adminWin.exec();
         }
-        else if(employeeType == "store manager")
+        else if(employeeType == "store_manager")
         {
             smWin.setModal(true);
             smWin.exec();

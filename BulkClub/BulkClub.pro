@@ -25,7 +25,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         loginwindow.cpp \
-    smwindow.cpp \
     adminwindow.cpp \
     dbmanager.cpp \
     member.cpp \
@@ -40,7 +39,6 @@ SOURCES += main.cpp\
     storemanagerwindow.cpp
 
 HEADERS  += loginwindow.h \
-    smwindow.h \
     adminwindow.h \
     dbmanager.h \
     member.h \
@@ -55,7 +53,6 @@ HEADERS  += loginwindow.h \
     storemanagerwindow.h
 
 FORMS    += loginwindow.ui \
-    smwindow.ui \
     adminwindow.ui \
     addmemberwindow.ui \
     confirmremoval.ui \
