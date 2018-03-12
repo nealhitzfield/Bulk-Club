@@ -1,8 +1,8 @@
 #include "models.h"
 
-MemberModel::MemberModel(QObject *parent) : QAbstractTableModel(parent){}
-
-MemberModel::MemberModel(QList<Member> memberList, QObject *parent) : QAbstractTableModel(parent)
+// MEMBER MODEL
+MemberModel::MemberModel(QList<Member> memberList, QObject *parent):
+    QAbstractTableModel(parent)
 {
     modMemberList = memberList;
 }
@@ -14,13 +14,15 @@ void MemberModel::setList(const QList<Member> memberList)
     endResetModel();
 }
 
-int MemberModel::rowCount(const QModelIndex & /*parent*/) const
+int MemberModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return modMemberList.length();
 }
 
-int MemberModel::columnCount(const QModelIndex & /*parent*/) const
+int MemberModel::columnCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return 6;
 }
 
@@ -30,6 +32,11 @@ QVariant MemberModel::data(const QModelIndex &index, int role) const
     {
         return QVariant();
     }
+    if(index.row() >= modMemberList.size() || index.row() < 0)
+    {
+        return QVariant();
+    }
+
     if(role == Qt::DisplayRole)
     {
         Member member = modMemberList.at(index.row());
@@ -53,6 +60,9 @@ QVariant MemberModel::data(const QModelIndex &index, int role) const
             break;
         case 5:
             return QString::number(member.GetRebate(), 'f', 2);
+            break;
+        default:
+            return QVariant();
             break;
         }
     }
@@ -93,9 +103,9 @@ QVariant MemberModel::headerData(int section, Qt::Orientation orientation, int r
     return QVariant();
 }
 
-ItemModel::ItemModel(QObject *parent) : QAbstractTableModel(parent){}
-
-ItemModel::ItemModel(QList<Item> itemList, QObject *parent) : QAbstractTableModel(parent)
+// ITEM MODEL
+ItemModel::ItemModel(QList<Item> itemList, QObject *parent):
+    QAbstractTableModel(parent)
 {
     modItemList = itemList;
 }
@@ -107,13 +117,15 @@ void ItemModel::setList(const QList<Item> itemList)
     endResetModel();
 }
 
-int ItemModel::rowCount(const QModelIndex & /*parent*/) const
+int ItemModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return modItemList.length();
 }
 
-int ItemModel::columnCount(const QModelIndex & /*parent*/) const
+int ItemModel::columnCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return 2;
 }
 
@@ -123,6 +135,11 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const
     {
         return QVariant();
     }
+    if(index.row() >= modItemList.size() || index.row() < 0)
+    {
+        return QVariant();
+    }
+
     if(role == Qt::DisplayRole)
     {
         Item item = modItemList.at(index.row());
@@ -134,6 +151,9 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const
             break;
         case 1:
             return QString::number(item.GetItemPrice(), 'f', 2);
+            break;
+        default:
+            return QVariant();
             break;
         }
     }
@@ -160,4 +180,154 @@ QVariant ItemModel::headerData(int section, Qt::Orientation orientation, int rol
         }
     }
     return QVariant();
+}
+
+// TRANSACTION MODEL
+TransactionModel::TransactionModel(QList<Transaction> transList, QObject *parent):
+    QAbstractTableModel(parent)
+{
+    modTransList = transList;
+}
+
+void TransactionModel::setList(const QList<Transaction> transList)
+{
+    modTransList = transList;
+}
+
+int TransactionModel::rowCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent);
+    return modTransList.length();
+}
+
+int TransactionModel::columnCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent);
+    return 5;
+}
+
+QVariant TransactionModel::data(const QModelIndex &index, int role) const
+{
+    if(!index.isValid())
+    {
+        return QVariant();
+    }
+    if(index.row() >= modTransList.size() || index.row() < 0)
+    {
+        return QVariant();
+    }
+    if(role == Qt::DisplayRole)
+    {
+        const Transaction& trans = modTransList.at(index.row());
+        switch(index.column())
+        {
+        case 0:
+            return trans.GetTransactionDate().toString("MM/dd/yyyy");
+            break;
+        case 1:
+            return trans.GetBuyersID();
+            break;
+        case 2:
+            return trans.GetItemName();
+            break;
+        case 3:
+            return trans.GetQuantityPurchased();
+            break;
+        case 4:
+            return trans.GetTransactionPrice();
+            break;
+        default:
+            return QVariant();
+            break;
+        }
+    }
+    return QVariant();
+}
+
+QVariant TransactionModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if(role != Qt::DisplayRole)
+    {
+        return QVariant();
+    }
+    if(orientation == Qt::Horizontal)
+    {
+        switch(section)
+        {
+        case 0:
+            return tr("Transaction Date");
+            break;
+        case 1:
+            return tr("Buyer's ID");
+            break;
+        case 2:
+            return tr("Item Purchased");
+            break;
+        case 3:
+            return tr("Qty Purchased");
+            break;
+        case 4:
+            return tr("Transaction Total");
+            break;
+        default:
+            return QVariant();
+            break;
+        }
+    }
+    return QVariant();
+}
+
+ProxyModel::ProxyModel(QObject *parent): QSortFilterProxyModel(parent),
+    tDate(1900, 1, 1), bID(0), iName("")
+{
+
+}
+
+void ProxyModel::setTransactionDate(QDate transDate)
+{
+    if(tDate != transDate)
+        tDate = transDate;
+    invalidateFilter();
+}
+
+void ProxyModel::setBuyersID(int buyersID)
+{
+    if(bID != buyersID)
+        bID = buyersID;
+    invalidateFilter();
+}
+
+void ProxyModel::setItemName(QString itemName)
+{
+    if(iName != itemName)
+        iName = itemName;
+    invalidateFilter();
+}
+
+bool ProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
+{
+    QModelIndex indDate;
+    QModelIndex indID;
+    QModelIndex indName;
+
+    indDate = sourceModel()->index(source_row, 0, source_parent);
+    indID = sourceModel()->index(source_row, 1, source_parent);
+    indName = sourceModel()->index(source_row, 2, source_parent);
+
+    if(tDate > QDate(1900, 1, 1))
+        if(QDate::fromString(sourceModel()->data(indDate).toString(), "MM/dd/yyyy") != tDate)
+            return false;
+    if(bID > 0)
+        if(sourceModel()->data(indID).toInt() != bID)
+            return false;
+    if(!iName.isEmpty())
+        if(sourceModel()->data(indName).toString() != iName)
+            return false;
+
+    return true;
+}
+
+QVariant ProxyModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    return sourceModel()->headerData(section, orientation, role);
 }

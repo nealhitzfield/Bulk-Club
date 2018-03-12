@@ -2,20 +2,23 @@
 #define MEMBERMODEL_H
 
 #include <QAbstractTableModel>
+#include <QSortFilterProxyModel>
 #include <QList>
 #include <QDebug>
+#include <QObject>
 #include "member.h"
 #include "item.h"
+#include "transaction.h"
 
+// Model used to display Member information
 class MemberModel : public QAbstractTableModel
 {
 public:
-    MemberModel(QObject *parent = 0);
     MemberModel(QList<Member> memberList, QObject *parent = 0);
 
     void setList(const QList<Member> memberList);
-    int rowCount(const QModelIndex & /*parent*/) const;
-    int columnCount(const QModelIndex & /*parent*/) const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
@@ -23,18 +26,53 @@ private:
     QList<Member> modMemberList;
 };
 
+// Model used to display Item information
 class ItemModel : public QAbstractTableModel
 {
 public:
-    ItemModel(QObject *parent = 0);
     ItemModel(QList<Item> itemList, QObject *parent = 0);
 
     void setList(const QList<Item> itemList);
-    int rowCount(const QModelIndex & /*parent*/) const;
-    int columnCount(const QModelIndex & /*parent*/) const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 private:
     QList<Item> modItemList;
+};
+
+// Model used to display Transaction information
+class TransactionModel : public QAbstractTableModel
+{
+public:
+    TransactionModel(QList<Transaction> transList, QObject *parent = 0);
+
+    void setList(const QList<Transaction> transList);
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    QVariant data(const QModelIndex &index, int role) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+private:
+    QList<Transaction> modTransList;
+};
+
+// Proxy Model used for sorting/filtering
+class ProxyModel : public QSortFilterProxyModel
+{
+    Q_OBJECT
+public:
+    ProxyModel(QObject* parent = 0);
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+
+public slots:
+    void setTransactionDate(QDate transDate);
+    void setBuyersID(int buyersID);
+    void setItemName(QString itemName);
+
+private:
+    QDate tDate;
+    int bID;
+    QString iName;
 };
 #endif // MEMBERMODEL_H

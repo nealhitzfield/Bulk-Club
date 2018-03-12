@@ -486,6 +486,52 @@ bool DBManager::TransactionExists(const Transaction& trans)
     return transactionExists;
 }
 
+QList<Transaction> DBManager::GetAllTransactions()
+{
+    QSqlQuery query;
+    QList<Transaction> transactionList;
+    int dateIndex;
+    int idIndex;
+    int itemNameIndex;
+    int priceIndex;
+    int qtyIndex;
+    QDate transDate;
+    int id;
+    QString itemName;
+    double itemPrice;
+    int qty;
+    double transTotal;
+
+    query.prepare("SELECT transaction_date, id, item_name, price, quantity FROM transactions");
+
+    if(query.exec())
+    {
+        dateIndex       = query.record().indexOf("transaction_date");
+        idIndex         = query.record().indexOf("id");
+        itemNameIndex   = query.record().indexOf("item_name");
+        priceIndex      = query.record().indexOf("price");
+        qtyIndex        = query.record().indexOf("quantity");
+
+        while(query.next())
+        {
+            transDate   = QDate::fromString(query.value(dateIndex).toString(), "MM/dd/yyyy");
+            id          = query.value(idIndex).toInt();
+            itemName    = query.value(itemNameIndex).toString();
+            itemPrice   = query.value(priceIndex).toDouble();
+            qty         = query.value(qtyIndex).toInt();
+            transTotal  = qty * itemPrice;
+
+            transactionList.append(Transaction(transDate, id, Item(itemName, itemPrice), qty, transTotal));
+        }
+    }
+    else
+    {
+        qDebug() << "Error Getting Transactions: " << query.lastError();
+    }
+
+    return transactionList;
+}
+
 bool DBManager::GetValidDates(QDate &earliestDate, QDate &latestDate)
 {
     bool success;

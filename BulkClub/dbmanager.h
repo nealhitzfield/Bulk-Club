@@ -34,13 +34,13 @@ public:
     bool RemoveTransaction(const Transaction& transaction);
     bool TransactionExists(const Transaction& transaction);
     bool TransactionUpdateInventory(const Transaction newTransaction);
+    QList<Transaction> GetAllTransactions();
 
     // Inventory
     bool AddItem(const Item& newItem);
     bool RemoveItem(const Item& item);
     bool ItemExists(const Item& item) const;
     Item GetItem(QString itemName);
-
     QList<Item> GetAllItems();
 
     // Connection Test

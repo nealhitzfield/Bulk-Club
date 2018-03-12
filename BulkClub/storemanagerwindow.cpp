@@ -26,9 +26,22 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
     {
         qDebug() << "Error setting min/max dates";
     }
+
+    tModel = new TransactionModel(bulkdb.GetAllTransactions());
+    pModel = new ProxyModel;
+    pModel->setSourceModel(tModel);
+
+    ui->dailyView->setModel(pModel);
+    ui->dailyView->setSortingEnabled(true);
+    ui->dailyView->sortByColumn(0, Qt::AscendingOrder);
 }
 
 StoreManagerWindow::~StoreManagerWindow()
 {
     delete ui;
+}
+
+void StoreManagerWindow::on_pushButton_clicked()
+{
+    pModel->setTransactionDate(ui->dateEdit->date());
 }
