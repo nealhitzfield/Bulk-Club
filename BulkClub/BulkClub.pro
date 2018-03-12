@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     confirmremoval.cpp \
     addtransactionwindow.cpp \
     models.cpp \
-    additemwindow.cpp
+    additemwindow.cpp \
+    storemanagerwindow.cpp
 
 HEADERS  += loginwindow.h \
     smwindow.h \
@@ -50,7 +51,8 @@ HEADERS  += loginwindow.h \
     confirmremoval.h \
     addtransactionwindow.h \
     models.h \
-    additemwindow.h
+    additemwindow.h \
+    storemanagerwindow.h
 
 FORMS    += loginwindow.ui \
     smwindow.ui \
@@ -58,4 +60,5 @@ FORMS    += loginwindow.ui \
     addmemberwindow.ui \
     confirmremoval.ui \
     addtransactionwindow.ui \
-    additemwindow.ui
+    additemwindow.ui \
+    storemanagerwindow.ui
