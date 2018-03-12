@@ -83,6 +83,7 @@ public:
         LoginWindow->setStatusBar(statusBar);
 
         retranslateUi(LoginWindow);
+        QObject::connect(lineEdit_password, SIGNAL(returnPressed()), pushButton, SLOT(click()));
 
         QMetaObject::connectSlotsByName(LoginWindow);
     } // setupUi

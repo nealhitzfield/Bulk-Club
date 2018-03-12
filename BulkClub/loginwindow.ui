@@ -125,5 +125,22 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>lineEdit_password</sender>
+   <signal>returnPressed()</signal>
+   <receiver>pushButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>122</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>162</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

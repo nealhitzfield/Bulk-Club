@@ -42,7 +42,7 @@ public:
     QTableView *itemsTable;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *addItemButton;
-    QPushButton *removeItemButtton;
+    QPushButton *removeItemButton;
 
     void setupUi(QDialog *AdminWindow)
     {
@@ -103,10 +103,10 @@ public:
 
         horizontalLayout_4->addWidget(addItemButton);
 
-        removeItemButtton = new QPushButton(InventoryTab);
-        removeItemButtton->setObjectName(QStringLiteral("removeItemButtton"));
+        removeItemButton = new QPushButton(InventoryTab);
+        removeItemButton->setObjectName(QStringLiteral("removeItemButton"));
 
-        horizontalLayout_4->addWidget(removeItemButtton);
+        horizontalLayout_4->addWidget(removeItemButton);
 
 
         verticalLayout_2->addLayout(horizontalLayout_4);
@@ -135,7 +135,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(MembersTab), QApplication::translate("AdminWindow", "Members", nullptr));
         tabWidget->setTabToolTip(tabWidget->indexOf(MembersTab), QApplication::translate("AdminWindow", "Member Management", nullptr));
         addItemButton->setText(QApplication::translate("AdminWindow", "Add Item", nullptr));
-        removeItemButtton->setText(QApplication::translate("AdminWindow", "Remove Item", nullptr));
+        removeItemButton->setText(QApplication::translate("AdminWindow", "Remove Item", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(InventoryTab), QApplication::translate("AdminWindow", "Inventory", nullptr));
         tabWidget->setTabToolTip(tabWidget->indexOf(InventoryTab), QApplication::translate("AdminWindow", "Inventory Management", nullptr));
     } // retranslateUi
