@@ -142,5 +142,21 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>lineEdit_username</sender>
+   <signal>returnPressed()</signal>
+   <receiver>pushButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>235</x>
+     <y>98</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>242</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
 </ui>
