@@ -10,6 +10,9 @@ LoginWindow::LoginWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    connect(ui->lineEdit_username, SIGNAL(returnPressed()), ui->pushButton, SLOT(click()));
+    connect(ui->lineEdit_password, SIGNAL(returnPressed()), ui->pushButton, SLOT(click()));
+
     if(!bulkdb.isOpen())
     {
         ui->label_status->setText("Failed to connect to database");
