@@ -51,6 +51,6 @@ void LoginWindow::on_pushButton_clicked()
     }
     else
     {
-        ui->label_status->setText("Invalid username/password");
+        ui->label_status->setText("Invalid username or password");
     }
 }

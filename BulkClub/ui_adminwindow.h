@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'adminwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.10.0
+** Created by: Qt User Interface Compiler version 5.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -27,7 +27,7 @@ QT_BEGIN_NAMESPACE
 class Ui_AdminWindow
 {
 public:
-    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout_3;
     QTabWidget *tabWidget;
     QWidget *MembersTab;
     QHBoxLayout *horizontalLayout_3;
@@ -48,9 +48,9 @@ public:
     {
         if (AdminWindow->objectName().isEmpty())
             AdminWindow->setObjectName(QStringLiteral("AdminWindow"));
-        AdminWindow->resize(400, 300);
-        horizontalLayout = new QHBoxLayout(AdminWindow);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        AdminWindow->resize(654, 518);
+        verticalLayout_3 = new QVBoxLayout(AdminWindow);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         tabWidget = new QTabWidget(AdminWindow);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
         MembersTab = new QWidget();
@@ -116,12 +116,12 @@ public:
 
         tabWidget->addTab(InventoryTab, QString());
 
-        horizontalLayout->addWidget(tabWidget);
+        verticalLayout_3->addWidget(tabWidget);
 
 
         retranslateUi(AdminWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(AdminWindow);
@@ -129,15 +129,15 @@ public:
 
     void retranslateUi(QDialog *AdminWindow)
     {
-        AdminWindow->setWindowTitle(QApplication::translate("AdminWindow", "Admin Window", nullptr));
-        addMemberButton->setText(QApplication::translate("AdminWindow", "Add Member", nullptr));
-        removeMemberButton->setText(QApplication::translate("AdminWindow", "Remove Member", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(MembersTab), QApplication::translate("AdminWindow", "Members", nullptr));
-        tabWidget->setTabToolTip(tabWidget->indexOf(MembersTab), QApplication::translate("AdminWindow", "Member Management", nullptr));
-        addItemButton->setText(QApplication::translate("AdminWindow", "Add Item", nullptr));
-        removeItemButton->setText(QApplication::translate("AdminWindow", "Remove Item", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(InventoryTab), QApplication::translate("AdminWindow", "Inventory", nullptr));
-        tabWidget->setTabToolTip(tabWidget->indexOf(InventoryTab), QApplication::translate("AdminWindow", "Inventory Management", nullptr));
+        AdminWindow->setWindowTitle(QApplication::translate("AdminWindow", "Admin Window", Q_NULLPTR));
+        addMemberButton->setText(QApplication::translate("AdminWindow", "Add Member", Q_NULLPTR));
+        removeMemberButton->setText(QApplication::translate("AdminWindow", "Remove Member", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(MembersTab), QApplication::translate("AdminWindow", "Members", Q_NULLPTR));
+        tabWidget->setTabToolTip(tabWidget->indexOf(MembersTab), QApplication::translate("AdminWindow", "Member Management", Q_NULLPTR));
+        addItemButton->setText(QApplication::translate("AdminWindow", "Add Item", Q_NULLPTR));
+        removeItemButton->setText(QApplication::translate("AdminWindow", "Remove Item", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(InventoryTab), QApplication::translate("AdminWindow", "Inventory", Q_NULLPTR));
+        tabWidget->setTabToolTip(tabWidget->indexOf(InventoryTab), QApplication::translate("AdminWindow", "Inventory Management", Q_NULLPTR));
     } // retranslateUi
 
 };
