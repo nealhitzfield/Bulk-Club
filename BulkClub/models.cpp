@@ -278,7 +278,7 @@ QVariant TransactionModel::headerData(int section, Qt::Orientation orientation, 
 }
 
 ProxyModel::ProxyModel(QObject *parent): QSortFilterProxyModel(parent),
-    tDate(1900, 1, 1), bID(0), iName("")
+    filterType(NO_FILTER), tDate(1900, 1, 1), bID(0), iName("")
 {
 
 }
