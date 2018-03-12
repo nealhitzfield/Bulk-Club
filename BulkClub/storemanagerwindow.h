@@ -2,6 +2,7 @@
 #define STOREMANAGERWINDOW_H
 
 #include <QDialog>
+#include "dbmanager.h"
 
 namespace Ui {
 class StoreManagerWindow;
@@ -17,6 +18,7 @@ public:
 
 private:
     Ui::StoreManagerWindow *ui;
+    DBManager bulkdb;
 };
 
 #endif // STOREMANAGERWINDOW_H

@@ -17,8 +17,10 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -30,7 +32,10 @@ public:
     QTabWidget *SMTabs;
     QWidget *daily;
     QTableView *dailyView;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout;
     QDateEdit *dateEdit;
+    QLabel *label_status;
     QWidget *member;
     QWidget *item;
 
@@ -48,12 +53,25 @@ public:
         dailyView = new QTableView(daily);
         dailyView->setObjectName(QStringLiteral("dailyView"));
         dailyView->setGeometry(QRect(10, 10, 256, 192));
-        dateEdit = new QDateEdit(daily);
+        widget = new QWidget(daily);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(270, 10, 111, 71));
+        verticalLayout = new QVBoxLayout(widget);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        dateEdit = new QDateEdit(widget);
         dateEdit->setObjectName(QStringLiteral("dateEdit"));
-        dateEdit->setGeometry(QRect(270, 10, 110, 22));
-        dateEdit->setMaximumDateTime(QDateTime(QDate(2018, 2, 18), QTime(23, 59, 59)));
-        dateEdit->setMinimumDateTime(QDateTime(QDate(2018, 2, 12), QTime(0, 0, 0)));
+        dateEdit->setMaximumDateTime(QDateTime(QDate(2019, 2, 18), QTime(23, 59, 59)));
+        dateEdit->setMinimumDateTime(QDateTime(QDate(2017, 2, 12), QTime(0, 0, 0)));
         dateEdit->setCalendarPopup(true);
+
+        verticalLayout->addWidget(dateEdit);
+
+        label_status = new QLabel(widget);
+        label_status->setObjectName(QStringLiteral("label_status"));
+
+        verticalLayout->addWidget(label_status);
+
         SMTabs->addTab(daily, QString());
         member = new QWidget();
         member->setObjectName(QStringLiteral("member"));
@@ -76,6 +94,7 @@ public:
     void retranslateUi(QDialog *StoreManagerWindow)
     {
         StoreManagerWindow->setWindowTitle(QApplication::translate("StoreManagerWindow", "Dialog", nullptr));
+        label_status->setText(QApplication::translate("StoreManagerWindow", "[+]Status", nullptr));
         SMTabs->setTabText(SMTabs->indexOf(daily), QApplication::translate("StoreManagerWindow", "Sales by day", nullptr));
         SMTabs->setTabText(SMTabs->indexOf(member), QApplication::translate("StoreManagerWindow", "Sales by member", nullptr));
         SMTabs->setTabText(SMTabs->indexOf(item), QApplication::translate("StoreManagerWindow", "Sales by item", nullptr));

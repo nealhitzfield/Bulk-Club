@@ -485,3 +485,47 @@ bool DBManager::TransactionExists(const Transaction& trans)
 
     return transactionExists;
 }
+
+bool DBManager::GetValidDates(QDate &earliestDate, QDate &latestDate)
+{
+    bool success;
+    QSqlQuery query;
+    int transIndex;
+    QDate tempDate;
+
+    query.prepare("SELECT transaction_date FROM transactions");
+
+    if(query.exec())
+    {
+        transIndex = query.record().indexOf("transaction_date");
+        if(query.next())
+        {
+            success = true;
+            earliestDate = QDate::fromString(query.value(transIndex).toString(), "MM/dd/yyyy");
+            latestDate = QDate::fromString(query.value(transIndex).toString(), "MM/dd/yyyy");
+            while(query.next())
+            {
+                tempDate = QDate::fromString(query.value(transIndex).toString(), "MM/dd/yyyy");
+                if(tempDate < earliestDate)
+                {
+                    earliestDate = tempDate;
+                }
+                else if(tempDate > latestDate)
+                {
+                    latestDate = tempDate;
+                }
+            }
+
+        }
+        else
+        {
+            success = false;
+        }
+    }
+    else
+    {
+        success = false;
+    }
+
+    return success;
+}

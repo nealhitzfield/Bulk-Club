@@ -45,6 +45,9 @@ public:
 
     // Connection Test
     bool isOpen() const;
+
+    // Retrieve boundaries of transaction dates
+    bool GetValidDates(QDate& earliestDate, QDate& latestDate);
 };
 
 #endif // DBMANAGER_H

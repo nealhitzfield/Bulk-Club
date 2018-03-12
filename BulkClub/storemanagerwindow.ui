@@ -33,38 +33,51 @@
         </rect>
        </property>
       </widget>
-      <widget class="QDateEdit" name="dateEdit">
+      <widget class="QWidget" name="">
        <property name="geometry">
         <rect>
          <x>270</x>
          <y>10</y>
-         <width>110</width>
-         <height>22</height>
+         <width>111</width>
+         <height>71</height>
         </rect>
        </property>
-       <property name="maximumDateTime">
-        <datetime>
-         <hour>23</hour>
-         <minute>59</minute>
-         <second>59</second>
-         <year>2018</year>
-         <month>2</month>
-         <day>18</day>
-        </datetime>
-       </property>
-       <property name="minimumDateTime">
-        <datetime>
-         <hour>0</hour>
-         <minute>0</minute>
-         <second>0</second>
-         <year>2018</year>
-         <month>2</month>
-         <day>12</day>
-        </datetime>
-       </property>
-       <property name="calendarPopup">
-        <bool>true</bool>
-       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QDateEdit" name="dateEdit">
+          <property name="maximumDateTime">
+           <datetime>
+            <hour>23</hour>
+            <minute>59</minute>
+            <second>59</second>
+            <year>2019</year>
+            <month>2</month>
+            <day>18</day>
+           </datetime>
+          </property>
+          <property name="minimumDateTime">
+           <datetime>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>0</second>
+            <year>2017</year>
+            <month>2</month>
+            <day>12</day>
+           </datetime>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_status">
+          <property name="text">
+           <string>[+]Status</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
      <widget class="QWidget" name="member">
