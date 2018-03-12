@@ -17,7 +17,9 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui->itemsTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->itemsTable->setSelectionMode(QAbstractItemView::MultiSelection);
     ui->removeMemberButton->setEnabled(false);
+    ui->removeItemButton->setEnabled(false);
     selectedID = 0;
+    selectedName = "";
 }
 
 AdminWindow::~AdminWindow()
@@ -72,6 +74,44 @@ void AdminWindow::on_membersTable_clicked(const QModelIndex &index)
     idIndex = ui->membersTable->model()->index(index.row(), 1);
     selectedID = ui->membersTable->model()->data(idIndex).toInt();
     ui->removeMemberButton->setEnabled(true);
+}
+
+void AdminWindow::on_itemsTable_clicked(const QModelIndex &index)
+{
+    QModelIndex nameIndex;
+    nameIndex = ui->itemsTable->model()->index(index.row(), 0);
+    selectedName = ui->itemsTable->model()->data(nameIndex).toString();
+    qDebug() << selectedName;
+    ui->removeItemButton->setEnabled(true);
+}
+
+void AdminWindow::removeItem()
+{
+
+    if(bulkdb.RemoveItem(bulkdb.GetItem(selectedName)))
+    {
+        updateItemView();
+    }
+}
+
+void AdminWindow::on_removeItemButton_clicked()
+{
+    ConfirmRemoval *remWin;
+    QList<Item> iList;
+    ItemModel *tempModel;
+
+    if(selectedName != "")
+    {
+        iList.append(Item(bulkdb.GetItem(selectedName)));
+        tempModel = new ItemModel(iList);
+        remWin = new ConfirmRemoval(this);
+        connect(this, SIGNAL(sendModel(ItemModel*)), remWin, SLOT(setItemView(ItemModel*)));
+        connect(remWin, SIGNAL(removalConfirmed()), this, SLOT(removeItem()));
+        emit sendModel(tempModel);
+        remWin->exec();
+        delete tempModel;
+        delete remWin;
+    }
 }
 
 void AdminWindow::on_addItemButton_clicked()

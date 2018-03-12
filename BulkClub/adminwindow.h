@@ -25,18 +25,24 @@ private slots:
     void on_removeMemberButton_clicked();
     void removeMember();
     void on_membersTable_clicked(const QModelIndex &index);
+    void on_itemsTable_clicked(const QModelIndex &index);
     void on_addItemButton_clicked();
+    void on_removeItemButton_clicked();
+    void removeItem();
     void updateItemView();
     void updateMemberView();
 signals:
     void sendSelectedID(int id);
+    void sendSelectedName(QString itemName);
     void sendModel(MemberModel *mod);
+    void sendModel(ItemModel *mod);
 private:
     Ui::AdminWindow *ui;
     MemberModel *mModel;
     ItemModel *iModel;
     DBManager bulkdb;
     int selectedID;
+    QString selectedName;
 };
 
 #endif // ADMINWINDOW_H
