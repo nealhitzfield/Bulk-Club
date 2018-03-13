@@ -72,6 +72,7 @@ public slots:
     void setTransactionDate(QDate transDate);
     void setBuyersID(int buyersID);
     void setItemName(QString itemName);
+    void resetFilter();
 
 signals:
     void updateTotal(double price);

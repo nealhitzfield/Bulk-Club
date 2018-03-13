@@ -285,31 +285,37 @@ ProxyModel::ProxyModel(QObject *parent): QSortFilterProxyModel(parent),
 
 void ProxyModel::setTransactionDate(QDate transDate)
 {
+    filterType = DATE;
     if(tDate != transDate)
     {
         tDate = transDate;
-        filterType = DATE;
     }
     invalidateFilter();
 }
 
 void ProxyModel::setBuyersID(int buyersID)
 {
+    filterType = MEMBER;
     if(bID != buyersID)
     {
         bID = buyersID;
-        filterType = MEMBER;
     }
     invalidateFilter();
 }
 
 void ProxyModel::setItemName(QString itemName)
 {
+    filterType = ITEM;
     if(iName != itemName)
     {
         iName = itemName;
-        filterType = ITEM;
     }
+    invalidateFilter();
+}
+
+void ProxyModel::resetFilter()
+{
+    filterType = NO_FILTER;
     invalidateFilter();
 }
 
@@ -334,7 +340,7 @@ bool ProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_pare
             return false;
         break;
     case ITEM:
-        if(sourceModel()->data(indName).toString() != iName)
+        if(sourceModel()->data(indName).toString().toLower() != iName.toLower())
             return false;
         break;
     case NO_FILTER:

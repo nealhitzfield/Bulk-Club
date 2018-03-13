@@ -35,6 +35,10 @@ public:
     bool TransactionExists(const Transaction& transaction);
     bool TransactionUpdateInventory(const Transaction newTransaction);
     QList<Transaction> GetAllTransactions();
+    double CalcGrossSales();
+    double CalcGrossSalesByDate(QDate tDate);
+    double CalcGrossSalesByMember(int buyersID);
+    double CalcGrossSalesByItem(QString itemName);
 
     // Inventory
     bool AddItem(const Item& newItem);

@@ -22,6 +22,8 @@ private slots:
     void on_itemFilterButton_clicked();
     void on_memberFilterButton_clicked();
 
+    void on_resetButton_clicked();
+
 private:
     Ui::StoreManagerWindow *ui;
     DBManager bulkdb;

@@ -7,6 +7,8 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
 {
     QDate minDate;
     QDate maxDate;
+    QString grossSales;
+
     ui->setupUi(this);
     if(bulkdb.isOpen())
     {
@@ -34,6 +36,9 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
     ui->dailyView->setModel(pModel);
     ui->dailyView->setSortingEnabled(true);
     ui->dailyView->sortByColumn(0, Qt::AscendingOrder);
+
+    grossSales = QString::number(bulkdb.CalcGrossSales(), 'f', 2);
+    ui->gross_sales->setText(grossSales);
 }
 
 StoreManagerWindow::~StoreManagerWindow()
@@ -43,15 +48,33 @@ StoreManagerWindow::~StoreManagerWindow()
 
 void StoreManagerWindow::on_dateFilterButton_clicked()
 {
-    pModel->setTransactionDate(ui->dateEdit->date());
+    QDate dateFilter;
+
+    dateFilter = ui->dateEdit->date();
+    pModel->setTransactionDate(dateFilter);
+    ui->gross_sales->setText(QString::number(bulkdb.CalcGrossSalesByDate(dateFilter), 'f', 2));
 }
 
 void StoreManagerWindow::on_itemFilterButton_clicked()
 {
-    pModel->setItemName(ui->lineEdit_item->text());
+    QString itemFilter;
+
+    itemFilter = ui->lineEdit_item->text();
+    pModel->setItemName(itemFilter);
+    ui->gross_sales->setText(QString::number(bulkdb.CalcGrossSalesByItem(itemFilter), 'f', 2));
 }
 
 void StoreManagerWindow::on_memberFilterButton_clicked()
 {
-    pModel->setBuyersID(ui->memberID->value());
+    int idFilter;
+
+    idFilter = ui->memberID->value();
+    pModel->setBuyersID(idFilter);
+    ui->gross_sales->setText(QString::number(bulkdb.CalcGrossSalesByMember(idFilter), 'f', 2));
+}
+
+void StoreManagerWindow::on_resetButton_clicked()
+{
+    pModel->resetFilter();
+    ui->gross_sales->setText(QString::number(bulkdb.CalcGrossSales(), 'f', 2));
 }
