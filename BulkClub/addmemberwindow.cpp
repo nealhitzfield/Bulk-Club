@@ -102,6 +102,7 @@ void AddMemberWindow::on_yesButton_clicked()
     transWin = new AddTransactionWindow;
     id = ui->mID->value();
     connect(this, SIGNAL(sendID(int)), transWin, SLOT(receiveID(int)));
+    connect(transWin, SIGNAL(transactionAdded()), this, SIGNAL(transactionAdded()));
     emit sendID(id);
     transWin->setModal(true);
     transWin->exec();

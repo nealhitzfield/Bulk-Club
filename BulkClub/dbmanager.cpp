@@ -454,7 +454,7 @@ bool DBManager::AddTransaction(const Transaction& newTransaction)
 
     query.prepare("INSERT INTO transactions (transaction_date, id, item_name, price, quantity, total) \
                   VALUES (:transaction_date, :id, :item_name, :price, :quantity, :total)");
-    query.bindValue(":transaction_date", newTransaction.GetTransactionDate());
+    query.bindValue(":transaction_date", newTransaction.GetTransactionDate().toString("MM/dd/yyyy"));
     query.bindValue(":id", newTransaction.GetBuyersID());
     query.bindValue(":item_name", newTransaction.GetItemName());
     query.bindValue(":price", newTransaction.GetTransactionPrice());

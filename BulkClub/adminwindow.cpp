@@ -33,6 +33,7 @@ void AdminWindow::on_addMemberButton_clicked()
     AddMemberWindow *addWin;
     addWin = new AddMemberWindow(this);
     connect(addWin, SIGNAL(memberAdded()), this, SLOT(updateMemberView()));
+    connect(addWin, SIGNAL(transactionAdded()), this, SLOT(updateMemberView()));
     addWin->setModal(true);
     addWin->exec();
     delete addWin;

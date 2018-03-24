@@ -38,7 +38,8 @@ void AddTransactionWindow::on_purchaseAddButton_clicked()
     transItemName = ui->comboBox->itemText(ui->comboBox->currentIndex());
     transQuantity = ui->purchaseQuantity->value();
     itemPrice = DBManager::instance().GetItemPrice(transItemName);
-
+    ui->label_item_price->setText(QString::number(itemPrice, 'f', 2));
+    ui->label_trans_total->setText(QString::number(transQuantity * itemPrice, 'f', 2));
     qDebug() << "Added " << transItemName << " at $" << itemPrice;
 
     Item transItem(transItemName, itemPrice);
@@ -47,6 +48,7 @@ void AddTransactionWindow::on_purchaseAddButton_clicked()
         if (DBManager::instance().AddTransaction(Transaction(transDate, id, transItem, transQuantity, itemPrice)))
         {
             ui->label_status->setText("Success.");
+            emit transactionAdded();
         }
         else
         {

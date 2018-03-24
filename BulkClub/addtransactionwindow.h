@@ -21,6 +21,9 @@ private slots:
     void on_purchaseCancelButton_clicked();
     void on_purchaseAddButton_clicked();
 
+signals:
+    void transactionAdded();
+
 private:
     Ui::AddTransactionWindow *ui;
     int memberID;

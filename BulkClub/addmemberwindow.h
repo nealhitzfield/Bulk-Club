@@ -28,6 +28,7 @@ private slots:
 signals:
     void sendID(int id);
     void memberAdded();
+    void transactionAdded();
 
 private:
     Ui::AddMemberWindow *ui;
