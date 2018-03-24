@@ -31,7 +31,6 @@ signals:
 
 private:
     Ui::AddMemberWindow *ui;
-    DBManager bulkdb;
 };
 
 #endif // ADDMEMBERWINDOW_H

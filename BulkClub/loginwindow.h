@@ -25,7 +25,6 @@ private slots:
 
 private:
     Ui::LoginWindow *ui;
-    DBManager bulkdb;
 };
 
 #endif // LOGINWINDOW_H

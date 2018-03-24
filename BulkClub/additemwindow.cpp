@@ -21,9 +21,9 @@ void additemwindow::on_addButton_clicked()
     name = ui->itemName->text();
     price = ui->itemPrice->value();
 
-    if(!db.ItemExists(Item(name,price)))
+    if(!DBManager::instance().ItemExists(Item(name,price)))
     {
-        if(db.AddItem(Item(name, price)))
+        if(DBManager::instance().AddItem(Item(name, price)))
         {
             ui->outputLabel->setText("Item Added");
             emit itemAdded();

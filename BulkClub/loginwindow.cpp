@@ -5,15 +5,14 @@
 
 LoginWindow::LoginWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::LoginWindow),
-    bulkdb("bulkclub.db")
+    ui(new Ui::LoginWindow)
 {
     ui->setupUi(this);
 
     connect(ui->lineEdit_username, SIGNAL(returnPressed()), ui->pushButton, SLOT(click()));
     connect(ui->lineEdit_password, SIGNAL(returnPressed()), ui->pushButton, SLOT(click()));
 
-    if(!bulkdb.isOpen())
+    if(!DBManager::instance().isOpen())
     {
         ui->label_status->setText("Failed to connect to database");
     }
@@ -34,7 +33,7 @@ void LoginWindow::on_pushButton_clicked()
     StoreManagerWindow smWin;
     AdminWindow adminWin;
 
-    if(bulkdb.VerifyLogin(Credentials(ui->lineEdit_username->text(),
+    if(DBManager::instance().VerifyLogin(Credentials(ui->lineEdit_username->text(),
                                       ui->lineEdit_password->text()), employeeType))
     {
         ui->label_status->setText("Login accepted");

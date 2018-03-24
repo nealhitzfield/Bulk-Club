@@ -1,24 +1,43 @@
 #include "dbmanager.h"
+#include <QFile>
 
 DBManager::DBManager()
 {
-    bulkdb = QSqlDatabase::database();
-}
-DBManager::DBManager(const QString& dbFilename)
-{
     bulkdb = QSqlDatabase::addDatabase("QSQLITE");
-    bulkdb.setDatabaseName(dbFilename);
+    bulkdb.setDatabaseName("bulkclub.db");
 
-    if(!bulkdb.open())
+    if(QFile::exists("bulkclub.db"))
     {
-        qDebug() << "Can't connect to database";
+        if(!bulkdb.open())
+        {
+            qDebug() << "Error connecting to database";
+        }
+        else
+        {
+            qDebug() << "Connected to database";
+        }
     }
     else
     {
-        qDebug() << "Connected to database";
+        qDebug() << "Database file path does not exist";
     }
 }
 
+DBManager::~DBManager()
+{
+    if(bulkdb.isOpen())
+    {
+        bulkdb.close();
+    }
+    qDebug() << "Destroying DBManager";
+}
+
+DBManager& DBManager::instance()
+{
+    static DBManager bulkdbInstance;
+
+    return bulkdbInstance;
+}
 bool DBManager::AddItem(const Item& newItem)
 {
     bool success = false;

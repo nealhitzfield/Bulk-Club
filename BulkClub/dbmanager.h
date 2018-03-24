@@ -3,21 +3,22 @@
 
 #include <QtSql>
 #include <QList>
-#include <QObject>
 #include "credentials.h"
 #include "member.h"
 #include "transaction.h"
 #include "item.h"
 
-class DBManager : public QObject
+class DBManager
 {
-    Q_OBJECT
 private:
+    DBManager();
+    ~DBManager();
+
     QSqlDatabase bulkdb;
 public:
-    DBManager();
-
-    DBManager(const QString& dbFilename);
+    static DBManager& instance();
+    DBManager(const DBManager&) = delete;
+    void operator=(const DBManager&) = delete;
 
     // Login
     bool VerifyLogin(const Credentials& credentials, QString& employeeType);

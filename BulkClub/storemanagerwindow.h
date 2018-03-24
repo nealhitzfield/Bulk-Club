@@ -26,7 +26,6 @@ private slots:
 
 private:
     Ui::StoreManagerWindow *ui;
-    DBManager bulkdb;
     TransactionModel *tModel;
     ProxyModel *pModel;
 };

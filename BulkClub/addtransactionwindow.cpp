@@ -68,9 +68,9 @@ void AddTransactionWindow::on_purchaseAddButton_clicked()
     qDebug() << "Added " << transItemName << " at $" << transPrice;
 
     Item transItem(transItemName, transPrice);
-    if (!bulkdb.TransactionExists(Transaction(transDate, id, transItem, transQuantity, transPrice)))
+    if (!DBManager::instance().TransactionExists(Transaction(transDate, id, transItem, transQuantity, transPrice)))
     {
-        if (bulkdb.AddTransaction(Transaction(transDate, id, transItem, transQuantity, transPrice)))
+        if (DBManager::instance().AddTransaction(Transaction(transDate, id, transItem, transQuantity, transPrice)))
         {
             ui->label_status->setText("Success.");
         }

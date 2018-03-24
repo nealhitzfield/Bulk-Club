@@ -40,7 +40,6 @@ private:
     Ui::AdminWindow *ui;
     MemberModel *mModel;
     ItemModel *iModel;
-    DBManager bulkdb;
     int selectedID;
     QString selectedName;
 };

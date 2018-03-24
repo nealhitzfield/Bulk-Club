@@ -24,7 +24,6 @@ signals:
     void itemAdded();
 private:
     Ui::additemwindow *ui;
-    DBManager db;
 };
 
 #endif // ADDITEMWINDOW_H

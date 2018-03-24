@@ -8,8 +8,8 @@ AdminWindow::AdminWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    mModel = new MemberModel(bulkdb.GetAllMembers());
-    iModel = new ItemModel(bulkdb.GetAllItems());
+    mModel = new MemberModel(DBManager::instance().GetAllMembers());
+    iModel = new ItemModel(DBManager::instance().GetAllItems());
     ui->membersTable->setModel(mModel);
     ui->itemsTable->setModel(iModel);
     ui->membersTable->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -46,7 +46,7 @@ void AdminWindow::on_removeMemberButton_clicked()
 
     if(selectedID != 0)
     {
-        mList.append(Member(bulkdb.GetMember(selectedID)));
+        mList.append(Member(DBManager::instance().GetMember(selectedID)));
         tempModel = new MemberModel(mList);
         remWin = new ConfirmRemoval(this);
         connect(this, SIGNAL(sendModel(MemberModel*)), remWin, SLOT(setMemberView(MemberModel*)));
@@ -61,7 +61,7 @@ void AdminWindow::on_removeMemberButton_clicked()
 void AdminWindow::removeMember()
 {
 
-    if(bulkdb.RemoveMember(bulkdb.GetMember(selectedID)))
+    if(DBManager::instance().RemoveMember(DBManager::instance().GetMember(selectedID)))
     {
         updateMemberView();
     }
@@ -88,7 +88,7 @@ void AdminWindow::on_itemsTable_clicked(const QModelIndex &index)
 void AdminWindow::removeItem()
 {
 
-    if(bulkdb.RemoveItem(bulkdb.GetItem(selectedName)))
+    if(DBManager::instance().RemoveItem(DBManager::instance().GetItem(selectedName)))
     {
         updateItemView();
     }
@@ -102,7 +102,7 @@ void AdminWindow::on_removeItemButton_clicked()
 
     if(selectedName != "")
     {
-        iList.append(Item(bulkdb.GetItem(selectedName)));
+        iList.append(Item(DBManager::instance().GetItem(selectedName)));
         tempModel = new ItemModel(iList);
         remWin = new ConfirmRemoval(this);
         connect(this, SIGNAL(sendModel(ItemModel*)), remWin, SLOT(setItemView(ItemModel*)));
@@ -127,11 +127,11 @@ void AdminWindow::on_addItemButton_clicked()
 void AdminWindow::updateItemView()
 {
     qDebug() << "Received signal, updating item view";
-    iModel->setList(bulkdb.GetAllItems());
+    iModel->setList(DBManager::instance().GetAllItems());
 }
 
 void AdminWindow::updateMemberView()
 {
     qDebug() << "Received signal, updating member view";
-    mModel->setList(bulkdb.GetAllMembers());
+    mModel->setList(DBManager::instance().GetAllMembers());
 }

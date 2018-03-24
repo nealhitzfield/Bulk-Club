@@ -23,7 +23,6 @@ private slots:
 
 private:
     Ui::AddTransactionWindow *ui;
-    DBManager bulkdb;
     int memberID;
 };
 

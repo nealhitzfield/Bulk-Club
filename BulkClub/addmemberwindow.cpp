@@ -64,9 +64,9 @@ void AddMemberWindow::on_addButton_clicked()
    {
        memberType = EXECUTIVE;
    }
-   if(!bulkdb.MemberExists(Member(name, id, memberType, expDate)))
+   if(!DBManager::instance().MemberExists(Member(name, id, memberType, expDate)))
    {
-       if(bulkdb.AddMember(Member(name, id, memberType, expDate)))
+       if(DBManager::instance().AddMember(Member(name, id, memberType, expDate)))
        {
            emit memberAdded();
            ui->label_status->setText("Add Transactions?");
