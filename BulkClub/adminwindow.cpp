@@ -44,7 +44,7 @@ void AdminWindow::on_removeMemberButton_clicked()
     QList<Member> mList;
     MemberModel *tempModel;
 
-    if(selectedID != 0)
+    if(selectedID != 0 && DBManager::instance().MemberExists(selectedID))
     {
         mList.append(Member(DBManager::instance().GetMember(selectedID)));
         tempModel = new MemberModel(mList);
@@ -61,9 +61,12 @@ void AdminWindow::on_removeMemberButton_clicked()
 void AdminWindow::removeMember()
 {
 
-    if(DBManager::instance().RemoveMember(DBManager::instance().GetMember(selectedID)))
+    if(DBManager::instance().MemberExists(selectedID))
     {
-        updateMemberView();
+        if(DBManager::instance().RemoveMember(DBManager::instance().GetMember(selectedID)))
+        {
+            updateMemberView();
+        }
     }
 }
 

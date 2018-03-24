@@ -26,7 +26,7 @@ public:
     // Members
     bool AddMember(const Member& newMember);
     bool RemoveMember(const Member& member);
-    bool MemberExists(const Member& member);
+    bool MemberExists(const int memberID);
     Member GetMember(int memberID);
     QList<Member> GetAllMembers();
 
@@ -35,6 +35,8 @@ public:
     bool RemoveTransaction(const Transaction& transaction);
     bool TransactionExists(const Transaction& transaction);
     bool TransactionUpdateInventory(const Transaction newTransaction);
+    bool TransactionUpdateMemberTotalSpent(const Transaction newTransaction);
+    bool TransactionUpdateMemberRebate(const Transaction newTransaction);
     QList<Transaction> GetAllTransactions();
     double CalcGrossSales();
     double CalcGrossSalesByDate(QDate tDate);
@@ -46,7 +48,9 @@ public:
     bool RemoveItem(const Item& item);
     bool ItemExists(const Item& item) const;
     Item GetItem(QString itemName);
+    double GetItemPrice(QString itemName);
     QList<Item> GetAllItems();
+    QStringList GetAllItemNames();
 
     // Connection Test
     bool isOpen() const;

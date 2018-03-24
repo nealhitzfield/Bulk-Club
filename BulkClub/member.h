@@ -4,6 +4,7 @@
 #include <QDate>
 
 enum MemberType {REGULAR, EXECUTIVE};
+const double REBATE_RATE = 0.04;
 
 class Member
 {
@@ -24,6 +25,7 @@ public:
     QString GetExpirationDateString() const;
     double GetTotalSpent() const;
     double GetRebate() const;
+    bool isExecutive() const;
 };
 
 #endif // MEMBER_H

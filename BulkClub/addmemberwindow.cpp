@@ -64,7 +64,7 @@ void AddMemberWindow::on_addButton_clicked()
    {
        memberType = EXECUTIVE;
    }
-   if(!DBManager::instance().MemberExists(Member(name, id, memberType, expDate)))
+   if(!DBManager::instance().MemberExists(id))
    {
        if(DBManager::instance().AddMember(Member(name, id, memberType, expDate)))
        {

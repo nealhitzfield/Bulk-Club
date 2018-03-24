@@ -62,3 +62,18 @@ double Member::GetRebate() const
     return rebate;
 }
 
+bool Member::isExecutive() const
+{
+    bool executiveMember;
+
+    if(membership == EXECUTIVE)
+    {
+        executiveMember = true;
+    }
+    else
+    {
+        executiveMember = false;
+    }
+
+    return executiveMember;
+}

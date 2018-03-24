@@ -168,7 +168,7 @@ bool DBManager::RemoveMember(const Member& member)
 
     success = false;
 
-    if(MemberExists(member))
+    if(MemberExists(member.GetID()))
     {
         deleteQuery.prepare("DELETE FROM members WHERE name = (:name) AND id = (:id)");
         deleteQuery.bindValue(":name", member.GetMemberName());
@@ -191,7 +191,7 @@ bool DBManager::RemoveMember(const Member& member)
     return success;
 }
 
-bool DBManager::MemberExists(const Member& member)
+bool DBManager::MemberExists(const int memberID)
 {
     bool memberExists;
     QSqlQuery checkQuery;
@@ -199,7 +199,7 @@ bool DBManager::MemberExists(const Member& member)
     memberExists = false;
 
     checkQuery.prepare("SELECT id FROM members WHERE id = (:id)");
-    checkQuery.bindValue(":id", member.GetID());
+    checkQuery.bindValue(":id", memberID);
 
     if(checkQuery.exec())
     {
@@ -299,7 +299,7 @@ QList<Member> DBManager::GetAllMembers()
         idIndex         = query.record().indexOf("id");
         mTypeIndex      = query.record().indexOf("member_type");
         expDateIndex    = query.record().indexOf("expiration_date");
-        totalSpentIndex = query.record().indexOf("expiration_date");
+        totalSpentIndex = query.record().indexOf("total_spent");
         rebateIndex     = query.record().indexOf("rebate");
         while(query.next())
         {
@@ -364,6 +364,30 @@ Item DBManager::GetItem(QString itemName)
     return Item(name, price);
 }
 
+double DBManager::GetItemPrice(QString itemName)
+{
+    QSqlQuery query;
+    int priceIndex;
+    double itemPrice;
+
+    query.prepare("SELECT price FROM inventory WHERE item_name = :itemName");
+    query.bindValue(":itemName", itemName);
+
+    if(query.exec())
+    {
+        priceIndex = query.record().indexOf("price");
+        if(query.next())
+        {
+            itemPrice = query.value(priceIndex).toDouble();
+        }
+        else
+        {
+            itemPrice = 0.0;
+        }
+    }
+    return itemPrice;
+}
+
 bool DBManager::isOpen() const
 {
     return bulkdb.isOpen();
@@ -400,23 +424,52 @@ QList<Item> DBManager::GetAllItems()
     return itemList;
 }
 
+QStringList DBManager::GetAllItemNames()
+{
+    QSqlQuery query;
+    int nameIndex;
+    QString name;
+    QStringList itemNames;
+
+    query.prepare("SELECT item_name FROM inventory");
+    if(query.exec())
+    {
+        nameIndex = query.record().indexOf("item_name");
+        while(query.next())
+        {
+            name = query.value(nameIndex).toString();
+            itemNames.append(name);
+        }
+    }
+    else
+    {
+        qDebug() << "Error getting items: " << query.lastError();
+    }
+    return itemNames;
+}
 bool DBManager::AddTransaction(const Transaction& newTransaction)
 {
     QSqlQuery query;
     bool success;
 
-    query.prepare("INSERT INTO transactions (transaction_date, id, item_name, price, quantity) \
-                  VALUES (:transaction_date, :id, :item_name, :price, :quantity)");
+    query.prepare("INSERT INTO transactions (transaction_date, id, item_name, price, quantity, total) \
+                  VALUES (:transaction_date, :id, :item_name, :price, :quantity, :total)");
     query.bindValue(":transaction_date", newTransaction.GetTransactionDate());
     query.bindValue(":id", newTransaction.GetBuyersID());
     query.bindValue(":item_name", newTransaction.GetItemName());
     query.bindValue(":price", newTransaction.GetTransactionPrice());
     query.bindValue(":quantity", newTransaction.GetQuantityPurchased());
+    query.bindValue(":total", newTransaction.GetTransactionPrice() * newTransaction.GetQuantityPurchased());
 
     if(query.exec())
     {
         success = true;
         TransactionUpdateInventory(newTransaction);   // If transaction was successful, update the inventory details.
+        TransactionUpdateMemberTotalSpent(newTransaction); // If transaction was successful, update member's total spent
+        if(GetMember(newTransaction.GetBuyersID()).isExecutive())
+        {
+            TransactionUpdateMemberRebate(newTransaction);
+        }
     }
     else
     {
@@ -447,6 +500,60 @@ bool DBManager::TransactionUpdateInventory(const Transaction newTransaction)
     else  // If the item doesn't exist, return.
     {
         qDebug() << "Item did not exist";
+        success = false;
+    }
+    return success;
+}
+
+bool DBManager::TransactionUpdateMemberTotalSpent(const Transaction newTransaction)
+{
+    QSqlQuery query;
+    bool success;
+    if(MemberExists(newTransaction.GetBuyersID()))  // If the member exists, update it.
+    {
+        query.prepare("UPDATE members SET total_spent = total_spent + :transactionTotal WHERE id = :buyersID");
+        query.bindValue(":transactionTotal", newTransaction.GetTransactionPrice() * newTransaction.GetQuantityPurchased());
+        query.bindValue(":buyersID", newTransaction.GetBuyersID());
+        if(query.exec())
+        {
+            success = true;
+            qDebug() << "Updated total spent";
+        }
+        else
+        {
+            qDebug() << "Updating member's total spent failed: " << query.lastError();
+        }
+     }
+    else  // If the member doesn't exist
+    {
+        qDebug() << "Member does not exist";
+        success = false;
+    }
+    return success;
+}
+
+bool DBManager::TransactionUpdateMemberRebate(const Transaction newTransaction)
+{
+    QSqlQuery query;
+    bool success;
+    if(MemberExists(newTransaction.GetBuyersID()))  // If the member exists, update it.
+    {
+        query.prepare("UPDATE members SET rebate = total_spent * :rebateRate WHERE id = :buyersID");
+        query.bindValue(":rebateRate", REBATE_RATE);
+        query.bindValue(":buyersID", newTransaction.GetBuyersID());
+        if(query.exec())
+        {
+            success = true;
+            qDebug() << "Updated rebate";
+        }
+        else
+        {
+            qDebug() << "Updating member's rebate failed: " << query.lastError();
+        }
+     }
+    else  // If the member doesn't exist
+    {
+        qDebug() << "Member does not exist";
         success = false;
     }
     return success;

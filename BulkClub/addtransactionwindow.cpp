@@ -6,25 +6,8 @@ AddTransactionWindow::AddTransactionWindow(QWidget *parent) :
     ui(new Ui::AddTransactionWindow)
 {
     ui->setupUi(this);
-    QStringList itemNames;
-    QSqlQuery query;
-    int nameIndex;
-    QString name;
-    query.prepare("SELECT item_name FROM inventory");
-    if(query.exec())
-    {
-        nameIndex = query.record().indexOf("item_name");
-        while(query.next())
-        {
-            name = query.value(nameIndex).toString();
-            itemNames.append(name);
-        }
-    }
-    else
-    {
-        qDebug() << "Error getting items: " << query.lastError();
-    }
-    ui->comboBox->addItems(itemNames);
+
+    ui->comboBox->addItems(DBManager::instance().GetAllItemNames());
 }
 
 AddTransactionWindow::~AddTransactionWindow()
@@ -47,30 +30,21 @@ void AddTransactionWindow::on_purchaseAddButton_clicked()
     QDate   transDate;
     int     id;
     QString transItemName;
-    double  transPrice;
+    double  itemPrice;
     int     transQuantity;
-    QSqlQuery query;
-    int priceIndex;
 
     transDate = ui->purchaseDate->date();
     id = memberID;
-
     transItemName = ui->comboBox->itemText(ui->comboBox->currentIndex());
     transQuantity = ui->purchaseQuantity->value();
+    itemPrice = DBManager::instance().GetItemPrice(transItemName);
 
-    query.prepare("SELECT price FROM inventory WHERE item_name = :item_name");
-    query.bindValue(":item_name", transItemName);
-    if(query.next())
-    {
-        priceIndex = query.record().indexOf("price");
-        transPrice = query.value(priceIndex).toDouble();
-    }
-    qDebug() << "Added " << transItemName << " at $" << transPrice;
+    qDebug() << "Added " << transItemName << " at $" << itemPrice;
 
-    Item transItem(transItemName, transPrice);
-    if (!DBManager::instance().TransactionExists(Transaction(transDate, id, transItem, transQuantity, transPrice)))
+    Item transItem(transItemName, itemPrice);
+    if (!DBManager::instance().TransactionExists(Transaction(transDate, id, transItem, transQuantity, itemPrice)))
     {
-        if (DBManager::instance().AddTransaction(Transaction(transDate, id, transItem, transQuantity, transPrice)))
+        if (DBManager::instance().AddTransaction(Transaction(transDate, id, transItem, transQuantity, itemPrice)))
         {
             ui->label_status->setText("Success.");
         }
