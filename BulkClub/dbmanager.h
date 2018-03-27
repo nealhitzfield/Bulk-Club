@@ -32,7 +32,6 @@ public:
 
     // Transactions
     bool AddTransaction(const Transaction& newTransaction);
-    bool RemoveTransaction(const Transaction& transaction);
     bool TransactionExists(const Transaction& transaction);
     bool TransactionUpdateInventory(const Transaction newTransaction);
     bool TransactionUpdateMemberTotalSpent(const Transaction newTransaction);

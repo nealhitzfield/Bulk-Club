@@ -7,7 +7,6 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
 {
     QDate minDate;
     QDate maxDate;
-    QString grossSales;
 
     ui->setupUi(this);
     if(DBManager::instance().isOpen())
@@ -27,6 +26,7 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
     else
     {
         qDebug() << "Error setting min/max dates";
+        ui->dateEdit->setEnabled(false);
     }
 
     tModel = new TransactionModel(DBManager::instance().GetAllTransactions());
@@ -37,8 +37,7 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
     ui->dailyView->setSortingEnabled(true);
     ui->dailyView->sortByColumn(0, Qt::AscendingOrder);
 
-    grossSales = QString::number(DBManager::instance().CalcGrossSales(), 'f', 2);
-    ui->gross_sales->setText(grossSales);
+    updateTotals(DBManager::instance().CalcGrossSales());
 }
 
 StoreManagerWindow::~StoreManagerWindow()
@@ -52,7 +51,7 @@ void StoreManagerWindow::on_dateFilterButton_clicked()
 
     dateFilter = ui->dateEdit->date();
     pModel->setTransactionDate(dateFilter);
-    ui->gross_sales->setText(QString::number(DBManager::instance().CalcGrossSalesByDate(dateFilter), 'f', 2));
+    updateTotals(DBManager::instance().CalcGrossSalesByDate(dateFilter));
 }
 
 void StoreManagerWindow::on_itemFilterButton_clicked()
@@ -61,7 +60,7 @@ void StoreManagerWindow::on_itemFilterButton_clicked()
 
     itemFilter = ui->lineEdit_item->text();
     pModel->setItemName(itemFilter);
-    ui->gross_sales->setText(QString::number(DBManager::instance().CalcGrossSalesByItem(itemFilter), 'f', 2));
+    updateTotals(DBManager::instance().CalcGrossSalesByItem(itemFilter));
 }
 
 void StoreManagerWindow::on_memberFilterButton_clicked()
@@ -70,11 +69,23 @@ void StoreManagerWindow::on_memberFilterButton_clicked()
 
     idFilter = ui->memberID->value();
     pModel->setBuyersID(idFilter);
-    ui->gross_sales->setText(QString::number(DBManager::instance().CalcGrossSalesByMember(idFilter), 'f', 2));
+    updateTotals(DBManager::instance().CalcGrossSalesByMember(idFilter));
 }
 
 void StoreManagerWindow::on_resetButton_clicked()
 {
     pModel->resetFilter();
-    ui->gross_sales->setText(QString::number(DBManager::instance().CalcGrossSales(), 'f', 2));
+    updateTotals(DBManager::instance().CalcGrossSales());
+}
+
+void StoreManagerWindow::updateTotals(double grossSales)
+{
+    double taxAmt, netSales;
+
+    taxAmt = grossSales * TAX_RATE;
+    netSales = grossSales + taxAmt;
+
+    ui->subtotal->setText(QString::number(grossSales, 'f', 2));
+    ui->tax->setText(QString::number(taxAmt, 'f', 2));
+    ui->total->setText(QString::number(netSales, 'f', 2));
 }

@@ -34,13 +34,21 @@ public:
     QHBoxLayout *horizontalLayout_7;
     QTabWidget *SMTabs;
     QWidget *daily;
-    QHBoxLayout *horizontalLayout_8;
-    QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_11;
+    QVBoxLayout *verticalLayout_4;
     QTableView *dailyView;
+    QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_10;
     QVBoxLayout *verticalLayout_2;
-    QHBoxLayout *horizontalLayout_6;
+    QHBoxLayout *horizontalLayout_9;
     QLabel *label_3;
-    QLabel *gross_sales;
+    QLabel *subtotal;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_4;
+    QLabel *tax;
+    QHBoxLayout *horizontalLayout_8;
+    QLabel *label_5;
+    QLabel *total;
     QPushButton *resetButton;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
@@ -71,40 +79,82 @@ public:
         SMTabs->setObjectName(QStringLiteral("SMTabs"));
         daily = new QWidget();
         daily->setObjectName(QStringLiteral("daily"));
-        horizontalLayout_8 = new QHBoxLayout(daily);
-        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
-        verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        horizontalLayout_11 = new QHBoxLayout(daily);
+        horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         dailyView = new QTableView(daily);
         dailyView->setObjectName(QStringLiteral("dailyView"));
         dailyView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
 
-        verticalLayout_3->addWidget(dailyView);
+        verticalLayout_4->addWidget(dailyView);
 
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
         label_3 = new QLabel(daily);
         label_3->setObjectName(QStringLiteral("label_3"));
 
-        horizontalLayout_6->addWidget(label_3);
+        horizontalLayout_9->addWidget(label_3);
 
-        gross_sales = new QLabel(daily);
-        gross_sales->setObjectName(QStringLiteral("gross_sales"));
-        gross_sales->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        subtotal = new QLabel(daily);
+        subtotal->setObjectName(QStringLiteral("subtotal"));
+        subtotal->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        horizontalLayout_6->addWidget(gross_sales);
+        horizontalLayout_9->addWidget(subtotal);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_9);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        label_4 = new QLabel(daily);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        horizontalLayout_6->addWidget(label_4);
+
+        tax = new QLabel(daily);
+        tax->setObjectName(QStringLiteral("tax"));
+        tax->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_6->addWidget(tax);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_6);
+
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
+        label_5 = new QLabel(daily);
+        label_5->setObjectName(QStringLiteral("label_5"));
+
+        horizontalLayout_8->addWidget(label_5);
+
+        total = new QLabel(daily);
+        total->setObjectName(QStringLiteral("total"));
+        total->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_8->addWidget(total);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_8);
+
+
+        horizontalLayout_10->addLayout(verticalLayout_2);
 
         resetButton = new QPushButton(daily);
         resetButton->setObjectName(QStringLiteral("resetButton"));
         resetButton->setMinimumSize(QSize(110, 23));
         resetButton->setMaximumSize(QSize(110, 23));
 
-        horizontalLayout_6->addWidget(resetButton);
+        horizontalLayout_10->addWidget(resetButton);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_6);
+        verticalLayout_3->addLayout(horizontalLayout_10);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
@@ -194,13 +244,13 @@ public:
         verticalLayout->addLayout(horizontalLayout_5);
 
 
-        verticalLayout_2->addLayout(verticalLayout);
+        verticalLayout_3->addLayout(verticalLayout);
 
 
-        verticalLayout_3->addLayout(verticalLayout_2);
+        verticalLayout_4->addLayout(verticalLayout_3);
 
 
-        horizontalLayout_8->addLayout(verticalLayout_3);
+        horizontalLayout_11->addLayout(verticalLayout_4);
 
         SMTabs->addTab(daily, QString());
         member = new QWidget();
@@ -224,8 +274,12 @@ public:
     void retranslateUi(QDialog *StoreManagerWindow)
     {
         StoreManagerWindow->setWindowTitle(QApplication::translate("StoreManagerWindow", "Dialog", nullptr));
-        label_3->setText(QApplication::translate("StoreManagerWindow", "Gross Sales", nullptr));
-        gross_sales->setText(QApplication::translate("StoreManagerWindow", "[+]Total", nullptr));
+        label_3->setText(QApplication::translate("StoreManagerWindow", "Sub Total", nullptr));
+        subtotal->setText(QApplication::translate("StoreManagerWindow", "[+]Total", nullptr));
+        label_4->setText(QApplication::translate("StoreManagerWindow", "Tax", nullptr));
+        tax->setText(QApplication::translate("StoreManagerWindow", "[+]Total", nullptr));
+        label_5->setText(QApplication::translate("StoreManagerWindow", "Total", nullptr));
+        total->setText(QApplication::translate("StoreManagerWindow", "[+]Total", nullptr));
         resetButton->setText(QApplication::translate("StoreManagerWindow", "Reset Filter", nullptr));
         label_status->setText(QApplication::translate("StoreManagerWindow", "[+]Status", nullptr));
         dateFilterButton->setText(QApplication::translate("StoreManagerWindow", "Get Transactions", nullptr));

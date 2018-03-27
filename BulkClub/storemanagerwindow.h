@@ -21,8 +21,8 @@ private slots:
     void on_dateFilterButton_clicked();
     void on_itemFilterButton_clicked();
     void on_memberFilterButton_clicked();
-
     void on_resetButton_clicked();
+    void updateTotals(double);
 
 private:
     Ui::StoreManagerWindow *ui;

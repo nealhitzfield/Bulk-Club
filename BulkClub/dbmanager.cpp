@@ -219,28 +219,28 @@ Member DBManager::GetMember(int memberID)
     int idIndex;
     int mTypeIndex;
     int expDateIndex;
-    int totalSpentIndex;
     int rebateIndex;
+    int totalSpentIndex;
     QString name;
     int id;
     QString mType;
     MemberType membershipType;
     QString expDate;
     QDate expirationDate;
-    double totalSpent;
     double rebate;
+    double totalSpent;
 
-    query.prepare("SELECT name, id, member_type, expiration_date, total_spent, rebate FROM members WHERE id = :id");
+    query.prepare("SELECT name, id, member_type, expiration_date, rebate, total_spent FROM members WHERE id = :id");
     query.bindValue(":id", memberID);
 
     if(query.exec())
     {
-        nameIndex       = query.record().indexOf("name");
-        idIndex         = query.record().indexOf("id");
-        mTypeIndex      = query.record().indexOf("member_type");
-        expDateIndex    = query.record().indexOf("expiration_date");
-        totalSpentIndex = query.record().indexOf("expiration_date");
-        rebateIndex     = query.record().indexOf("rebate");
+        nameIndex           = query.record().indexOf("name");
+        idIndex             = query.record().indexOf("id");
+        mTypeIndex          = query.record().indexOf("member_type");
+        expDateIndex        = query.record().indexOf("expiration_date");
+        rebateIndex         = query.record().indexOf("rebate");
+        totalSpentIndex     = query.record().indexOf("total_spent");
         if(query.next())
         {
             name    = query.value(nameIndex).toString();
@@ -256,20 +256,32 @@ Member DBManager::GetMember(int memberID)
             }
             expDate = query.value(expDateIndex).toString();
             expirationDate = QDate::fromString(expDate, "MM/dd/yyyy");
-            totalSpent = query.value(totalSpentIndex).toDouble();
             rebate = query.value(rebateIndex).toDouble();
+            totalSpent = query.value(totalSpentIndex).toDouble();
         }
         else
         {
             qDebug() << "Can't find member";
+            name = "";
+            id = 0;
+            membershipType = REGULAR;
+            expirationDate = QDate(2000, 1, 1);
+            rebate = 0;
+            totalSpent = 0;
         }
     }
     else
     {
         qDebug() << "Get Member Error: " << query.lastError();
+        name = "";
+        id = 0;
+        membershipType = REGULAR;
+        expirationDate = QDate(2000, 1, 1);
+        rebate = 0;
+        totalSpent = 0;
     }
 
-    return Member(name, id, membershipType, expirationDate, totalSpent, rebate);
+    return Member(name, id, membershipType, expirationDate, rebate, totalSpent);
 }
 
 QList<Member> DBManager::GetAllMembers()
@@ -280,18 +292,18 @@ QList<Member> DBManager::GetAllMembers()
     int idIndex;
     int mTypeIndex;
     int expDateIndex;
-    int totalSpentIndex;
     int rebateIndex;
+    int totalSpentIndex;
     QString name;
     int id;
     QString mType;
     MemberType membershipType;
     QString expDate;
     QDate expirationDate;
-    double totalSpent;
     double rebate;
+    double totalSpent;
 
-    query.prepare("SELECT name, id, member_type, expiration_date, total_spent, rebate FROM members");
+    query.prepare("SELECT name, id, member_type, expiration_date, rebate, total_spent FROM members");
 
     if(query.exec())
     {
@@ -299,8 +311,9 @@ QList<Member> DBManager::GetAllMembers()
         idIndex         = query.record().indexOf("id");
         mTypeIndex      = query.record().indexOf("member_type");
         expDateIndex    = query.record().indexOf("expiration_date");
-        totalSpentIndex = query.record().indexOf("total_spent");
         rebateIndex     = query.record().indexOf("rebate");
+        totalSpentIndex = query.record().indexOf("total_spent");
+
         while(query.next())
         {
             name    = query.value(nameIndex).toString();
@@ -316,10 +329,10 @@ QList<Member> DBManager::GetAllMembers()
             }
             expDate = query.value(expDateIndex).toString();
             expirationDate = QDate::fromString(expDate, "MM/dd/yyyy");
-            totalSpent = query.value(totalSpentIndex).toDouble();
             rebate = query.value(rebateIndex).toDouble();
+            totalSpent = query.value(totalSpentIndex).toDouble();
 
-            memberList.append(Member(name, id, membershipType, expirationDate, totalSpent, rebate));
+            memberList.append(Member(name, id, membershipType, expirationDate, rebate, totalSpent));
         }
     }
     else
@@ -450,16 +463,20 @@ QStringList DBManager::GetAllItemNames()
 bool DBManager::AddTransaction(const Transaction& newTransaction)
 {
     QSqlQuery query;
+    double taxAmt;
     bool success;
 
-    query.prepare("INSERT INTO transactions (transaction_date, id, item_name, price, quantity, total) \
-                  VALUES (:transaction_date, :id, :item_name, :price, :quantity, :total)");
+    taxAmt = newTransaction.GetTransactionSubTotal() * TAX_RATE;
+
+    query.prepare("INSERT INTO transactions (transaction_date, id, item_name, item_price, quantity, subtotal, total) "
+                  "VALUES (:transaction_date, :id, :item_name, :item_price, :quantity, :subtotal, :total)");
     query.bindValue(":transaction_date", newTransaction.GetTransactionDate().toString("MM/dd/yyyy"));
     query.bindValue(":id", newTransaction.GetBuyersID());
     query.bindValue(":item_name", newTransaction.GetItemName());
-    query.bindValue(":price", newTransaction.GetTransactionPrice());
+    query.bindValue(":item_price", newTransaction.GetItem().GetItemPrice());
     query.bindValue(":quantity", newTransaction.GetQuantityPurchased());
-    query.bindValue(":total", newTransaction.GetTransactionPrice() * newTransaction.GetQuantityPurchased());
+    query.bindValue(":subtotal", newTransaction.GetTransactionSubTotal());
+    query.bindValue(":total", newTransaction.GetTransactionSubTotal() + taxAmt);
 
     if(query.exec())
     {
@@ -474,6 +491,7 @@ bool DBManager::AddTransaction(const Transaction& newTransaction)
     else
     {
        qDebug() << "Failed to add transaction" << query.lastError();
+       success = false;
     }
     return success;
 }
@@ -495,9 +513,10 @@ bool DBManager::TransactionUpdateInventory(const Transaction newTransaction)
         else
         {
             qDebug() << "Updating item in inventory failed." << query.lastError();
+            success = false;
         }
      }
-    else  // If the item doesn't exist, return.
+    else  // If the item doesn't exist
     {
         qDebug() << "Item did not exist";
         success = false;
@@ -512,7 +531,7 @@ bool DBManager::TransactionUpdateMemberTotalSpent(const Transaction newTransacti
     if(MemberExists(newTransaction.GetBuyersID()))  // If the member exists, update it.
     {
         query.prepare("UPDATE members SET total_spent = total_spent + :transactionTotal WHERE id = :buyersID");
-        query.bindValue(":transactionTotal", newTransaction.GetTransactionPrice() * newTransaction.GetQuantityPurchased());
+        query.bindValue(":transactionTotal", newTransaction.GetTransactionTotal());
         query.bindValue(":buyersID", newTransaction.GetBuyersID());
         if(query.exec())
         {
@@ -522,6 +541,7 @@ bool DBManager::TransactionUpdateMemberTotalSpent(const Transaction newTransacti
         else
         {
             qDebug() << "Updating member's total spent failed: " << query.lastError();
+            success = false;
         }
      }
     else  // If the member doesn't exist
@@ -538,8 +558,8 @@ bool DBManager::TransactionUpdateMemberRebate(const Transaction newTransaction)
     bool success;
     if(MemberExists(newTransaction.GetBuyersID()))  // If the member exists, update it.
     {
-        query.prepare("UPDATE members SET rebate = total_spent * :rebateRate WHERE id = :buyersID");
-        query.bindValue(":rebateRate", REBATE_RATE);
+        query.prepare("UPDATE members SET rebate = rebate + :rebateAmt WHERE id = :buyersID");
+        query.bindValue(":rebateAmt", newTransaction.GetTransactionSubTotal() * REBATE_RATE);
         query.bindValue(":buyersID", newTransaction.GetBuyersID());
         if(query.exec())
         {
@@ -549,6 +569,7 @@ bool DBManager::TransactionUpdateMemberRebate(const Transaction newTransaction)
         else
         {
             qDebug() << "Updating member's rebate failed: " << query.lastError();
+            success = false;
         }
      }
     else  // If the member doesn't exist
@@ -559,34 +580,6 @@ bool DBManager::TransactionUpdateMemberRebate(const Transaction newTransaction)
     return success;
 }
 
-bool DBManager::RemoveTransaction(const Transaction& transaction)
-{
-    bool success;
-    QSqlQuery deleteQuery;
-
-    success = false;
-
-    if(TransactionExists(transaction))
-    {
-        deleteQuery.prepare("DELETE FROM transactions WHERE id = :id AND item_name = :item_name)");
-        deleteQuery.bindValue(":id", transaction.GetBuyersID());
-        deleteQuery.bindValue(":item_name", transaction.GetItemName());
-
-        success = deleteQuery.exec();
-
-        if(!success)
-        {
-            qDebug() << "Remove Transaction Error: " << deleteQuery.lastError();
-        }
-    }
-    else
-    {
-        qDebug() << "Transaction doesn't exist";
-    }
-
-    return success;
-}
-
 bool DBManager::TransactionExists(const Transaction& trans)
 {
     bool transactionExists;
@@ -594,11 +587,10 @@ bool DBManager::TransactionExists(const Transaction& trans)
 
     transactionExists = false;
 
-    checkQuery.prepare("SELECT id, item_name, price, quantity FROM transactions "
-                       "WHERE id = :id AND item_name = :item_name AND price = :price AND quantity = :quantity");
+    checkQuery.prepare("SELECT id, item_name, quantity FROM transactions "
+                       "WHERE id = :id AND item_name = :item_name AND quantity = :quantity");
     checkQuery.bindValue(":id", trans.GetBuyersID());
     checkQuery.bindValue(":item_name", trans.GetItemName());
-    checkQuery.bindValue(":price", trans.GetTransactionPrice());
     checkQuery.bindValue(":quantity", trans.GetQuantityPurchased());
 
     if(checkQuery.exec())
@@ -619,35 +611,41 @@ QList<Transaction> DBManager::GetAllTransactions()
     int dateIndex;
     int idIndex;
     int itemNameIndex;
-    int priceIndex;
+    int itemPriceIndex;
     int qtyIndex;
+    int subTotIndex;
+    int totIndex;
     QDate transDate;
     int id;
     QString itemName;
     double itemPrice;
     int qty;
+    double transSubtotal;
     double transTotal;
 
-    query.prepare("SELECT transaction_date, id, item_name, price, quantity FROM transactions");
+    query.prepare("SELECT transaction_date, id, item_name, item_price, quantity, subtotal, total FROM transactions");
 
     if(query.exec())
     {
         dateIndex       = query.record().indexOf("transaction_date");
         idIndex         = query.record().indexOf("id");
         itemNameIndex   = query.record().indexOf("item_name");
-        priceIndex      = query.record().indexOf("price");
+        itemPriceIndex  = query.record().indexOf("item_price");
         qtyIndex        = query.record().indexOf("quantity");
+        subTotIndex     = query.record().indexOf("subtotal");
+        totIndex        = query.record().indexOf("total");
 
         while(query.next())
         {
             transDate   = QDate::fromString(query.value(dateIndex).toString(), "MM/dd/yyyy");
             id          = query.value(idIndex).toInt();
             itemName    = query.value(itemNameIndex).toString();
-            itemPrice   = query.value(priceIndex).toDouble();
+            itemPrice   = query.value(itemPriceIndex).toDouble();
             qty         = query.value(qtyIndex).toInt();
-            transTotal  = qty * itemPrice;
+            transSubtotal = query.value(subTotIndex).toDouble();
+            transTotal  = query.value(totIndex).toDouble();
 
-            transactionList.append(Transaction(transDate, id, Item(itemName, itemPrice), qty, transTotal));
+            transactionList.append(Transaction(transDate, id, Item(itemName, itemPrice), qty, transSubtotal, transTotal));
         }
     }
     else
@@ -663,7 +661,7 @@ double DBManager::CalcGrossSales()
     QSqlQuery query;
     double grossSales;
 
-    query.prepare("SELECT Sum(total) FROM transactions");
+    query.prepare("SELECT Sum(subtotal) FROM transactions");
     grossSales = 0;
 
     if(query.exec())
@@ -678,7 +676,7 @@ double DBManager::CalcGrossSalesByDate(QDate tDate)
     QSqlQuery query;
     double grossSales;
 
-    query.prepare("SELECT Sum(total) FROM transactions WHERE transaction_date = :date");
+    query.prepare("SELECT Sum(subtotal) FROM transactions WHERE transaction_date = :date");
     query.bindValue(":date", tDate.toString("MM/dd/yyyy"));
     grossSales = 0;
 
@@ -694,7 +692,7 @@ double DBManager::CalcGrossSalesByMember(int buyersID)
     QSqlQuery query;
     double grossSales;
 
-    query.prepare("SELECT Sum(total) FROM transactions WHERE id = :id");
+    query.prepare("SELECT Sum(subtotal) FROM transactions WHERE id = :id");
     query.bindValue(":id", buyersID);
     grossSales = 0;
 
@@ -710,7 +708,7 @@ double DBManager::CalcGrossSalesByItem(QString itemName)
     QSqlQuery query;
     double grossSales;
 
-    query.prepare("SELECT Sum(total) FROM transactions WHERE item_name = :iName COLLATE NOCASE");
+    query.prepare("SELECT Sum(subtotal) FROM transactions WHERE item_name = :iName COLLATE NOCASE");
     query.bindValue(":iName", itemName);
     grossSales = 0;
 

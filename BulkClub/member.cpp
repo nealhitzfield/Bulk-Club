@@ -6,18 +6,18 @@ Member::Member(QString name, int id, MemberType mType, QDate expDate)
     memberID        = id;
     membership      = mType;
     expirationDate  = expDate;
-    totalSpent      = 0.00;
     rebate          = 0.00;
+    totalSpent      = 0.00;
 }
 
-Member::Member(QString name, int id, MemberType mType, QDate expDate, double totSpent, double rebateAmt)
+Member::Member(QString name, int id, MemberType mType, QDate expDate, double rebateAmt, double totSpent)
 {
     memberName      = name;
     memberID        = id;
     membership      = mType;
     expirationDate  = expDate;
-    totalSpent      = totSpent;
     rebate          = rebateAmt;
+    totalSpent      = totSpent;
 }
 
 QString Member::GetMemberName() const
@@ -52,14 +52,14 @@ QString Member::GetExpirationDateString() const
     return expirationDate.toString("MM/dd/yyyy");
 }
 
-double Member::GetTotalSpent() const
-{
-    return totalSpent;
-}
-
 double Member::GetRebate() const
 {
     return rebate;
+}
+
+double Member::GetTotalSpent() const
+{
+    return totalSpent;
 }
 
 bool Member::isExecutive() const

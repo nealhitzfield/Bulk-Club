@@ -4,6 +4,8 @@
 #include <QDate>
 #include "item.h"
 
+const double TAX_RATE = 0.0775;
+
 class Transaction
 {
 private:
@@ -11,17 +13,18 @@ private:
     int     buyersID;
     Item    itemPurchased;
     int     quantityPurchased;
-    double  transactionPrice;
-
+    double  transactionSubtotal;
+    double  transactionTotal;
 public:
     Transaction();
-    Transaction(QDate, int, Item, int, double);
+    Transaction(QDate, int, Item, int, double, double);
     QDate GetTransactionDate() const;
     int GetBuyersID() const;
     Item GetItem() const;
     QString GetItemName() const;
     int GetQuantityPurchased() const;
-    double GetTransactionPrice() const;
+    double GetTransactionSubTotal() const;
+    double GetTransactionTotal() const;
 };
 
 #endif // TRANSACTION_H

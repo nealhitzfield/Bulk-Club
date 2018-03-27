@@ -4,16 +4,18 @@ Transaction::Transaction() : transactionDate(1970, 1, 1), itemPurchased("", 0.0)
 {
     buyersID = 0;
     quantityPurchased = 0;
-    transactionPrice = 0.0;
+    transactionSubtotal = 0.0;
+    transactionTotal = 0.0;
 }
 
-Transaction::Transaction(QDate transDate, int bID, Item item, int quantity, double transPrice)
+Transaction::Transaction(QDate transDate, int bID, Item item, int quantity, double transSub, double transTotal)
 {
     transactionDate = transDate;
     buyersID = bID;
     itemPurchased = item;
     quantityPurchased = quantity;
-    transactionPrice = transPrice;
+    transactionSubtotal = transSub;
+    transactionTotal = transTotal;
 }
 
 QDate Transaction::GetTransactionDate() const
@@ -41,7 +43,12 @@ int Transaction::GetQuantityPurchased() const
     return quantityPurchased;
 }
 
-double Transaction::GetTransactionPrice() const
+double Transaction::GetTransactionSubTotal() const
 {
-    return transactionPrice;
+    return transactionSubtotal;
+}
+
+double Transaction::GetTransactionTotal() const
+{
+    return transactionTotal;
 }

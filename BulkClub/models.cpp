@@ -234,7 +234,7 @@ QVariant TransactionModel::data(const QModelIndex &index, int role) const
             return trans.GetQuantityPurchased();
             break;
         case 4:
-            return trans.GetTransactionPrice();
+            return trans.GetTransactionSubTotal();
             break;
         default:
             return QVariant();
@@ -267,7 +267,7 @@ QVariant TransactionModel::headerData(int section, Qt::Orientation orientation, 
             return tr("Qty Purchased");
             break;
         case 4:
-            return tr("Transaction Total");
+            return tr("Subtotal");
             break;
         default:
             return QVariant();

@@ -13,18 +13,18 @@ private:
     int         memberID;
     MemberType  membership;
     QDate       expirationDate;
-    double      totalSpent;
     double      rebate;
+    double      totalSpent;
 public:
     Member(QString name, int id, MemberType mType, QDate expDate);
-    Member(QString name, int id, MemberType mType, QDate expDate, double totSpent, double rebateAmt);
+    Member(QString name, int id, MemberType mType, QDate expDate, double rebateAmt, double totSpent);
 
     QString GetMemberName() const;
     int GetID() const;
     QString GetMembershipTypeString() const;
     QString GetExpirationDateString() const;
-    double GetTotalSpent() const;
     double GetRebate() const;
+    double GetTotalSpent() const;
     bool isExecutive() const;
 };
 
