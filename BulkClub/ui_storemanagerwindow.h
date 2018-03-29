@@ -281,7 +281,7 @@ public:
         label_5->setText(QApplication::translate("StoreManagerWindow", "Total", nullptr));
         total->setText(QApplication::translate("StoreManagerWindow", "[+]Total", nullptr));
         resetButton->setText(QApplication::translate("StoreManagerWindow", "Reset Filter", nullptr));
-        label_status->setText(QApplication::translate("StoreManagerWindow", "[+]Status", nullptr));
+        label_status->setText(QApplication::translate("StoreManagerWindow", "Enter Transaction Date", nullptr));
         dateFilterButton->setText(QApplication::translate("StoreManagerWindow", "Get Transactions", nullptr));
         label->setText(QApplication::translate("StoreManagerWindow", "Enter Item Name", nullptr));
         itemFilterButton->setText(QApplication::translate("StoreManagerWindow", "Get Transactions", nullptr));

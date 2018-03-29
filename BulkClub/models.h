@@ -57,9 +57,10 @@ private:
     QList<Transaction> modTransList;
 };
 
-// Proxy Model used for sorting/filtering
+
 enum Filter {NO_FILTER, DATE, ITEM, MEMBER};
 
+// Proxy Model used for sorting/filtering
 class ProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT

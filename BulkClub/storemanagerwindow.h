@@ -28,6 +28,8 @@ private:
     Ui::StoreManagerWindow *ui;
     TransactionModel *tModel;
     ProxyModel *pModel;
+    QDate minDate;
+    QDate maxDate;
 };
 
 #endif // STOREMANAGERWINDOW_H

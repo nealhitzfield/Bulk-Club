@@ -3,20 +3,11 @@
 
 StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::StoreManagerWindow)
+    ui(new Ui::StoreManagerWindow),
+    tModel(new TransactionModel(DBManager::instance().GetAllTransactions())),
+    pModel(new ProxyModel)
 {
-    QDate minDate;
-    QDate maxDate;
-
     ui->setupUi(this);
-    if(DBManager::instance().isOpen())
-    {
-       ui->label_status->setText("Enter Transaction Date");
-    }
-    else
-    {
-        ui->label_status->setText("Cannot connect to database");
-    }
 
     if(DBManager::instance().GetValidDates(minDate, maxDate))
     {
@@ -29,14 +20,10 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
         ui->dateEdit->setEnabled(false);
     }
 
-    tModel = new TransactionModel(DBManager::instance().GetAllTransactions());
-    pModel = new ProxyModel;
     pModel->setSourceModel(tModel);
-
     ui->dailyView->setModel(pModel);
     ui->dailyView->setSortingEnabled(true);
     ui->dailyView->sortByColumn(0, Qt::AscendingOrder);
-
     updateTotals(DBManager::instance().CalcGrossSales());
 }
 

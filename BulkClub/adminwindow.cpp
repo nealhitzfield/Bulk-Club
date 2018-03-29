@@ -4,28 +4,26 @@
 
 AdminWindow::AdminWindow(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::AdminWindow)
+    ui(new Ui::AdminWindow),
+    mModel(new MemberModel(DBManager::instance().GetAllMembers())),
+    iModel(new ItemModel(DBManager::instance().GetAllItems())),
+    selectedID(0),
+    selectedName("")
 {
     ui->setupUi(this);
-
-    mModel = new MemberModel(DBManager::instance().GetAllMembers());
-    iModel = new ItemModel(DBManager::instance().GetAllItems());
     ui->membersTable->setModel(mModel);
     ui->itemsTable->setModel(iModel);
     ui->membersTable->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->membersTable->setSelectionMode(QAbstractItemView::MultiSelection);
     ui->itemsTable->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->itemsTable->setSelectionMode(QAbstractItemView::MultiSelection);
     ui->removeMemberButton->setEnabled(false);
     ui->removeItemButton->setEnabled(false);
-    selectedID = 0;
-    selectedName = "";
 }
 
 AdminWindow::~AdminWindow()
 {
     delete ui;
     delete mModel;
+    delete iModel;
 }
 
 void AdminWindow::on_addMemberButton_clicked()
