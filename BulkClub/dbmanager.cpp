@@ -1,5 +1,4 @@
 #include "dbmanager.h"
-#include <QFile>
 
 DBManager::DBManager()
 {
@@ -38,12 +37,134 @@ DBManager& DBManager::instance()
 
     return bulkdbInstance;
 }
+
+bool DBManager::IsDatabasePopulated()
+{
+    QSqlQuery flagQuery;
+    bool databasePopulated;
+
+    flagQuery.prepare("SELECT database_populated FROM populated_flag");
+    if(flagQuery.exec())
+        if(flagQuery.next())
+            databasePopulated = flagQuery.value(0).toBool();
+
+    return databasePopulated;
+}
+
+bool DBManager::SetPopulatedFlag()
+{
+    QSqlQuery flag;
+    bool success;
+
+    flag.prepare("UPDATE populated_flag SET database_populated = 1");
+
+    if(flag.exec())
+        success = true;
+    else
+        success = false;
+
+    return success;
+}
+bool DBManager::PopulateMembers()
+{
+    bool success;
+    ifstream fin;
+    string mTypeStr;
+    MemberType mType;
+    string expDate;
+    string mName;
+    int id;
+
+    fin.open(MEMBER_FILE.c_str());
+    success = true;
+
+    while(!fin.eof())
+    {
+        getline(fin, mName);
+        fin >> id;
+        fin.ignore(1000, '\n');
+        getline(fin, mTypeStr);
+        if(mTypeStr == "Regular")
+            mType = REGULAR;
+        else
+            mType = EXECUTIVE;
+        getline(fin, expDate);
+
+        qDebug() << QString::fromStdString(mTypeStr);
+        qDebug() << QString::fromStdString(expDate);
+        qDebug() << QString::fromStdString(mName);
+        qDebug() << id;
+
+        if(!AddMember(Member(QString::fromStdString(mName), id, mType,
+                            QDate::fromString(QString::fromStdString(expDate), "MM/dd/yyyy"))))
+        {
+            success = false;
+        }
+    }
+    fin.close();
+
+    return success;
+}
+
+bool DBManager::PopulateTransactions()
+{
+    bool success;
+    ifstream fin;
+    string transDate;
+    int buyersID;
+    string itemName;
+    double itemPrice;
+    int qty;
+    double subtotal;
+    double total;
+
+    for(int fileCount = 0; fileCount < TOTAL_TRANS_FILES; fileCount++)
+    {
+        fin.open(TRANS_FILES[fileCount].c_str());
+        while(!fin.eof())
+        {
+            getline(fin, transDate);
+            fin >> buyersID;
+            fin.ignore(1000, '\n');
+            getline(fin, itemName);
+            fin >> itemPrice;
+            fin.ignore(1000, '\t');
+            fin >> qty;
+            fin.ignore(1000, '\n');
+
+            qDebug() << QString::fromStdString(transDate);
+            qDebug() << buyersID;
+            qDebug() << QString::fromStdString(itemName);
+            qDebug() << itemPrice;
+            qDebug() << qty;
+
+            subtotal = itemPrice * qty;
+            total = subtotal + subtotal * TAX_RATE;
+
+            if(!ItemExists(Item(QString::fromStdString(itemName), itemPrice)))
+            {
+                    if(!AddItem(Item(QString::fromStdString(itemName), itemPrice)))
+                        qDebug() << "Error adding item";
+            }
+            if(!AddTransaction(Transaction(QDate::fromString(QString::fromStdString(transDate), "MM/dd/yyyy"),
+                                       buyersID, Item(QString::fromStdString(itemName), itemPrice), qty,
+                                       subtotal, total)))
+            {
+                success = false;
+            }
+        }
+        fin.close();
+    }
+
+    return success;
+}
 bool DBManager::AddItem(const Item& newItem)
 {
-    bool success = false;
+    bool success;
     QString itemName;
     double price;
 
+    success = false;
     itemName = newItem.GetItemName();
     price = newItem.GetItemPrice();
 
@@ -463,10 +584,8 @@ QStringList DBManager::GetAllItemNames()
 bool DBManager::AddTransaction(const Transaction& newTransaction)
 {
     QSqlQuery query;
-    double taxAmt;
     bool success;
 
-    taxAmt = newTransaction.GetTransactionSubTotal() * TAX_RATE;
 
     query.prepare("INSERT INTO transactions (transaction_date, id, item_name, item_price, quantity, subtotal, total) "
                   "VALUES (:transaction_date, :id, :item_name, :item_price, :quantity, :subtotal, :total)");
@@ -476,7 +595,7 @@ bool DBManager::AddTransaction(const Transaction& newTransaction)
     query.bindValue(":item_price", newTransaction.GetItem().GetItemPrice());
     query.bindValue(":quantity", newTransaction.GetQuantityPurchased());
     query.bindValue(":subtotal", newTransaction.GetTransactionSubTotal());
-    query.bindValue(":total", newTransaction.GetTransactionSubTotal() + taxAmt);
+    query.bindValue(":total", newTransaction.GetTransactionTotal());
 
     if(query.exec())
     {

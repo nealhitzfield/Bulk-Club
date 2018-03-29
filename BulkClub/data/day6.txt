@@ -42,4 +42,3 @@ Coke
 12345
 Propel Fitness Water
 12.50	3
- 

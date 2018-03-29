@@ -18,6 +18,15 @@ LoginWindow::LoginWindow(QWidget *parent) :
     }
     else
     {
+        if(!DBManager::instance().IsDatabasePopulated())
+        {
+            if(DBManager::instance().PopulateMembers() &&
+                    DBManager::instance().PopulateTransactions())
+            {
+                if(DBManager::instance().SetPopulatedFlag())
+                    qDebug() << "Populated Flag Set";
+            }
+        }
         ui->label_status->setText("Please sign in");
     }
 }

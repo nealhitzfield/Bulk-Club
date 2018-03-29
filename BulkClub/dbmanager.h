@@ -3,11 +3,20 @@
 
 #include <QtSql>
 #include <QList>
+#include <QFile>
+#include <QString>
+#include <fstream>
+#include <string>
 #include "credentials.h"
 #include "member.h"
 #include "transaction.h"
 #include "item.h"
 
+using namespace std;
+
+const int TOTAL_TRANS_FILES = 7;
+const string TRANS_FILES[] = {"data/day1.txt", "data/day2.txt", "data/day3.txt", "data/day4.txt", "data/day5.txt", "data/day6.txt", "data/day7.txt"};
+const string MEMBER_FILE = "data/warehouse-shoppers.txt";
 class DBManager
 {
 private:
@@ -15,6 +24,7 @@ private:
     ~DBManager();
 
     QSqlDatabase bulkdb;
+
 public:
     static DBManager& instance();
     DBManager(const DBManager&) = delete;
@@ -22,6 +32,12 @@ public:
 
     // Login
     bool VerifyLogin(const Credentials& credentials, QString& employeeType);
+
+    // Populate database from file
+    bool IsDatabasePopulated();
+    bool SetPopulatedFlag();
+    bool PopulateMembers();
+    bool PopulateTransactions();
 
     // Members
     bool AddMember(const Member& newMember);

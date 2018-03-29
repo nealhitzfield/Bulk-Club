@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'adminwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.8.0
+** Created by: Qt User Interface Compiler version 5.10.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -16,6 +16,7 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
@@ -43,6 +44,15 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QPushButton *addItemButton;
     QPushButton *removeItemButton;
+    QWidget *UpgDowngTab;
+    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout_6;
+    QVBoxLayout *verticalLayout_5;
+    QLabel *label;
+    QTableView *UpgradeTable;
+    QVBoxLayout *verticalLayout_4;
+    QLabel *label_2;
+    QTableView *DowngradeTable;
 
     void setupUi(QDialog *AdminWindow)
     {
@@ -115,13 +125,57 @@ public:
         horizontalLayout_5->addLayout(verticalLayout_2);
 
         tabWidget->addTab(InventoryTab, QString());
+        UpgDowngTab = new QWidget();
+        UpgDowngTab->setObjectName(QStringLiteral("UpgDowngTab"));
+        horizontalLayout = new QHBoxLayout(UpgDowngTab);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        label = new QLabel(UpgDowngTab);
+        label->setObjectName(QStringLiteral("label"));
+        QFont font;
+        font.setPointSize(10);
+        label->setFont(font);
+
+        verticalLayout_5->addWidget(label);
+
+        UpgradeTable = new QTableView(UpgDowngTab);
+        UpgradeTable->setObjectName(QStringLiteral("UpgradeTable"));
+
+        verticalLayout_5->addWidget(UpgradeTable);
+
+
+        verticalLayout_6->addLayout(verticalLayout_5);
+
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        label_2 = new QLabel(UpgDowngTab);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setFont(font);
+
+        verticalLayout_4->addWidget(label_2);
+
+        DowngradeTable = new QTableView(UpgDowngTab);
+        DowngradeTable->setObjectName(QStringLiteral("DowngradeTable"));
+
+        verticalLayout_4->addWidget(DowngradeTable);
+
+
+        verticalLayout_6->addLayout(verticalLayout_4);
+
+
+        horizontalLayout->addLayout(verticalLayout_6);
+
+        tabWidget->addTab(UpgDowngTab, QString());
 
         verticalLayout_3->addWidget(tabWidget);
 
 
         retranslateUi(AdminWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(AdminWindow);
@@ -129,15 +183,18 @@ public:
 
     void retranslateUi(QDialog *AdminWindow)
     {
-        AdminWindow->setWindowTitle(QApplication::translate("AdminWindow", "Admin Window", Q_NULLPTR));
-        addMemberButton->setText(QApplication::translate("AdminWindow", "Add Member", Q_NULLPTR));
-        removeMemberButton->setText(QApplication::translate("AdminWindow", "Remove Member", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(MembersTab), QApplication::translate("AdminWindow", "Members", Q_NULLPTR));
-        tabWidget->setTabToolTip(tabWidget->indexOf(MembersTab), QApplication::translate("AdminWindow", "Member Management", Q_NULLPTR));
-        addItemButton->setText(QApplication::translate("AdminWindow", "Add Item", Q_NULLPTR));
-        removeItemButton->setText(QApplication::translate("AdminWindow", "Remove Item", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(InventoryTab), QApplication::translate("AdminWindow", "Inventory", Q_NULLPTR));
-        tabWidget->setTabToolTip(tabWidget->indexOf(InventoryTab), QApplication::translate("AdminWindow", "Inventory Management", Q_NULLPTR));
+        AdminWindow->setWindowTitle(QApplication::translate("AdminWindow", "Admin Window", nullptr));
+        addMemberButton->setText(QApplication::translate("AdminWindow", "Add Member", nullptr));
+        removeMemberButton->setText(QApplication::translate("AdminWindow", "Remove Member", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(MembersTab), QApplication::translate("AdminWindow", "Members", nullptr));
+        tabWidget->setTabToolTip(tabWidget->indexOf(MembersTab), QApplication::translate("AdminWindow", "Member Management", nullptr));
+        addItemButton->setText(QApplication::translate("AdminWindow", "Add Item", nullptr));
+        removeItemButton->setText(QApplication::translate("AdminWindow", "Remove Item", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(InventoryTab), QApplication::translate("AdminWindow", "Inventory", nullptr));
+        tabWidget->setTabToolTip(tabWidget->indexOf(InventoryTab), QApplication::translate("AdminWindow", "Inventory Management", nullptr));
+        label->setText(QApplication::translate("AdminWindow", "Suggested Membership Upgrades", nullptr));
+        label_2->setText(QApplication::translate("AdminWindow", "Suggested Membership Downgrades", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(UpgDowngTab), QApplication::translate("AdminWindow", "Upgrade/Downgrade", nullptr));
     } // retranslateUi
 
 };
