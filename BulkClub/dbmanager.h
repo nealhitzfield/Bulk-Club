@@ -45,6 +45,8 @@ public:
     bool MemberExists(const int memberID);
     Member GetMember(int memberID);
     QList<Member> GetAllMembers();
+    QList<Member> GetUpgrades();
+    QList<Member> GetDowngrades();
 
     // Transactions
     bool AddTransaction(const Transaction& newTransaction);

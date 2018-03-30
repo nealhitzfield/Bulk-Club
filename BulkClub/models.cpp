@@ -358,3 +358,159 @@ QVariant ProxyModel::headerData(int section, Qt::Orientation orientation, int ro
 {
     return sourceModel()->headerData(section, orientation, role);
 }
+
+UpgradeModel::UpgradeModel(QList<Member> upgradeList, QObject *parent):
+    QAbstractTableModel(parent)
+{
+    modUpgradeList = upgradeList;
+}
+
+void UpgradeModel::setList(const QList<Member> upgradeList)
+{
+    beginResetModel();
+    modUpgradeList = upgradeList;
+    endResetModel();
+}
+
+int UpgradeModel::rowCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent);
+    return modUpgradeList.length();
+}
+
+int UpgradeModel::columnCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent);
+    return 2;
+}
+
+QVariant UpgradeModel::data(const QModelIndex &index, int role) const
+{
+    if(!index.isValid())
+    {
+        return QVariant();
+    }
+    if(index.row() >= modUpgradeList.size() || index.row() < 0)
+    {
+        return QVariant();
+    }
+
+    if(role == Qt::DisplayRole)
+    {
+        Member member = modUpgradeList.at(index.row());
+
+        switch(index.column())
+        {
+        case 0:
+            return member.GetMemberName();
+            break;
+        case 1:
+            return member.GetID();
+            break;
+        default:
+            return QVariant();
+            break;
+        }
+    }
+    return QVariant();
+}
+
+QVariant UpgradeModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if(role != Qt::DisplayRole)
+    {
+        return QVariant();
+    }
+
+    if(orientation == Qt::Horizontal)
+    {
+        switch(section)
+        {
+        case 0:
+            return tr("Name");
+            break;
+        case 1:
+            return tr("Member ID");
+            break;
+        }
+    }
+    return QVariant();
+}
+
+DowngradeModel::DowngradeModel(QList<Member> downgradeList, QObject *parent):
+    QAbstractTableModel(parent)
+{
+    modDowngradeList = downgradeList;
+}
+
+void DowngradeModel::setList(const QList<Member> downgradeList)
+{
+    beginResetModel();
+    modDowngradeList = downgradeList;
+    endResetModel();
+}
+
+int DowngradeModel::rowCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent);
+    return modDowngradeList.length();
+}
+
+int DowngradeModel::columnCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent);
+    return 2;
+}
+
+QVariant DowngradeModel::data(const QModelIndex &index, int role) const
+{
+    if(!index.isValid())
+    {
+        return QVariant();
+    }
+    if(index.row() >= modDowngradeList.size() || index.row() < 0)
+    {
+        return QVariant();
+    }
+
+    if(role == Qt::DisplayRole)
+    {
+        Member member = modDowngradeList.at(index.row());
+
+        switch(index.column())
+        {
+        case 0:
+            return member.GetMemberName();
+            break;
+        case 1:
+            return member.GetID();
+            break;
+        default:
+            return QVariant();
+            break;
+        }
+    }
+    return QVariant();
+}
+
+QVariant DowngradeModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if(role != Qt::DisplayRole)
+    {
+        return QVariant();
+    }
+
+    if(orientation == Qt::Horizontal)
+    {
+        switch(section)
+        {
+        case 0:
+            return tr("Name");
+            break;
+        case 1:
+            return tr("Member ID");
+            break;
+        }
+    }
+    return QVariant();
+}

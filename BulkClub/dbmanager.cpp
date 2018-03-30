@@ -881,3 +881,117 @@ bool DBManager::GetValidDates(QDate &earliestDate, QDate &latestDate)
 
     return success;
 }
+
+QList<Member> DBManager::GetUpgrades()
+{
+    QSqlQuery query;
+    QList<Member> memberList;
+    int nameIndex;
+    int idIndex;
+    int mTypeIndex;
+    int expDateIndex;
+    int rebateIndex;
+    int totalSpentIndex;
+    QString name;
+    int id;
+    QString mType;
+    MemberType membershipType;
+    QString expDate;
+    QDate expirationDate;
+    double rebate;
+    double totalSpent;
+
+    query.prepare("SELECT name, id, member_type, expiration_date, rebate, total_spent FROM members");
+
+    if(query.exec())
+    {
+        nameIndex       = query.record().indexOf("name");
+        idIndex         = query.record().indexOf("id");
+        mTypeIndex      = query.record().indexOf("member_type");
+        expDateIndex    = query.record().indexOf("expiration_date");
+        rebateIndex     = query.record().indexOf("rebate");
+        totalSpentIndex = query.record().indexOf("total_spent");
+
+        while(query.next())
+        {
+            mType   = query.value(mTypeIndex).toString();
+            if(mType == "Regular")
+            {
+                totalSpent = query.value(totalSpentIndex).toDouble();
+                if(totalSpent/(1 + TAX_RATE) >= 120)
+                {
+                name    = query.value(nameIndex).toString();
+                id      = query.value(idIndex).toInt();
+                membershipType = REGULAR;
+                expDate = query.value(expDateIndex).toString();
+                expirationDate = QDate::fromString(expDate, "MM/dd/yyyy");
+                rebate = query.value(rebateIndex).toDouble();
+                memberList.append(Member(name, id, membershipType, expirationDate, rebate, totalSpent));
+                }
+            }
+        }
+    }
+    else
+    {
+        qDebug() << "Error Getting Upgrades: " << query.lastError();
+    }
+
+    return memberList;
+}
+
+QList<Member> DBManager::GetDowngrades()
+{
+    QSqlQuery query;
+    QList<Member> memberList;
+    int nameIndex;
+    int idIndex;
+    int mTypeIndex;
+    int expDateIndex;
+    int rebateIndex;
+    int totalSpentIndex;
+    QString name;
+    int id;
+    QString mType;
+    MemberType membershipType;
+    QString expDate;
+    QDate expirationDate;
+    double rebate;
+    double totalSpent;
+
+    query.prepare("SELECT name, id, member_type, expiration_date, rebate, total_spent FROM members");
+
+    if(query.exec())
+    {
+        nameIndex       = query.record().indexOf("name");
+        idIndex         = query.record().indexOf("id");
+        mTypeIndex      = query.record().indexOf("member_type");
+        expDateIndex    = query.record().indexOf("expiration_date");
+        rebateIndex     = query.record().indexOf("rebate");
+        totalSpentIndex = query.record().indexOf("total_spent");
+
+        while(query.next())
+        {
+            mType   = query.value(mTypeIndex).toString();
+            if(mType == "Executive")
+            {
+                rebate = query.value(rebateIndex).toDouble();
+                if(rebate < 120)
+                {
+                name    = query.value(nameIndex).toString();
+                id      = query.value(idIndex).toInt();
+                membershipType = REGULAR;
+                totalSpent = query.value(totalSpentIndex).toDouble();
+                expDate = query.value(expDateIndex).toString();
+                expirationDate = QDate::fromString(expDate, "MM/dd/yyyy");
+                memberList.append(Member(name, id, membershipType, expirationDate, rebate, totalSpent));
+                }
+            }
+        }
+    }
+    else
+    {
+        qDebug() << "Error Getting Dowmgrades: " << query.lastError();
+    }
+
+    return memberList;
+}

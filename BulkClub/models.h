@@ -85,4 +85,34 @@ private:
     QString iName;
 };
 
+class UpgradeModel : public QAbstractTableModel
+{
+public:
+    UpgradeModel(QList<Member> upgradeList, QObject *parent = 0);
+
+    void setList(const QList<Member> upgradeList);
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    QVariant data(const QModelIndex &index, int role) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+
+private:
+    QList<Member> modUpgradeList;
+};
+
+class DowngradeModel : public QAbstractTableModel
+{
+public:
+    DowngradeModel(QList<Member> downgradeList, QObject *parent = 0);
+
+    void setList(const QList<Member> downgradeList);
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    QVariant data(const QModelIndex &index, int role) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+
+private:
+    QList<Member> modDowngradeList;
+};
+
 #endif // MEMBERMODEL_H
