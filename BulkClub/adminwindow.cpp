@@ -7,12 +7,16 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui(new Ui::AdminWindow),
     mModel(new MemberModel(DBManager::instance().GetAllMembers())),
     iModel(new ItemModel(DBManager::instance().GetAllItems())),
+    uModel(new UpgradeModel(DBManager::instance().GetUpgrades())),
+    dModel(new DowngradeModel(DBManager::instance().GetDowngrades())),
     selectedID(0),
     selectedName("")
 {
     ui->setupUi(this);
     ui->membersTable->setModel(mModel);
     ui->itemsTable->setModel(iModel);
+    ui->UpgradeTable->setModel(uModel);
+    ui->DowngradeTable->setModel(dModel);
     ui->membersTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->itemsTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->removeMemberButton->setEnabled(false);
@@ -136,4 +140,11 @@ void AdminWindow::updateMemberView()
 {
     qDebug() << "Received signal, updating member view";
     mModel->setList(DBManager::instance().GetAllMembers());
+}
+
+void AdminWindow::on_tabWidget_tabBarClicked(int index)
+{
+    qDebug() << "Received signal, updating upgrades/downgrades";
+    uModel->setList(DBManager::instance().GetUpgrades());
+    dModel->setList(DBManager::instance().GetDowngrades());
 }

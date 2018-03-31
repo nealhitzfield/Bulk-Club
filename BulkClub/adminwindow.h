@@ -31,6 +31,8 @@ private slots:
     void removeItem();
     void updateItemView();
     void updateMemberView();
+    void on_tabWidget_tabBarClicked(int index);
+
 signals:
     void sendSelectedID(int id);
     void sendSelectedName(QString itemName);
@@ -40,6 +42,8 @@ private:
     Ui::AdminWindow *ui;
     MemberModel *mModel;
     ItemModel *iModel;
+    UpgradeModel *uModel;
+    DowngradeModel *dModel;
     int selectedID;
     QString selectedName;
 };
