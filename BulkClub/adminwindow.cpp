@@ -142,7 +142,7 @@ void AdminWindow::updateMemberView()
     mModel->setList(DBManager::instance().GetAllMembers());
 }
 
-void AdminWindow::on_tabWidget_tabBarClicked(int index)
+void AdminWindow::on_tabWidget_tabBarClicked()
 {
     qDebug() << "Received signal, updating upgrades/downgrades";
     uModel->setList(DBManager::instance().GetUpgrades());

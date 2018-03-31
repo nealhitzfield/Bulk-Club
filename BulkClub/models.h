@@ -120,4 +120,35 @@ private:
     QList<Member> modDowngradeList;
 };
 
+class ExpModel : public QAbstractTableModel
+{
+public:
+    ExpModel(QList<Member> expList, QObject *parent = 0);
+
+    void setList(const QList<Member> expList);
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    QVariant data(const QModelIndex &index, int role) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+
+private:
+    QList<Member> modExpList;
+};
+
+class RebateModel : public QAbstractTableModel
+{
+public:
+    RebateModel(QList<Member> rebateList, QObject *parent = 0);
+
+    void setList(const QList<Member> rebateList);
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    QVariant data(const QModelIndex &index, int role) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+
+private:
+    QList<Member> modRebateList;
+};
+
+
 #endif // MEMBERMODEL_H

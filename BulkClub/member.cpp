@@ -10,6 +10,15 @@ Member::Member(QString name, int id, MemberType mType, QDate expDate)
     totalSpent      = 0.00;
 }
 
+Member::Member(QString name, int id, int renewCost)
+{
+    memberName      = name;
+    memberID        = id;
+    memberRenewal   = renewCost;
+    rebate          = 0.00;
+    totalSpent      = 0.00;
+}
+
 Member::Member(QString name, int id, MemberType mType, QDate expDate, double rebateAmt, double totSpent)
 {
     memberName      = name;
@@ -18,6 +27,14 @@ Member::Member(QString name, int id, MemberType mType, QDate expDate, double reb
     expirationDate  = expDate;
     rebate          = rebateAmt;
     totalSpent      = totSpent;
+}
+
+Member::Member(QString name, int id, double rebateAmt)
+{
+    memberName = name;
+    memberID   = id;
+    rebate     = rebateAmt;
+    totalSpent = 0.0;
 }
 
 QString Member::GetMemberName() const
@@ -76,4 +93,9 @@ bool Member::isExecutive() const
     }
 
     return executiveMember;
+}
+
+int Member::GetRenewCost() const
+{
+    return memberRenewal;
 }

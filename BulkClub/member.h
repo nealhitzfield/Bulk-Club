@@ -15,7 +15,10 @@ private:
     QDate       expirationDate;
     double      rebate;
     double      totalSpent;
+    int         memberRenewal;
 public:
+    Member(QString name, int id, int renewCost);
+    Member(QString name, int id, double rebateAmt);
     Member(QString name, int id, MemberType mType, QDate expDate);
     Member(QString name, int id, MemberType mType, QDate expDate, double rebateAmt, double totSpent);
 
@@ -25,6 +28,7 @@ public:
     QString GetExpirationDateString() const;
     double GetRebate() const;
     double GetTotalSpent() const;
+    int GetRenewCost() const;
     bool isExecutive() const;
 };
 

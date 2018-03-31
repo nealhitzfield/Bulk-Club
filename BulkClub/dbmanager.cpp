@@ -1054,7 +1054,7 @@ QList<Member> DBManager::GetUpgrades()
             if(mType == "Regular")
             {
                 totalSpent = query.value(totalSpentIndex).toDouble();
-                if(totalSpent/(1 + TAX_RATE) >= 120)
+                if(totalSpent/(1 + TAX_RATE) >= 55)
                 {
                 name    = query.value(nameIndex).toString();
                 id      = query.value(idIndex).toInt();
@@ -1111,11 +1111,11 @@ QList<Member> DBManager::GetDowngrades()
             if(mType == "Executive")
             {
                 rebate = query.value(rebateIndex).toDouble();
-                if(rebate < 120)
+                if(rebate < 55)
                 {
                 name    = query.value(nameIndex).toString();
                 id      = query.value(idIndex).toInt();
-                membershipType = REGULAR;
+                membershipType = EXECUTIVE;
                 totalSpent = query.value(totalSpentIndex).toDouble();
                 expDate = query.value(expDateIndex).toString();
                 expirationDate = QDate::fromString(expDate, "MM/dd/yyyy");
@@ -1131,3 +1131,100 @@ QList<Member> DBManager::GetDowngrades()
 
     return memberList;
 }
+
+QList<Member> DBManager::GetExpirations(int month)
+{
+    QSqlQuery query;
+    QList<Member> memberList;
+    int nameIndex;
+    int idIndex;
+    int mTypeIndex;
+    int expDateIndex;
+    QString name;
+    int id;
+    QString mType;
+    QString expDate;
+    QDate expirationDate;
+    int renewCost;
+
+    query.prepare("SELECT name, id, member_type, expiration_date FROM members");
+
+    if(query.exec())
+    {
+        nameIndex       = query.record().indexOf("name");
+        idIndex         = query.record().indexOf("id");
+        mTypeIndex      = query.record().indexOf("member_type");
+        expDateIndex    = query.record().indexOf("expiration_date");
+
+        while(query.next())
+        {
+            expDate = query.value(expDateIndex).toString();
+            expirationDate = QDate::fromString(expDate, "MM/dd/yyyy");
+            if(month == expirationDate.month())
+            {
+                mType   = query.value(mTypeIndex).toString();
+                name    = query.value(nameIndex).toString();
+                id      = query.value(idIndex).toInt();
+                if(mType == "Executive")
+                {
+                    renewCost = 120;
+                }
+                else
+                {
+                    renewCost = 65;
+                }
+
+                memberList.append(Member(name, id, renewCost));
+            }
+        }
+    }
+    else
+    {
+        qDebug() << "Error Getting Expirations: " << query.lastError();
+    }
+
+    return memberList;
+}
+
+QList<Member> DBManager::GetRebates()
+{
+    QSqlQuery query;
+    QList<Member> memberList;
+    int nameIndex;
+    int idIndex;
+    int mTypeIndex;
+    int rebateIndex;
+    QString name;
+    int id;
+    QString mType;
+    double rebate;
+
+    query.prepare("SELECT name, id, member_type, rebate FROM members");
+
+    if(query.exec())
+    {
+        nameIndex       = query.record().indexOf("name");
+        idIndex         = query.record().indexOf("id");
+        mTypeIndex      = query.record().indexOf("member_type");
+        rebateIndex     = query.record().indexOf("rebate");
+
+        while(query.next())
+        {
+            mType   = query.value(mTypeIndex).toString();
+            if(mType == "Executive")
+            {
+                rebate = query.value(rebateIndex).toDouble();
+                name    = query.value(nameIndex).toString();
+                id      = query.value(idIndex).toInt();
+                memberList.append(Member(name, id, rebate));
+            }
+        }
+    }
+    else
+    {
+        qDebug() << "Error Getting Rebates: " << query.lastError();
+    }
+
+    return memberList;
+}
+

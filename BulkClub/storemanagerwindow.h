@@ -27,10 +27,16 @@ private slots:
     void on_memberNameFilterButton_clicked();
     void on_memberTypeFilterButton_clicked();
 
+    void on_getMemberExpirationButton_clicked();
+
+    void on_SMTabs_tabBarClicked();
+
 private:
     Ui::StoreManagerWindow *ui;
     TransactionModel *tModel;
     ProxyModel *pModel;
+    ExpModel *eModel;
+    RebateModel *rModel;
     QDate minDate;
     QDate maxDate;
 };

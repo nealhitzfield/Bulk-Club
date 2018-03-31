@@ -47,6 +47,8 @@ public:
     QList<Member> GetAllMembers();
     QList<Member> GetUpgrades();
     QList<Member> GetDowngrades();
+    QList<Member> GetExpirations(int month);
+    QList<Member> GetRebates();
 
     // Transactions
     bool AddTransaction(const Transaction& newTransaction);

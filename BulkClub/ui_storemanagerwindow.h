@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'storemanagerwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.10.0
+** Created by: Qt User Interface Compiler version 5.10.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -90,14 +90,14 @@ public:
     QHBoxLayout *horizontalLayout_18;
     QLabel *label_11;
     QPushButton *ResetExpirationFilterButton;
-    QTableView *tableView;
+    QTableView *ExpTable;
     QHBoxLayout *horizontalLayout_17;
     QComboBox *monthComboBox;
     QLabel *label_10;
     QPushButton *getMemberExpirationButton;
     QVBoxLayout *verticalLayout_7;
     QLabel *label_12;
-    QTableView *tableView_2;
+    QTableView *rebateTable;
 
     void setupUi(QDialog *StoreManagerWindow)
     {
@@ -402,10 +402,10 @@ public:
 
         verticalLayout_6->addLayout(horizontalLayout_18);
 
-        tableView = new QTableView(member);
-        tableView->setObjectName(QStringLiteral("tableView"));
+        ExpTable = new QTableView(member);
+        ExpTable->setObjectName(QStringLiteral("ExpTable"));
 
-        verticalLayout_6->addWidget(tableView);
+        verticalLayout_6->addWidget(ExpTable);
 
 
         verticalLayout_8->addLayout(verticalLayout_6);
@@ -442,10 +442,10 @@ public:
 
         verticalLayout_7->addWidget(label_12);
 
-        tableView_2 = new QTableView(member);
-        tableView_2->setObjectName(QStringLiteral("tableView_2"));
+        rebateTable = new QTableView(member);
+        rebateTable->setObjectName(QStringLiteral("rebateTable"));
 
-        verticalLayout_7->addWidget(tableView_2);
+        verticalLayout_7->addWidget(rebateTable);
 
 
         verticalLayout_9->addLayout(verticalLayout_7);
@@ -460,7 +460,7 @@ public:
 
         retranslateUi(StoreManagerWindow);
 
-        SMTabs->setCurrentIndex(0);
+        SMTabs->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(StoreManagerWindow);

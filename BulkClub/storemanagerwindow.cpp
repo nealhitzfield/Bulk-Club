@@ -5,7 +5,9 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StoreManagerWindow),
     tModel(new TransactionModel(DBManager::instance().GetAllTransactions())),
-    pModel(new ProxyModel)
+    pModel(new ProxyModel),
+    eModel(new ExpModel(DBManager::instance().GetExpirations(0))),
+    rModel(new RebateModel(DBManager::instance().GetRebates()))
 {
     ui->setupUi(this);
 
@@ -20,6 +22,10 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
         ui->dateEdit->setEnabled(false);
     }
 
+    QStringList months;
+    months << "January" << "February" << "March" << "April" << "May"
+           << "June" << "July" << "August" << "September" << "October"
+           << "November" << "December";
     pModel->setSourceModel(tModel);
     pModel->setSortRole(Qt::UserRole);
     ui->dailyView->setModel(pModel);
@@ -27,6 +33,9 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
     ui->dailyView->sortByColumn(0, Qt::AscendingOrder);
     ui->memberTypeComboBox->addItem("Regular");
     ui->memberTypeComboBox->addItem("Executive");
+    ui->ExpTable->setModel(eModel);
+    ui->monthComboBox->addItems(months);
+    ui->rebateTable->setModel(rModel);
 
     updateSalesTotals(DBManager::instance().CalcGrossSales());
     updateMembersTotals(DBManager::instance().GetTotalShoppers(REGULAR),
@@ -125,4 +134,61 @@ void StoreManagerWindow::on_memberTypeFilterButton_clicked()
 
     pModel->setMemberType(mType);
     updateSalesTotals(DBManager::instance().CalcGrossSalesByMember(mType));
+}
+
+void StoreManagerWindow::on_getMemberExpirationButton_clicked()
+{
+    if(ui->monthComboBox->currentText() == "January")
+    {
+         eModel->setList(DBManager::instance().GetExpirations(1));
+    }
+    else if(ui->monthComboBox->currentText() == "Febrauary")
+    {
+        eModel->setList(DBManager::instance().GetExpirations(2));
+    }
+    else if(ui->monthComboBox->currentText() == "March")
+    {
+        eModel->setList(DBManager::instance().GetExpirations(3));
+    }
+    else if(ui->monthComboBox->currentText() == "April")
+    {
+        eModel->setList(DBManager::instance().GetExpirations(4));
+    }
+    else if(ui->monthComboBox->currentText() == "May")
+    {
+        eModel->setList(DBManager::instance().GetExpirations(5));
+    }
+    else if(ui->monthComboBox->currentText() == "June")
+    {
+        eModel->setList(DBManager::instance().GetExpirations(6));
+    }
+    else if(ui->monthComboBox->currentText() == "July")
+    {
+        eModel->setList(DBManager::instance().GetExpirations(7));
+    }
+    else if(ui->monthComboBox->currentText() == "August")
+    {
+        eModel->setList(DBManager::instance().GetExpirations(8));
+    }
+    else if(ui->monthComboBox->currentText() == "September")
+    {
+        eModel->setList(DBManager::instance().GetExpirations(9));
+    }
+    else if(ui->monthComboBox->currentText() == "October")
+    {
+        eModel->setList(DBManager::instance().GetExpirations(10));
+    }
+    else if(ui->monthComboBox->currentText() == "November")
+    {
+        eModel->setList(DBManager::instance().GetExpirations(11));
+    }
+    else
+    {
+        eModel->setList(DBManager::instance().GetExpirations(12));
+    }
+}
+
+void StoreManagerWindow::on_SMTabs_tabBarClicked()
+{
+    rModel->setList(DBManager::instance().GetRebates());
 }

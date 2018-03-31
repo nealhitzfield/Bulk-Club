@@ -591,3 +591,172 @@ QVariant DowngradeModel::headerData(int section, Qt::Orientation orientation, in
     }
     return QVariant();
 }
+
+ExpModel::ExpModel(QList<Member> expList, QObject *parent):
+    QAbstractTableModel(parent)
+{
+    modExpList = expList;
+}
+
+void ExpModel::setList(const QList<Member> expList)
+{
+    beginResetModel();
+    modExpList = expList;
+    endResetModel();
+}
+
+int ExpModel::rowCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent);
+    return modExpList.length();
+}
+
+int ExpModel::columnCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent);
+    return 3;
+}
+
+QVariant ExpModel::data(const QModelIndex &index, int role) const
+{
+    if(!index.isValid())
+    {
+        return QVariant();
+    }
+    if(index.row() >= modExpList.size() || index.row() < 0)
+    {
+        return QVariant();
+    }
+
+    if(role == Qt::DisplayRole)
+    {
+        Member member = modExpList.at(index.row());
+
+        switch(index.column())
+        {
+        case 0:
+            return member.GetMemberName();
+            break;
+        case 1:
+            return member.GetID();
+            break;
+        case 2:
+            return member.GetRenewCost();
+            break;
+        default:
+            return QVariant();
+            break;
+        }
+    }
+    return QVariant();
+}
+
+QVariant ExpModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if(role != Qt::DisplayRole)
+    {
+        return QVariant();
+    }
+
+    if(orientation == Qt::Horizontal)
+    {
+        switch(section)
+        {
+        case 0:
+            return tr("Name");
+            break;
+        case 1:
+            return tr("Member ID");
+            break;
+        case 2:
+            return tr("Renewal Cost");
+            break;
+        }
+    }
+    return QVariant();
+}
+
+RebateModel::RebateModel(QList<Member> rebateList, QObject *parent):
+    QAbstractTableModel(parent)
+{
+    modRebateList = rebateList;
+}
+
+void RebateModel::setList(const QList<Member> rebateList)
+{
+    beginResetModel();
+    modRebateList = rebateList;
+    endResetModel();
+}
+
+int RebateModel::rowCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent);
+    return modRebateList.length();
+}
+
+int RebateModel::columnCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent);
+    return 3;
+}
+
+QVariant RebateModel::data(const QModelIndex &index, int role) const
+{
+    if(!index.isValid())
+    {
+        return QVariant();
+    }
+    if(index.row() >= modRebateList.size() || index.row() < 0)
+    {
+        return QVariant();
+    }
+
+    if(role == Qt::DisplayRole)
+    {
+        Member member = modRebateList.at(index.row());
+
+        switch(index.column())
+        {
+        case 0:
+            return member.GetMemberName();
+            break;
+        case 1:
+            return member.GetID();
+            break;
+        case 2:
+            return member.GetRebate();
+            break;
+        default:
+            return QVariant();
+            break;
+        }
+    }
+    return QVariant();
+}
+
+QVariant RebateModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if(role != Qt::DisplayRole)
+    {
+        return QVariant();
+    }
+
+    if(orientation == Qt::Horizontal)
+    {
+        switch(section)
+        {
+        case 0:
+            return tr("Name");
+            break;
+        case 1:
+            return tr("Member ID");
+            break;
+        case 2:
+            return tr("Rebate");
+            break;
+        }
+    }
+    return QVariant();
+}
+

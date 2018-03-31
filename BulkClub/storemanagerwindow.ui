@@ -20,7 +20,7 @@
    <item>
     <widget class="QTabWidget" name="SMTabs">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="daily">
       <attribute name="title">
@@ -465,17 +465,10 @@
                  </property>
                 </widget>
                </item>
-               <item>
-                <widget class="QPushButton" name="ResetExpirationFilterButton">
-                 <property name="text">
-                  <string>Reset Filter</string>
-                 </property>
-                </widget>
-               </item>
               </layout>
              </item>
              <item>
-              <widget class="QTableView" name="tableView"/>
+              <widget class="QTableView" name="ExpTable"/>
              </item>
             </layout>
            </item>
@@ -525,7 +518,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QTableView" name="tableView_2"/>
+            <widget class="QTableView" name="rebateTable"/>
            </item>
           </layout>
          </item>

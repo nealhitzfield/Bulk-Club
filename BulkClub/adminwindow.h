@@ -31,7 +31,7 @@ private slots:
     void removeItem();
     void updateItemView();
     void updateMemberView();
-    void on_tabWidget_tabBarClicked(int index);
+    void on_tabWidget_tabBarClicked();
 
 signals:
     void sendSelectedID(int id);
