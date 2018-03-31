@@ -10,6 +10,7 @@
 #include "member.h"
 #include "item.h"
 #include "transaction.h"
+#include "dbmanager.h"
 
 // Model used to display Member information
 class MemberModel : public QAbstractTableModel
@@ -58,7 +59,7 @@ private:
 };
 
 
-enum Filter {NO_FILTER, DATE, ITEM, MEMBER};
+enum Filter {NO_FILTER, DATE, ITEM, MEMBER_ID, MEMBER_NAME, MEMBERSHIP_TYPE};
 
 // Proxy Model used for sorting/filtering
 class ProxyModel : public QSortFilterProxyModel
@@ -72,7 +73,9 @@ public:
 public slots:
     void setTransactionDate(QDate transDate);
     void setBuyersID(int buyersID);
+    void setBuyersName(QString buyersName);
     void setItemName(QString itemName);
+    void setMemberType(MemberType memberType);
     void resetFilter();
 
 signals:
@@ -83,6 +86,8 @@ private:
     QDate tDate;
     int bID;
     QString iName;
+    QString bName;
+    MemberType mType;
 };
 
 class UpgradeModel : public QAbstractTableModel

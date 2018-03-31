@@ -20,9 +20,12 @@ public:
 private slots:
     void on_dateFilterButton_clicked();
     void on_itemFilterButton_clicked();
-    void on_memberFilterButton_clicked();
+    void on_memberIDFilterButton_clicked();
     void on_resetButton_clicked();
-    void updateTotals(double);
+    void updateSalesTotals(double);
+    void updateMembersTotals(int, int);
+    void on_memberNameFilterButton_clicked();
+    void on_memberTypeFilterButton_clicked();
 
 private:
     Ui::StoreManagerWindow *ui;

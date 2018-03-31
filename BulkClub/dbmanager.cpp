@@ -822,6 +822,62 @@ double DBManager::CalcGrossSalesByMember(int buyersID)
     return grossSales;
 }
 
+double DBManager::CalcGrossSalesByMember(QString bName)
+{
+    QSqlQuery queryMember;
+    QSqlQuery queryTrans;
+    double grossSales;
+    int id;
+
+    queryMember.prepare("SELECT id FROM members WHERE name = :name COLLATE NOCASE");
+    queryMember.bindValue(":name", bName);
+
+    grossSales = 0;
+
+    if(queryMember.exec())
+        if(queryMember.next())
+        {
+            id = queryMember.value(0).toInt();
+
+            queryTrans.prepare("SELECT Sum(subtotal) FROM transactions WHERE id = :id");
+            queryTrans.bindValue(":id", id);
+
+            if(queryTrans.exec())
+                if(queryTrans.next())
+                    grossSales = queryTrans.value(0).toDouble();
+        }
+
+    return grossSales;
+}
+
+double DBManager::CalcGrossSalesByMember(MemberType mType)
+{
+    QSqlQuery query;
+    double grossSales;
+    int id;
+
+    query.prepare("SELECT subtotal, id FROM transactions");
+
+    grossSales = 0;
+    if(query.exec())
+        while(query.next())
+        {
+            id = query.value(1).toInt();
+            if(GetMember(id).isExecutive())
+            {
+                if(mType == EXECUTIVE)
+                    grossSales += query.value(0).toDouble();
+            }
+            else
+            {
+                if(mType == REGULAR)
+                    grossSales += query.value(0).toDouble();
+            }
+        }
+
+    return grossSales;
+}
+
 double DBManager::CalcGrossSalesByItem(QString itemName)
 {
     QSqlQuery query;
@@ -836,6 +892,86 @@ double DBManager::CalcGrossSalesByItem(QString itemName)
             grossSales = query.value(0).toDouble();
 
     return grossSales;
+}
+
+int DBManager::GetTotalShoppers(MemberType mType)
+{
+    QSqlQuery query;
+    int totalShoppers;
+    int id;
+    QString mTypeString;
+
+    query.prepare("SELECT id FROM transactions");
+    totalShoppers = 0;
+    if(mType == REGULAR)
+        mTypeString = "Regular";
+    else
+        mTypeString = "Executive";
+
+    totalShoppers = 0;
+    if(query.exec())
+        while(query.next())
+        {
+            id = query.value(0).toInt();
+            if(GetMember(id).GetMembershipTypeString() == mTypeString)
+                totalShoppers++;
+        }
+
+    return totalShoppers;
+}
+
+int DBManager::GetTotalShoppersByDate(QDate fDate, MemberType mType)
+{
+    QSqlQuery query;
+    int totalShoppers;
+    int id;
+    QString mTypeString;
+
+    query.prepare("SELECT id FROM transactions WHERE transaction_date = :tDate");
+    query.bindValue(":tDate", fDate.toString("MM/dd/yyyy"));
+
+    totalShoppers = 0;
+    if(mType == REGULAR)
+        mTypeString = "Regular";
+    else
+        mTypeString = "Executive";
+
+    if(query.exec())
+        while(query.next())
+        {
+            id = query.value(0).toInt();
+            if(GetMember(id).GetMembershipTypeString() == mTypeString)
+                totalShoppers++;
+        }
+
+    return totalShoppers;
+}
+
+int DBManager::GetTotalShoppersByItem(QString itemName, MemberType mType)
+{
+    QSqlQuery query;
+    int totalShoppers;
+    int id;
+    QString mTypeString;
+
+    query.prepare("SELECT id FROM transactions WHERE item_name = :iName COLLATE NOCASE");
+    query.bindValue(":iName", itemName);
+
+    totalShoppers = 0;
+    if(mType == REGULAR)
+        mTypeString = "Regular";
+    else
+        mTypeString = "Executive";
+
+    if(query.exec())
+        while(query.next())
+        {
+            id = query.value(0).toInt();
+            if(GetMember(id).GetMembershipTypeString() == mTypeString)
+                totalShoppers++;
+        }
+
+    return totalShoppers;
 }
 
 bool DBManager::GetValidDates(QDate &earliestDate, QDate &latestDate)

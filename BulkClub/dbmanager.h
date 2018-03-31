@@ -58,7 +58,12 @@ public:
     double CalcGrossSales();
     double CalcGrossSalesByDate(QDate tDate);
     double CalcGrossSalesByMember(int buyersID);
+    double CalcGrossSalesByMember(QString bName);
+    double CalcGrossSalesByMember(MemberType mType);
     double CalcGrossSalesByItem(QString itemName);
+    int GetTotalShoppers(MemberType mType);
+    int GetTotalShoppersByDate(QDate, MemberType mType);
+    int GetTotalShoppersByItem(QString itemName, MemberType mType);
 
     // Inventory
     bool AddItem(const Item& newItem);

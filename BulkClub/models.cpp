@@ -203,11 +203,14 @@ int TransactionModel::rowCount(const QModelIndex &parent) const
 int TransactionModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return 5;
+    return 7;
 }
 
 QVariant TransactionModel::data(const QModelIndex &index, int role) const
 {
+    const Transaction& trans = modTransList.at(index.row());
+    const Member& member = DBManager::instance().GetMember(trans.GetBuyersID());
+
     if(!index.isValid())
     {
         return QVariant();
@@ -218,7 +221,6 @@ QVariant TransactionModel::data(const QModelIndex &index, int role) const
     }
     if(role == Qt::DisplayRole)
     {
-        const Transaction& trans = modTransList.at(index.row());
         switch(index.column())
         {
         case 0:
@@ -228,12 +230,48 @@ QVariant TransactionModel::data(const QModelIndex &index, int role) const
             return trans.GetBuyersID();
             break;
         case 2:
-            return trans.GetItemName();
+            return member.GetMemberName();
             break;
         case 3:
-            return trans.GetQuantityPurchased();
+            return member.GetMembershipTypeString();
             break;
         case 4:
+            return trans.GetItemName();
+            break;
+        case 5:
+            return trans.GetQuantityPurchased();
+            break;
+        case 6:
+            return QString::number(trans.GetTransactionSubTotal(), 'f', 2);
+            break;
+        default:
+            return QVariant();
+            break;
+        }
+    }
+    if(role == Qt::UserRole)
+    {
+        switch(index.column())
+        {
+        case 0:
+            return trans.GetTransactionDate();
+            break;
+        case 1:
+            return trans.GetBuyersID();
+            break;
+        case 2:
+            return member.GetMemberName();
+            break;
+        case 3:
+            return member.GetMembershipTypeString();
+            break;
+        case 4:
+            return trans.GetItemName();
+            break;
+        case 5:
+            return trans.GetQuantityPurchased();
+            break;
+        case 6:
             return trans.GetTransactionSubTotal();
             break;
         default:
@@ -261,12 +299,18 @@ QVariant TransactionModel::headerData(int section, Qt::Orientation orientation, 
             return tr("Buyer's ID");
             break;
         case 2:
-            return tr("Item Purchased");
+            return tr("Buyer's name");
             break;
         case 3:
-            return tr("Qty Purchased");
+            return tr("Membership Type");
             break;
         case 4:
+            return tr("Item Purchased");
+            break;
+        case 5:
+            return tr("Qty Purchased");
+            break;
+        case 6:
             return tr("Subtotal");
             break;
         default:
@@ -278,7 +322,7 @@ QVariant TransactionModel::headerData(int section, Qt::Orientation orientation, 
 }
 
 ProxyModel::ProxyModel(QObject *parent): QSortFilterProxyModel(parent),
-    filterType(NO_FILTER), tDate(1900, 1, 1), bID(0), iName("")
+    filterType(NO_FILTER), tDate(1900, 1, 1), bID(0), iName(""), bName(""), mType(REGULAR)
 {
 
 }
@@ -295,11 +339,19 @@ void ProxyModel::setTransactionDate(QDate transDate)
 
 void ProxyModel::setBuyersID(int buyersID)
 {
-    filterType = MEMBER;
+    filterType = MEMBER_ID;
     if(bID != buyersID)
     {
         bID = buyersID;
     }
+    invalidateFilter();
+}
+
+void ProxyModel::setBuyersName(QString buyersName)
+{
+    filterType = MEMBER_NAME;
+    if(bName != buyersName)
+        bName = buyersName;
     invalidateFilter();
 }
 
@@ -313,6 +365,14 @@ void ProxyModel::setItemName(QString itemName)
     invalidateFilter();
 }
 
+void ProxyModel::setMemberType(MemberType memberType)
+{
+    filterType = MEMBERSHIP_TYPE;
+    if(mType != memberType)
+        mType = memberType;
+    invalidateFilter();
+}
+
 void ProxyModel::resetFilter()
 {
     filterType = NO_FILTER;
@@ -323,11 +383,20 @@ bool ProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_pare
 {
     QModelIndex indDate;
     QModelIndex indID;
-    QModelIndex indName;
+    QModelIndex indBName;
+    QModelIndex indIName;
+    QModelIndex indMType;
+    QString mTypeString;
 
     indDate = sourceModel()->index(source_row, 0, source_parent);
     indID = sourceModel()->index(source_row, 1, source_parent);
-    indName = sourceModel()->index(source_row, 2, source_parent);
+    indBName = sourceModel()->index(source_row, 2, source_parent);
+    indMType = sourceModel()->index(source_row, 3, source_parent);
+    indIName = sourceModel()->index(source_row, 4, source_parent);
+    if(mType == REGULAR)
+        mTypeString = "Regular";
+    else
+        mTypeString = "Executive";
 
     switch(filterType)
     {
@@ -335,12 +404,20 @@ bool ProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_pare
         if(QDate::fromString(sourceModel()->data(indDate).toString(), "MM/dd/yyyy") != tDate)
             return false;
         break;
-    case MEMBER:
+    case MEMBER_ID:
         if(sourceModel()->data(indID).toInt() != bID)
             return false;
         break;
     case ITEM:
-        if(sourceModel()->data(indName).toString().toLower() != iName.toLower())
+        if(sourceModel()->data(indIName).toString().toLower() != iName.toLower())
+            return false;
+        break;
+    case MEMBER_NAME:
+        if(sourceModel()->data(indBName).toString().toLower() != bName.toLower())
+            return false;
+            break;
+    case MEMBERSHIP_TYPE:
+        if(sourceModel()->data(indMType).toString() != mTypeString)
             return false;
         break;
     case NO_FILTER:
