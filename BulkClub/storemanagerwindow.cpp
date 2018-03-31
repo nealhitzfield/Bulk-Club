@@ -50,7 +50,7 @@ void StoreManagerWindow::on_itemFilterButton_clicked()
     updateTotals(DBManager::instance().CalcGrossSalesByItem(itemFilter));
 }
 
-void StoreManagerWindow::on_memberFilterButton_clicked()
+void StoreManagerWindow::on_memberIDFilterButton_clicked()
 {
     int idFilter;
 
