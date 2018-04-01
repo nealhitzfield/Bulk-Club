@@ -1,3 +1,7 @@
+/** @file member.h
+*	@brief Contains data in regard to members within the databse.
+*/
+
 #ifndef MEMBER_H
 #define MEMBER_H
 

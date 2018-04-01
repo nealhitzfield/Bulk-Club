@@ -1,3 +1,7 @@
+/** @file confirmremoval.h
+*	@brief Prompts user to confirm their decision for deleting a member or inventory item.
+*/
+
 #ifndef CONFIRMREMOVAL_H
 #define CONFIRMREMOVAL_H
 

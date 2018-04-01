@@ -1,3 +1,10 @@
+/** @file storemanagerwindow.h
+*	@brief Displays a window which lists data for the store manager.
+*
+* Data includes a list of transactions, profit information, member expiration dates, and member rebate.
+* Provides search options to list particular sales as well.
+*/
+
 #ifndef STOREMANAGERWINDOW_H
 #define STOREMANAGERWINDOW_H
 

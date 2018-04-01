@@ -1,3 +1,7 @@
+/** @file dbmanager.h
+*	@brief Handles information sent to and read from the bulkclub database file.
+*/
+
 #ifndef DBMANAGER_H
 #define DBMANAGER_H
 

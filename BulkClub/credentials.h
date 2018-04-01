@@ -1,3 +1,7 @@
+/** @file credentials.h
+*	@brief Receives the entered username and password from the login page.
+*/
+
 #ifndef CREDENTIALS_H
 #define CREDENTIALS_H
 

@@ -1,3 +1,7 @@
+/** @file item.h
+*	@brief Contains data in regard to items within the databse.
+*/
+
 #ifndef ITEM_H
 #define ITEM_H
 

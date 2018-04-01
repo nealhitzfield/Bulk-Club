@@ -1,3 +1,7 @@
+/** @file models.h
+*	@brief Manages the user interface as well as information that is displayed to the user.
+*/
+
 #ifndef MEMBERMODEL_H
 #define MEMBERMODEL_H
 

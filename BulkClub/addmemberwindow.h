@@ -1,3 +1,9 @@
+/** @file addmemberwindow.h
+*	@brief Displays a window which lets the user add a member as well as their details.
+*
+* Details include membership type, ID, and member expiration date.
+*/
+
 #ifndef ADDMEMBERWINDOW_H
 #define ADDMEMBERWINDOW_H
 

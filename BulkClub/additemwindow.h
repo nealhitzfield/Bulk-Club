@@ -1,3 +1,7 @@
+/** @file additemwindow.h
+*	@brief Displays a window which lets the user add an item and its price to the inventory.
+*/
+
 #ifndef ADDITEMWINDOW_H
 #define ADDITEMWINDOW_H
 

@@ -1,3 +1,7 @@
+/** @file adminwindow.h
+*	@brief Displays members, inventory, and upgrade/downgrade suggestions for admins who log in.
+*/
+
 #ifndef ADMINWINDOW_H
 #define ADMINWINDOW_H
 

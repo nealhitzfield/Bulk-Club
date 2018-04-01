@@ -1,3 +1,7 @@
+/** @file transaction.h
+*	@brief Contains data in regard to transactions within the databse.
+*/
+
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
 

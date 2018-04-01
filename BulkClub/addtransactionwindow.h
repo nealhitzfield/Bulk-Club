@@ -1,3 +1,9 @@
+/** @file addtransactionwindow.h
+*	@brief Displays a window which lets the user add a member's transactions.
+*
+* Features for a member's transactions include purchase date, item type, and quantity.
+*/
+
 #ifndef ADDTRANSACTIONWINDOW_H
 #define ADDTRANSACTIONWINDOW_H
 

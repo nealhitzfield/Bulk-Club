@@ -1,3 +1,7 @@
+/** @file loginwindow.h
+*	@brief Displays a window which prompts the user to enter a username and password.
+*/
+
 #ifndef LOGINWINDOW_H
 #define LOGINWINDOW_H
 
