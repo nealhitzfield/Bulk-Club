@@ -899,22 +899,30 @@ int DBManager::GetTotalShoppers(MemberType mType)
     QSqlQuery query;
     int totalShoppers;
     int id;
+    int temp;
     QString mTypeString;
 
-    query.prepare("SELECT id FROM transactions");
+    query.prepare("SELECT id FROM transactions ORDER BY id");
     totalShoppers = 0;
     if(mType == REGULAR)
         mTypeString = "Regular";
     else
         mTypeString = "Executive";
 
+    id = 0;
     totalShoppers = 0;
     if(query.exec())
         while(query.next())
         {
-            id = query.value(0).toInt();
-            if(GetMember(id).GetMembershipTypeString() == mTypeString)
-                totalShoppers++;
+            temp = query.value(0).toInt();
+            if(id != temp)
+            {
+                id = temp;
+                if(GetMember(id).GetMembershipTypeString() == mTypeString)
+                {
+                    totalShoppers++;
+                }
+            }
         }
 
     return totalShoppers;
@@ -925,12 +933,14 @@ int DBManager::GetTotalShoppersByDate(QDate fDate, MemberType mType)
     QSqlQuery query;
     int totalShoppers;
     int id;
+    int temp;
     QString mTypeString;
 
-    query.prepare("SELECT id FROM transactions WHERE transaction_date = :tDate");
+    query.prepare("SELECT id FROM transactions WHERE transaction_date = :tDate ORDER BY id");
     query.bindValue(":tDate", fDate.toString("MM/dd/yyyy"));
 
     totalShoppers = 0;
+    id = 0;
     if(mType == REGULAR)
         mTypeString = "Regular";
     else
@@ -939,9 +949,15 @@ int DBManager::GetTotalShoppersByDate(QDate fDate, MemberType mType)
     if(query.exec())
         while(query.next())
         {
-            id = query.value(0).toInt();
-            if(GetMember(id).GetMembershipTypeString() == mTypeString)
-                totalShoppers++;
+            temp = query.value(0).toInt();
+            if(id != temp)
+            {
+                id = temp;
+                if(GetMember(id).GetMembershipTypeString() == mTypeString)
+                {
+                    totalShoppers++;
+                }
+            }
         }
 
     return totalShoppers;
@@ -952,12 +968,14 @@ int DBManager::GetTotalShoppersByItem(QString itemName, MemberType mType)
     QSqlQuery query;
     int totalShoppers;
     int id;
+    int temp;
     QString mTypeString;
 
-    query.prepare("SELECT id FROM transactions WHERE item_name = :iName COLLATE NOCASE");
+    query.prepare("SELECT id FROM transactions WHERE item_name = :iName ORDER BY id COLLATE NOCASE");
     query.bindValue(":iName", itemName);
 
     totalShoppers = 0;
+    id = 0;
     if(mType == REGULAR)
         mTypeString = "Regular";
     else
@@ -966,9 +984,15 @@ int DBManager::GetTotalShoppersByItem(QString itemName, MemberType mType)
     if(query.exec())
         while(query.next())
         {
-            id = query.value(0).toInt();
-            if(GetMember(id).GetMembershipTypeString() == mTypeString)
-                totalShoppers++;
+            temp = query.value(0).toInt();
+            if(id != temp)
+            {
+                id = temp;
+                if(GetMember(id).GetMembershipTypeString() == mTypeString)
+                {
+                    totalShoppers++;
+                }
+            }
         }
 
     return totalShoppers;
