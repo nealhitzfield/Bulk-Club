@@ -5,12 +5,7 @@ DBManager::DBManager()
     bulkdb = QSqlDatabase::addDatabase("QSQLITE");
     bulkdb.setDatabaseName("bulkclub.db");
 
-    if(!QFile::exists("bulkclub.db"))
-    {
-        bulkdb.open();
-        CreateTables();
-    }
-    else
+    if(QFile::exists("bulkclub.db"))
     {
         if(!bulkdb.open())
         {
@@ -20,6 +15,10 @@ DBManager::DBManager()
         {
             qDebug() << "Connected to database";
         }
+    }
+    else
+    {
+        qDebug() << "Database file path does not exist";
     }
 }
 
@@ -32,44 +31,6 @@ DBManager::~DBManager()
     qDebug() << "Destroying DBManager";
 }
 
-void DBManager::CreateTables()
-{
-    QSqlQuery login;
-    QSqlQuery flag;
-    QSqlQuery inventory;
-    QSqlQuery members;
-    QSqlQuery transactions;
-
-    login.prepare("CREATE TABLE credentials(username TEXT PRIMARY KEY, password TEXT, employee_type TEXT);");
-    flag.prepare("CREATE TABLE populated_flag(database_populated BOOLEAN DEFAULT 0);");
-    inventory.prepare("CREATE TABLE inventory(item_name TEXT, price REAL, quantity_sold INTEGER DEFAULT 0);");
-    members.prepare("CREATE TABLE members(name TEXT, id INTEGER PRIMARY KEY, member_type TEXT, expiration_date TEXT, rebate REAL DEFAULT 0, total_spent REAL DEFAULT 0);");
-    transactions.prepare("CREATE TABLE transactions(transaction_date TEXT, id INTEGER, item_name TEXT, item_price REAL, quantity INTEGER, subtotal REAL, total REAL);");
-
-    if(login.exec())
-    {
-        login.prepare("INSERT INTO credentials (username, password, employee_type) VALUES (:user1, :pw1, :type1), (:user2, :pw2, :type2)");
-        login.bindValue(":user1", "admin");
-        login.bindValue(":pw1", "1234");
-        login.bindValue(":type1", "administrator");
-        login.bindValue(":user2", "storeman");
-        login.bindValue(":pw2", "1234");
-        login.bindValue(":type2", "store_manager");
-        if(!login.exec())
-            qDebug() << "Error creating user accounts: " << login.lastError();
-    }
-    if(flag.exec())
-    {
-        flag.prepare("INSERT INTO populated_flag (database_populated) VALUES (:flag)");
-        flag.bindValue(":flag", 0);
-        if(!flag.exec())
-            qDebug() << "Error creating flag: " << flag.lastError();
-    }
-
-    inventory.exec();
-    members.exec();
-    transactions.exec();
-}
 DBManager& DBManager::instance()
 {
     static DBManager bulkdbInstance;

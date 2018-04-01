@@ -26,7 +26,6 @@ class DBManager
 private:
     DBManager();
     ~DBManager();
-    void CreateTables();
 
     QSqlDatabase bulkdb;
 
