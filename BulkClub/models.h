@@ -82,9 +82,6 @@ public slots:
     void setMemberType(MemberType memberType);
     void resetFilter();
 
-signals:
-    void updateTotal(double price);
-
 private:
     Filter filterType;
     QDate tDate;
