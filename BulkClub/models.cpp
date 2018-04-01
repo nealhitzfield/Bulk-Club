@@ -703,6 +703,8 @@ int RebateModel::columnCount(const QModelIndex &parent) const
 
 QVariant RebateModel::data(const QModelIndex &index, int role) const
 {
+    const Member& member = modRebateList.at(index.row());
+
     if(!index.isValid())
     {
         return QVariant();
@@ -714,8 +716,25 @@ QVariant RebateModel::data(const QModelIndex &index, int role) const
 
     if(role == Qt::DisplayRole)
     {
-        Member member = modRebateList.at(index.row());
 
+        switch(index.column())
+        {
+        case 0:
+            return member.GetMemberName();
+            break;
+        case 1:
+            return member.GetID();
+            break;
+        case 2:
+            return QString::number(member.GetRebate(), 'f', 2);
+            break;
+        default:
+            return QVariant();
+            break;
+        }
+    }
+    if(role == Qt::UserRole)
+    {
         switch(index.column())
         {
         case 0:

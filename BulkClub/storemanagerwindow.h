@@ -35,6 +35,7 @@ private:
     Ui::StoreManagerWindow *ui;
     TransactionModel *tModel;
     ProxyModel *pModel;
+    ProxyModel *pRModel;
     ExpModel *eModel;
     RebateModel *rModel;
     QDate minDate;

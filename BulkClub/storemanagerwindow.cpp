@@ -6,6 +6,7 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
     ui(new Ui::StoreManagerWindow),
     tModel(new TransactionModel(DBManager::instance().GetAllTransactions())),
     pModel(new ProxyModel),
+    pRModel(new ProxyModel),
     eModel(new ExpModel(DBManager::instance().GetExpirations(0))),
     rModel(new RebateModel(DBManager::instance().GetRebates()))
 {
@@ -28,6 +29,8 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
            << "November" << "December";
     pModel->setSourceModel(tModel);
     pModel->setSortRole(Qt::UserRole);
+    pRModel->setSourceModel(rModel);
+    pRModel->setSortRole(Qt::UserRole);
     ui->dailyView->setModel(pModel);
     ui->dailyView->setSortingEnabled(true);
     ui->dailyView->sortByColumn(0, Qt::AscendingOrder);
@@ -35,7 +38,9 @@ StoreManagerWindow::StoreManagerWindow(QWidget *parent) :
     ui->memberTypeComboBox->addItem("Executive");
     ui->ExpTable->setModel(eModel);
     ui->monthComboBox->addItems(months);
-    ui->rebateTable->setModel(rModel);
+    ui->rebateTable->setModel(pRModel);
+    ui->rebateTable->setSortingEnabled(true);
+    ui->rebateTable->sortByColumn(2, Qt::AscendingOrder);
 
     updateSalesTotals(DBManager::instance().CalcGrossSales());
     updateMembersTotals(DBManager::instance().GetTotalShoppers(REGULAR),
