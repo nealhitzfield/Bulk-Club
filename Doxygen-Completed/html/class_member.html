@@ -69,15 +69,26 @@ $(function() {
 <div class="title">Member Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Contains property values of a member from the database.  
+ <a href="class_member.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="member_8h_source.html">member.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a2ad24a730bad2d8636d9d4645b5dc70d"><td class="memItemLeft" align="right" valign="top"><a id="a2ad24a730bad2d8636d9d4645b5dc70d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Member</b> (QString name, int id, int renewCost)</td></tr>
+<tr class="separator:a2ad24a730bad2d8636d9d4645b5dc70d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09c25b792a83337fc4b5f937112b3203"><td class="memItemLeft" align="right" valign="top"><a id="a09c25b792a83337fc4b5f937112b3203"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Member</b> (QString name, int id, double rebateAmt)</td></tr>
+<tr class="separator:a09c25b792a83337fc4b5f937112b3203"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92d505b92f58ef6bee3599677eee51a5"><td class="memItemLeft" align="right" valign="top"><a id="a92d505b92f58ef6bee3599677eee51a5"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Member</b> (QString name, int id, MemberType mType, QDate expDate)</td></tr>
 <tr class="separator:a92d505b92f58ef6bee3599677eee51a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a317912a29e377858dfae8873ac5a77ff"><td class="memItemLeft" align="right" valign="top"><a id="a317912a29e377858dfae8873ac5a77ff"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Member</b> (QString name, int id, MemberType mType, QDate expDate, double totSpent, double rebateAmt)</td></tr>
-<tr class="separator:a317912a29e377858dfae8873ac5a77ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabc8f461658702d2612db6c64c93302c"><td class="memItemLeft" align="right" valign="top"><a id="aabc8f461658702d2612db6c64c93302c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Member</b> (QString name, int id, MemberType mType, QDate expDate, double rebateAmt, double totSpent)</td></tr>
+<tr class="separator:aabc8f461658702d2612db6c64c93302c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaba370b742cfe75151f5da331b9c677f"><td class="memItemLeft" align="right" valign="top"><a id="aaba370b742cfe75151f5da331b9c677f"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><b>GetMemberName</b> () const</td></tr>
 <tr class="separator:aaba370b742cfe75151f5da331b9c677f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -90,12 +101,18 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>GetMembershipTypeS
 <tr class="memitem:aca64d3629776abdac055ae0140021aa3"><td class="memItemLeft" align="right" valign="top"><a id="aca64d3629776abdac055ae0140021aa3"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><b>GetExpirationDateString</b> () const</td></tr>
 <tr class="separator:aca64d3629776abdac055ae0140021aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19cb2fa14badadbd3eb5eea4f94179d4"><td class="memItemLeft" align="right" valign="top"><a id="a19cb2fa14badadbd3eb5eea4f94179d4"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>GetTotalSpent</b> () const</td></tr>
-<tr class="separator:a19cb2fa14badadbd3eb5eea4f94179d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf6de50fe7517be7cd2a009bffc615b5"><td class="memItemLeft" align="right" valign="top"><a id="adf6de50fe7517be7cd2a009bffc615b5"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>GetRebate</b> () const</td></tr>
 <tr class="separator:adf6de50fe7517be7cd2a009bffc615b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19cb2fa14badadbd3eb5eea4f94179d4"><td class="memItemLeft" align="right" valign="top"><a id="a19cb2fa14badadbd3eb5eea4f94179d4"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>GetTotalSpent</b> () const</td></tr>
+<tr class="separator:a19cb2fa14badadbd3eb5eea4f94179d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7f45754db08f7b1f586e2a43b4dfffe"><td class="memItemLeft" align="right" valign="top"><a id="ab7f45754db08f7b1f586e2a43b4dfffe"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>GetRenewCost</b> () const</td></tr>
+<tr class="separator:ab7f45754db08f7b1f586e2a43b4dfffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cb29a17a2bed42772a22af7cdf4aec4"><td class="memItemLeft" align="right" valign="top"><a id="a7cb29a17a2bed42772a22af7cdf4aec4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isExecutive</b> () const</td></tr>
+<tr class="separator:a7cb29a17a2bed42772a22af7cdf4aec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -111,14 +128,19 @@ MemberType&#160;</td><td class="memItemRight" valign="bottom"><b>membership</b><
 <tr class="memitem:a697e8d1fc0417da55627350df5e02b47"><td class="memItemLeft" align="right" valign="top"><a id="a697e8d1fc0417da55627350df5e02b47"></a>
 QDate&#160;</td><td class="memItemRight" valign="bottom"><b>expirationDate</b></td></tr>
 <tr class="separator:a697e8d1fc0417da55627350df5e02b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2ca88932004e0c2005bbf837a5d6d58"><td class="memItemLeft" align="right" valign="top"><a id="ab2ca88932004e0c2005bbf837a5d6d58"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>totalSpent</b></td></tr>
-<tr class="separator:ab2ca88932004e0c2005bbf837a5d6d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a351d6d0f9eafd12525300d937bb4438b"><td class="memItemLeft" align="right" valign="top"><a id="a351d6d0f9eafd12525300d937bb4438b"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>rebate</b></td></tr>
 <tr class="separator:a351d6d0f9eafd12525300d937bb4438b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2ca88932004e0c2005bbf837a5d6d58"><td class="memItemLeft" align="right" valign="top"><a id="ab2ca88932004e0c2005bbf837a5d6d58"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>totalSpent</b></td></tr>
+<tr class="separator:ab2ca88932004e0c2005bbf837a5d6d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3612665d378d6ccaaaaad560d6ba70db"><td class="memItemLeft" align="right" valign="top"><a id="a3612665d378d6ccaaaaad560d6ba70db"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>memberRenewal</b></td></tr>
+<tr class="separator:a3612665d378d6ccaaaaad560d6ba70db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains property values of a member from the database. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>C:/Users/Kevin/Documents/GitHub/Bulk-Club/BulkClub/<a class="el" href="member_8h_source.html">member.h</a></li>
 <li>C:/Users/Kevin/Documents/GitHub/Bulk-Club/BulkClub/member.cpp</li>
 </ul>

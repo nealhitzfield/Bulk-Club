@@ -21,6 +21,10 @@ using namespace std;
 const int TOTAL_TRANS_FILES = 7;
 const string TRANS_FILES[] = {"data/day1.txt", "data/day2.txt", "data/day3.txt", "data/day4.txt", "data/day5.txt", "data/day6.txt", "data/day7.txt"};
 const string MEMBER_FILE = "data/warehouse-shoppers.txt";
+
+/**
+* @brief Manages data stored within the bulkclub database file.
+*/
 class DBManager
 {
 private:

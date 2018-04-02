@@ -7,6 +7,9 @@
 
 #include <QObject>
 
+/**
+* @brief Contains property values of an item from the database.
+*/
 class Item
 {
 private:

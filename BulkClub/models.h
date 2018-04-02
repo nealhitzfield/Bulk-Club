@@ -16,7 +16,9 @@
 #include "transaction.h"
 #include "dbmanager.h"
 
-// Model used to display Member information
+/**
+* @brief Model used to display Member information
+*/
 class MemberModel : public QAbstractTableModel
 {
 public:
@@ -32,7 +34,9 @@ private:
     QList<Member> modMemberList;
 };
 
-// Model used to display Item information
+/**
+* @brief Model used to display Item information
+*/
 class ItemModel : public QAbstractTableModel
 {
 public:
@@ -47,7 +51,9 @@ private:
     QList<Item> modItemList;
 };
 
-// Model used to display Transaction information
+/**
+* @brief Model used to display Transaction information
+*/
 class TransactionModel : public QAbstractTableModel
 {
 public:
@@ -65,7 +71,9 @@ private:
 
 enum Filter {NO_FILTER, DATE, ITEM, MEMBER_ID, MEMBER_NAME, MEMBERSHIP_TYPE};
 
-// Proxy Model used for sorting/filtering
+/**
+* @brief Proxy Model used for sorting/filtering
+*/
 class ProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
@@ -94,6 +102,9 @@ private:
     MemberType mType;
 };
 
+/**
+* @brief Model used to display upgrade suggestions
+*/
 class UpgradeModel : public QAbstractTableModel
 {
 public:
@@ -109,6 +120,9 @@ private:
     QList<Member> modUpgradeList;
 };
 
+/**
+* @brief Model used to display downgrade suggestions
+*/
 class DowngradeModel : public QAbstractTableModel
 {
 public:
@@ -124,6 +138,9 @@ private:
     QList<Member> modDowngradeList;
 };
 
+/**
+* @brief Handles display of membership experiation data.
+*/
 class ExpModel : public QAbstractTableModel
 {
 public:
@@ -139,6 +156,9 @@ private:
     QList<Member> modExpList;
 };
 
+/**
+* @brief Handles display of membership rebate data.
+*/
 class RebateModel : public QAbstractTableModel
 {
 public:

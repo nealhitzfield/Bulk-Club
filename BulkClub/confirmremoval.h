@@ -13,6 +13,9 @@ namespace Ui {
 class ConfirmRemoval;
 }
 
+/**
+* @brief Receives input for confirming member or item deletion.
+*/
 class ConfirmRemoval : public QDialog
 {
     Q_OBJECT

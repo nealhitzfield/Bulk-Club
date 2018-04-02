@@ -71,6 +71,11 @@ $(function() {
 <div class="title">AdminWindow Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Window for administrative functions.  
+ <a href="class_admin_window.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="adminwindow_8h_source.html">adminwindow.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for AdminWindow:</div>
 <div class="dyncontent">
@@ -85,9 +90,15 @@ Signals</h2></td></tr>
 <tr class="memitem:a2e6bb3162aebae122abc71e1086b9541"><td class="memItemLeft" align="right" valign="top"><a id="a2e6bb3162aebae122abc71e1086b9541"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sendSelectedID</b> (int id)</td></tr>
 <tr class="separator:a2e6bb3162aebae122abc71e1086b9541"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5270281321fda37c184eec8d71741a79"><td class="memItemLeft" align="right" valign="top"><a id="a5270281321fda37c184eec8d71741a79"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>sendSelectedName</b> (QString itemName)</td></tr>
+<tr class="separator:a5270281321fda37c184eec8d71741a79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4114115ca5ea21c9959b6d35d9884f7"><td class="memItemLeft" align="right" valign="top"><a id="ad4114115ca5ea21c9959b6d35d9884f7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sendModel</b> (<a class="el" href="class_member_model.html">MemberModel</a> *mod)</td></tr>
 <tr class="separator:ad4114115ca5ea21c9959b6d35d9884f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae49b563c2006f8bf84aea31b1e24276a"><td class="memItemLeft" align="right" valign="top"><a id="ae49b563c2006f8bf84aea31b1e24276a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>sendModel</b> (<a class="el" href="class_item_model.html">ItemModel</a> *mod)</td></tr>
+<tr class="separator:ae49b563c2006f8bf84aea31b1e24276a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -103,15 +114,33 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>on_addMemberButton_cl
 <tr class="memitem:a8c3cf24ae2f2e441639b8f2a3b318a19"><td class="memItemLeft" align="right" valign="top"><a id="a8c3cf24ae2f2e441639b8f2a3b318a19"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>on_removeMemberButton_clicked</b> ()</td></tr>
 <tr class="separator:a8c3cf24ae2f2e441639b8f2a3b318a19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dc5f886f2767ba3d17da0113168fa3b"><td class="memItemLeft" align="right" valign="top"><a id="a0dc5f886f2767ba3d17da0113168fa3b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>updateView</b> ()</td></tr>
-<tr class="separator:a0dc5f886f2767ba3d17da0113168fa3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac723fe967e1c49191addbea8ce544f9a"><td class="memItemLeft" align="right" valign="top"><a id="ac723fe967e1c49191addbea8ce544f9a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>removeMember</b> ()</td></tr>
 <tr class="separator:ac723fe967e1c49191addbea8ce544f9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8dd3cfbbbb415ddc4500ed32a752a50"><td class="memItemLeft" align="right" valign="top"><a id="ae8dd3cfbbbb415ddc4500ed32a752a50"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>on_membersTable_clicked</b> (const QModelIndex &amp;index)</td></tr>
 <tr class="separator:ae8dd3cfbbbb415ddc4500ed32a752a50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaff02ef0ba11fff530f3b452a314344c"><td class="memItemLeft" align="right" valign="top"><a id="aaff02ef0ba11fff530f3b452a314344c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>on_itemsTable_clicked</b> (const QModelIndex &amp;index)</td></tr>
+<tr class="separator:aaff02ef0ba11fff530f3b452a314344c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2124b4c1c17e5304b5b836e86c2dcaa6"><td class="memItemLeft" align="right" valign="top"><a id="a2124b4c1c17e5304b5b836e86c2dcaa6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>on_addItemButton_clicked</b> ()</td></tr>
+<tr class="separator:a2124b4c1c17e5304b5b836e86c2dcaa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68908f105ccb9b59a6633c475f49cf54"><td class="memItemLeft" align="right" valign="top"><a id="a68908f105ccb9b59a6633c475f49cf54"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>on_removeItemButton_clicked</b> ()</td></tr>
+<tr class="separator:a68908f105ccb9b59a6633c475f49cf54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc030ee24589408438cd643c512a1945"><td class="memItemLeft" align="right" valign="top"><a id="acc030ee24589408438cd643c512a1945"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>removeItem</b> ()</td></tr>
+<tr class="separator:acc030ee24589408438cd643c512a1945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab76dc76762081f6b697e72a19fc44a60"><td class="memItemLeft" align="right" valign="top"><a id="ab76dc76762081f6b697e72a19fc44a60"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateItemView</b> ()</td></tr>
+<tr class="separator:ab76dc76762081f6b697e72a19fc44a60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96d1b92ba3008ee2bb0d689812b178c5"><td class="memItemLeft" align="right" valign="top"><a id="a96d1b92ba3008ee2bb0d689812b178c5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateMemberView</b> ()</td></tr>
+<tr class="separator:a96d1b92ba3008ee2bb0d689812b178c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a969766e3ed768c11fcf3d698a75ee8"><td class="memItemLeft" align="right" valign="top"><a id="a6a969766e3ed768c11fcf3d698a75ee8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>on_tabWidget_tabBarClicked</b> ()</td></tr>
+<tr class="separator:a6a969766e3ed768c11fcf3d698a75ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -124,14 +153,22 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:adac3343d645364a16cf8a970a3e8b12a"><td class="memItemLeft" align="right" valign="top"><a id="adac3343d645364a16cf8a970a3e8b12a"></a>
 <a class="el" href="class_item_model.html">ItemModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>iModel</b></td></tr>
 <tr class="separator:adac3343d645364a16cf8a970a3e8b12a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d706087ad7f29389a98d0b732794819"><td class="memItemLeft" align="right" valign="top"><a id="a5d706087ad7f29389a98d0b732794819"></a>
-<a class="el" href="class_d_b_manager.html">DBManager</a>&#160;</td><td class="memItemRight" valign="bottom"><b>bulkdb</b></td></tr>
-<tr class="separator:a5d706087ad7f29389a98d0b732794819"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f486154ede97643b14c5cdbbbc81979"><td class="memItemLeft" align="right" valign="top"><a id="a1f486154ede97643b14c5cdbbbc81979"></a>
+<a class="el" href="class_upgrade_model.html">UpgradeModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>uModel</b></td></tr>
+<tr class="separator:a1f486154ede97643b14c5cdbbbc81979"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3b441553db7ec8a809f173824942ba4"><td class="memItemLeft" align="right" valign="top"><a id="aa3b441553db7ec8a809f173824942ba4"></a>
+<a class="el" href="class_downgrade_model.html">DowngradeModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>dModel</b></td></tr>
+<tr class="separator:aa3b441553db7ec8a809f173824942ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a019852d3390ef26cb634709e41f59764"><td class="memItemLeft" align="right" valign="top"><a id="a019852d3390ef26cb634709e41f59764"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>selectedID</b></td></tr>
 <tr class="separator:a019852d3390ef26cb634709e41f59764"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13177aa3fd835f2fb9eecbfa86f8b465"><td class="memItemLeft" align="right" valign="top"><a id="a13177aa3fd835f2fb9eecbfa86f8b465"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>selectedName</b></td></tr>
+<tr class="separator:a13177aa3fd835f2fb9eecbfa86f8b465"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Window for administrative functions. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>C:/Users/Kevin/Documents/GitHub/Bulk-Club/BulkClub/<a class="el" href="adminwindow_8h_source.html">adminwindow.h</a></li>
 <li>C:/Users/Kevin/Documents/GitHub/Bulk-Club/BulkClub/adminwindow.cpp</li>
 </ul>

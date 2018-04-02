@@ -16,6 +16,9 @@ namespace Ui {
 class LoginWindow;
 }
 
+/**
+* @brief Receives input for user login.
+*/
 class LoginWindow : public QMainWindow
 {
     Q_OBJECT

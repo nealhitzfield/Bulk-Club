@@ -14,6 +14,9 @@ namespace Ui {
 class AddTransactionWindow;
 }
 
+/**
+* @brief Receives input for adding new transactions.
+*/
 class AddTransactionWindow : public QDialog
 {
     Q_OBJECT

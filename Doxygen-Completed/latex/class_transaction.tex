@@ -1,10 +1,19 @@
 \hypertarget{class_transaction}{}\section{Transaction Class Reference}
 \label{class_transaction}\index{Transaction@{Transaction}}
+
+
+Contains property values of a transaction from the database.  
+
+
+
+
+{\ttfamily \#include $<$transaction.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_transaction_adbaf08ebfc9818b158108c715864d535}\label{class_transaction_adbaf08ebfc9818b158108c715864d535}} 
-{\bfseries Transaction} (Q\+Date trans\+Date, \mbox{\hyperlink{class_item}{Item}} item, int quantity)
+\mbox{\Hypertarget{class_transaction_a048501cb39df72cdd81d4eba73a9ef6b}\label{class_transaction_a048501cb39df72cdd81d4eba73a9ef6b}} 
+{\bfseries Transaction} (Q\+Date, int, \mbox{\hyperlink{class_item}{Item}}, int, double, double)
 \item 
 \mbox{\Hypertarget{class_transaction_a4460ca592783e1cb0f67dd0b974cb2ba}\label{class_transaction_a4460ca592783e1cb0f67dd0b974cb2ba}} 
 Q\+Date {\bfseries Get\+Transaction\+Date} () const
@@ -15,8 +24,17 @@ int {\bfseries Get\+Buyers\+ID} () const
 \mbox{\Hypertarget{class_transaction_a8af32e7e0db74a1990d7a887e658c618}\label{class_transaction_a8af32e7e0db74a1990d7a887e658c618}} 
 \mbox{\hyperlink{class_item}{Item}} {\bfseries Get\+Item} () const
 \item 
+\mbox{\Hypertarget{class_transaction_a30315f86291a072ab4baebb0102fa5a2}\label{class_transaction_a30315f86291a072ab4baebb0102fa5a2}} 
+Q\+String {\bfseries Get\+Item\+Name} () const
+\item 
 \mbox{\Hypertarget{class_transaction_a3edb74863df1a30670611c0d8b50a0fb}\label{class_transaction_a3edb74863df1a30670611c0d8b50a0fb}} 
 int {\bfseries Get\+Quantity\+Purchased} () const
+\item 
+\mbox{\Hypertarget{class_transaction_a3c032f59757de41179b1dc2d4b895529}\label{class_transaction_a3c032f59757de41179b1dc2d4b895529}} 
+double {\bfseries Get\+Transaction\+Sub\+Total} () const
+\item 
+\mbox{\Hypertarget{class_transaction_a15ce6b0ce8a8f155eb4490761e1cb670}\label{class_transaction_a15ce6b0ce8a8f155eb4490761e1cb670}} 
+double {\bfseries Get\+Transaction\+Total} () const
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -32,10 +50,19 @@ int {\bfseries buyers\+ID}
 \item 
 \mbox{\Hypertarget{class_transaction_ac4d79a9bd07ce1a8eb5f990afcd9c8f0}\label{class_transaction_ac4d79a9bd07ce1a8eb5f990afcd9c8f0}} 
 int {\bfseries quantity\+Purchased}
+\item 
+\mbox{\Hypertarget{class_transaction_aec650cd4cf26738ca14de11214b75277}\label{class_transaction_aec650cd4cf26738ca14de11214b75277}} 
+double {\bfseries transaction\+Subtotal}
+\item 
+\mbox{\Hypertarget{class_transaction_a3b2719a9154520b7338dff7112c93f4f}\label{class_transaction_a3b2719a9154520b7338dff7112c93f4f}} 
+double {\bfseries transaction\+Total}
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+Contains property values of a transaction from the database. 
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/transaction.\+h\item 
+C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/\mbox{\hyperlink{transaction_8h}{transaction.\+h}}\item 
 C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/transaction.\+cpp\end{DoxyCompactItemize}

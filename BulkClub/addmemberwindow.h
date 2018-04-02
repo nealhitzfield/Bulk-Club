@@ -15,6 +15,9 @@ namespace Ui {
 class AddMemberWindow;
 }
 
+/**
+* @brief Receives input for adding new members.
+*/
 class AddMemberWindow : public QDialog
 {
     Q_OBJECT

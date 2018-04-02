@@ -16,6 +16,9 @@ namespace Ui {
 class AdminWindow;
 }
 
+/**
+* @brief Window for administrative functions.
+*/
 class AdminWindow : public QDialog
 {
     Q_OBJECT

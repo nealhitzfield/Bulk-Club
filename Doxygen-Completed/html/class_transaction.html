@@ -69,12 +69,17 @@ $(function() {
 <div class="title">Transaction Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Contains property values of a transaction from the database.  
+ <a href="class_transaction.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="transaction_8h_source.html">transaction.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adbaf08ebfc9818b158108c715864d535"><td class="memItemLeft" align="right" valign="top"><a id="adbaf08ebfc9818b158108c715864d535"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Transaction</b> (QDate transDate, <a class="el" href="class_item.html">Item</a> item, int quantity)</td></tr>
-<tr class="separator:adbaf08ebfc9818b158108c715864d535"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a048501cb39df72cdd81d4eba73a9ef6b"><td class="memItemLeft" align="right" valign="top"><a id="a048501cb39df72cdd81d4eba73a9ef6b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Transaction</b> (QDate, int, <a class="el" href="class_item.html">Item</a>, int, double, double)</td></tr>
+<tr class="separator:a048501cb39df72cdd81d4eba73a9ef6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4460ca592783e1cb0f67dd0b974cb2ba"><td class="memItemLeft" align="right" valign="top"><a id="a4460ca592783e1cb0f67dd0b974cb2ba"></a>
 QDate&#160;</td><td class="memItemRight" valign="bottom"><b>GetTransactionDate</b> () const</td></tr>
 <tr class="separator:a4460ca592783e1cb0f67dd0b974cb2ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -84,9 +89,18 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>GetBuyersID</b> () con
 <tr class="memitem:a8af32e7e0db74a1990d7a887e658c618"><td class="memItemLeft" align="right" valign="top"><a id="a8af32e7e0db74a1990d7a887e658c618"></a>
 <a class="el" href="class_item.html">Item</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetItem</b> () const</td></tr>
 <tr class="separator:a8af32e7e0db74a1990d7a887e658c618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30315f86291a072ab4baebb0102fa5a2"><td class="memItemLeft" align="right" valign="top"><a id="a30315f86291a072ab4baebb0102fa5a2"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>GetItemName</b> () const</td></tr>
+<tr class="separator:a30315f86291a072ab4baebb0102fa5a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3edb74863df1a30670611c0d8b50a0fb"><td class="memItemLeft" align="right" valign="top"><a id="a3edb74863df1a30670611c0d8b50a0fb"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>GetQuantityPurchased</b> () const</td></tr>
 <tr class="separator:a3edb74863df1a30670611c0d8b50a0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c032f59757de41179b1dc2d4b895529"><td class="memItemLeft" align="right" valign="top"><a id="a3c032f59757de41179b1dc2d4b895529"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>GetTransactionSubTotal</b> () const</td></tr>
+<tr class="separator:a3c032f59757de41179b1dc2d4b895529"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15ce6b0ce8a8f155eb4490761e1cb670"><td class="memItemLeft" align="right" valign="top"><a id="a15ce6b0ce8a8f155eb4490761e1cb670"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>GetTransactionTotal</b> () const</td></tr>
+<tr class="separator:a15ce6b0ce8a8f155eb4490761e1cb670"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -102,8 +116,16 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>buyersID</b></td></tr>
 <tr class="memitem:ac4d79a9bd07ce1a8eb5f990afcd9c8f0"><td class="memItemLeft" align="right" valign="top"><a id="ac4d79a9bd07ce1a8eb5f990afcd9c8f0"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>quantityPurchased</b></td></tr>
 <tr class="separator:ac4d79a9bd07ce1a8eb5f990afcd9c8f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec650cd4cf26738ca14de11214b75277"><td class="memItemLeft" align="right" valign="top"><a id="aec650cd4cf26738ca14de11214b75277"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>transactionSubtotal</b></td></tr>
+<tr class="separator:aec650cd4cf26738ca14de11214b75277"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b2719a9154520b7338dff7112c93f4f"><td class="memItemLeft" align="right" valign="top"><a id="a3b2719a9154520b7338dff7112c93f4f"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>transactionTotal</b></td></tr>
+<tr class="separator:a3b2719a9154520b7338dff7112c93f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains property values of a transaction from the database. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>C:/Users/Kevin/Documents/GitHub/Bulk-Club/BulkClub/<a class="el" href="transaction_8h_source.html">transaction.h</a></li>
 <li>C:/Users/Kevin/Documents/GitHub/Bulk-Club/BulkClub/transaction.cpp</li>
 </ul>

@@ -10,6 +10,9 @@
 enum MemberType {REGULAR, EXECUTIVE};
 const double REBATE_RATE = 0.04;
 
+/**
+* @brief Contains property values of a member from the database.
+*/
 class Member
 {
 private:

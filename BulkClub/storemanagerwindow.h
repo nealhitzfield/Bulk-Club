@@ -16,6 +16,9 @@ namespace Ui {
 class StoreManagerWindow;
 }
 
+/**
+* @brief Window for store manager functions.
+*/
 class StoreManagerWindow : public QDialog
 {
     Q_OBJECT

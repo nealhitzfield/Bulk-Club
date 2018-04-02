@@ -69,6 +69,11 @@ $(function() {
 <div class="title">ItemModel Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Model used to display <a class="el" href="class_item.html" title="Contains property values of an item from the database. ">Item</a> information.  
+ <a href="class_item_model.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="models_8h_source.html">models.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ItemModel:</div>
 <div class="dyncontent">
@@ -80,21 +85,18 @@ Inheritance diagram for ItemModel:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8f3f4becd549700202fad2c59aa3069d"><td class="memItemLeft" align="right" valign="top"><a id="a8f3f4becd549700202fad2c59aa3069d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ItemModel</b> (QObject *parent=0)</td></tr>
-<tr class="separator:a8f3f4becd549700202fad2c59aa3069d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7f87167bc2f0d34ab48a04807b4a3d5"><td class="memItemLeft" align="right" valign="top"><a id="ac7f87167bc2f0d34ab48a04807b4a3d5"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ItemModel</b> (QList&lt; <a class="el" href="class_item.html">Item</a> &gt; itemList, QObject *parent=0)</td></tr>
 <tr class="separator:ac7f87167bc2f0d34ab48a04807b4a3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22a570830b9434396f128a27d0aafa02"><td class="memItemLeft" align="right" valign="top"><a id="a22a570830b9434396f128a27d0aafa02"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setList</b> (const QList&lt; <a class="el" href="class_item.html">Item</a> &gt; itemList)</td></tr>
 <tr class="separator:a22a570830b9434396f128a27d0aafa02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab71e5ac3f9fc6d368ffb11321315602e"><td class="memItemLeft" align="right" valign="top"><a id="ab71e5ac3f9fc6d368ffb11321315602e"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>rowCount</b> (const QModelIndex &amp;) const</td></tr>
-<tr class="separator:ab71e5ac3f9fc6d368ffb11321315602e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75bc0e3bcfa14e55ed14f197f1dc710b"><td class="memItemLeft" align="right" valign="top"><a id="a75bc0e3bcfa14e55ed14f197f1dc710b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>columnCount</b> (const QModelIndex &amp;) const</td></tr>
-<tr class="separator:a75bc0e3bcfa14e55ed14f197f1dc710b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91241854ee5a755a5ccae0e177f4a080"><td class="memItemLeft" align="right" valign="top"><a id="a91241854ee5a755a5ccae0e177f4a080"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>rowCount</b> (const QModelIndex &amp;parent=QModelIndex()) const</td></tr>
+<tr class="separator:a91241854ee5a755a5ccae0e177f4a080"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a217a5b250e2125daf7527f29597c1741"><td class="memItemLeft" align="right" valign="top"><a id="a217a5b250e2125daf7527f29597c1741"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>columnCount</b> (const QModelIndex &amp;parent=QModelIndex()) const</td></tr>
+<tr class="separator:a217a5b250e2125daf7527f29597c1741"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a434533c6c4a038db2a4d04bbef51a9dd"><td class="memItemLeft" align="right" valign="top"><a id="a434533c6c4a038db2a4d04bbef51a9dd"></a>
 QVariant&#160;</td><td class="memItemRight" valign="bottom"><b>data</b> (const QModelIndex &amp;index, int role) const</td></tr>
 <tr class="separator:a434533c6c4a038db2a4d04bbef51a9dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -108,7 +110,9 @@ Private Attributes</h2></td></tr>
 QList&lt; <a class="el" href="class_item.html">Item</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>modItemList</b></td></tr>
 <tr class="separator:ad6380d5a1a6268a82ff22cda344f12ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Model used to display <a class="el" href="class_item.html" title="Contains property values of an item from the database. ">Item</a> information. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>C:/Users/Kevin/Documents/GitHub/Bulk-Club/BulkClub/<a class="el" href="models_8h_source.html">models.h</a></li>
 <li>C:/Users/Kevin/Documents/GitHub/Bulk-Club/BulkClub/models.cpp</li>
 </ul>

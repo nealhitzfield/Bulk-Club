@@ -63,51 +63,147 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_d_b_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">DBManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Manages data stored within the bulkclub database file.  
+ <a href="class_d_b_manager.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="dbmanager_8h_source.html">dbmanager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af1069c944914668fb2bf3a0f18da556b"><td class="memItemLeft" align="right" valign="top"><a id="af1069c944914668fb2bf3a0f18da556b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>DBManager</b> (const QString &amp;dbFilename)</td></tr>
-<tr class="separator:af1069c944914668fb2bf3a0f18da556b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14fa55f5fc5808730566dbc7724dbc99"><td class="memItemLeft" align="right" valign="top"><a id="a14fa55f5fc5808730566dbc7724dbc99"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>DBManager</b> (const <a class="el" href="class_d_b_manager.html">DBManager</a> &amp;)=delete</td></tr>
+<tr class="separator:a14fa55f5fc5808730566dbc7724dbc99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adae25ff25c9a6d385aad1f77c6b5ec95"><td class="memItemLeft" align="right" valign="top"><a id="adae25ff25c9a6d385aad1f77c6b5ec95"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="class_d_b_manager.html">DBManager</a> &amp;)=delete</td></tr>
+<tr class="separator:adae25ff25c9a6d385aad1f77c6b5ec95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9fc43d8d42f0de24c2daae2135195aa"><td class="memItemLeft" align="right" valign="top"><a id="ac9fc43d8d42f0de24c2daae2135195aa"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>VerifyLogin</b> (const <a class="el" href="class_credentials.html">Credentials</a> &amp;credentials, QString &amp;employeeType)</td></tr>
 <tr class="separator:ac9fc43d8d42f0de24c2daae2135195aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40cf58eb81b82abebe7df72edddab87e"><td class="memItemLeft" align="right" valign="top"><a id="a40cf58eb81b82abebe7df72edddab87e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsDatabasePopulated</b> ()</td></tr>
+<tr class="separator:a40cf58eb81b82abebe7df72edddab87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f80a2ac0360dd2ba6fc18431dd9ef6c"><td class="memItemLeft" align="right" valign="top"><a id="a7f80a2ac0360dd2ba6fc18431dd9ef6c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>SetPopulatedFlag</b> ()</td></tr>
+<tr class="separator:a7f80a2ac0360dd2ba6fc18431dd9ef6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa580524cb93affde099ac37e9ee468d7"><td class="memItemLeft" align="right" valign="top"><a id="aa580524cb93affde099ac37e9ee468d7"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>PopulateMembers</b> ()</td></tr>
+<tr class="separator:aa580524cb93affde099ac37e9ee468d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e023e13095712a08c2b7a47656d8d7e"><td class="memItemLeft" align="right" valign="top"><a id="a7e023e13095712a08c2b7a47656d8d7e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>PopulateTransactions</b> ()</td></tr>
+<tr class="separator:a7e023e13095712a08c2b7a47656d8d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7cfff555a5cd6c0cb191fe377033062"><td class="memItemLeft" align="right" valign="top"><a id="af7cfff555a5cd6c0cb191fe377033062"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>AddMember</b> (const <a class="el" href="class_member.html">Member</a> &amp;newMember)</td></tr>
 <tr class="separator:af7cfff555a5cd6c0cb191fe377033062"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0857aec484261da158486c6609a9637"><td class="memItemLeft" align="right" valign="top"><a id="af0857aec484261da158486c6609a9637"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveMember</b> (const <a class="el" href="class_member.html">Member</a> &amp;member)</td></tr>
 <tr class="separator:af0857aec484261da158486c6609a9637"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abca86413cfbad97d5c8540d675fcc43a"><td class="memItemLeft" align="right" valign="top"><a id="abca86413cfbad97d5c8540d675fcc43a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>MemberExists</b> (const <a class="el" href="class_member.html">Member</a> &amp;member)</td></tr>
-<tr class="separator:abca86413cfbad97d5c8540d675fcc43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae55ecc834d2785d09ec7c01a9ea1284a"><td class="memItemLeft" align="right" valign="top"><a id="ae55ecc834d2785d09ec7c01a9ea1284a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>MemberExists</b> (const int memberID)</td></tr>
+<tr class="separator:ae55ecc834d2785d09ec7c01a9ea1284a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada9b21cf66caf785534d0072acb14530"><td class="memItemLeft" align="right" valign="top"><a id="ada9b21cf66caf785534d0072acb14530"></a>
 <a class="el" href="class_member.html">Member</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetMember</b> (int memberID)</td></tr>
 <tr class="separator:ada9b21cf66caf785534d0072acb14530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad76ac83a09292bf6cbceab84a94f86cd"><td class="memItemLeft" align="right" valign="top"><a id="ad76ac83a09292bf6cbceab84a94f86cd"></a>
 QList&lt; <a class="el" href="class_member.html">Member</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetAllMembers</b> ()</td></tr>
 <tr class="separator:ad76ac83a09292bf6cbceab84a94f86cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1cac75a2d8acbff34cc6c15a2bec6b2"><td class="memItemLeft" align="right" valign="top"><a id="af1cac75a2d8acbff34cc6c15a2bec6b2"></a>
+QList&lt; <a class="el" href="class_member.html">Member</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetUpgrades</b> ()</td></tr>
+<tr class="separator:af1cac75a2d8acbff34cc6c15a2bec6b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab966716ab5a3b66bda01edffc65c51e6"><td class="memItemLeft" align="right" valign="top"><a id="ab966716ab5a3b66bda01edffc65c51e6"></a>
+QList&lt; <a class="el" href="class_member.html">Member</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetDowngrades</b> ()</td></tr>
+<tr class="separator:ab966716ab5a3b66bda01edffc65c51e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f85b120f3664ed2f71a916534d666d1"><td class="memItemLeft" align="right" valign="top"><a id="a0f85b120f3664ed2f71a916534d666d1"></a>
+QList&lt; <a class="el" href="class_member.html">Member</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetExpirations</b> (int month)</td></tr>
+<tr class="separator:a0f85b120f3664ed2f71a916534d666d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e2214c52bd0958e4b34aac3b3c8fbcb"><td class="memItemLeft" align="right" valign="top"><a id="a3e2214c52bd0958e4b34aac3b3c8fbcb"></a>
+QList&lt; <a class="el" href="class_member.html">Member</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetRebates</b> ()</td></tr>
+<tr class="separator:a3e2214c52bd0958e4b34aac3b3c8fbcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab49f55667f4141f5cdb8da1c7e64fba7"><td class="memItemLeft" align="right" valign="top"><a id="ab49f55667f4141f5cdb8da1c7e64fba7"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>AddTransaction</b> (const <a class="el" href="class_transaction.html">Transaction</a> &amp;newTransaction)</td></tr>
 <tr class="separator:ab49f55667f4141f5cdb8da1c7e64fba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fb486dbd34ea77233e9d3135dfaf491"><td class="memItemLeft" align="right" valign="top"><a id="a0fb486dbd34ea77233e9d3135dfaf491"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>TransactionExists</b> (const <a class="el" href="class_transaction.html">Transaction</a> &amp;transaction)</td></tr>
+<tr class="separator:a0fb486dbd34ea77233e9d3135dfaf491"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa249651a4fc308b2860178affcdc038"><td class="memItemLeft" align="right" valign="top"><a id="afa249651a4fc308b2860178affcdc038"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>TransactionUpdateInventory</b> (const <a class="el" href="class_transaction.html">Transaction</a> newTransaction)</td></tr>
+<tr class="separator:afa249651a4fc308b2860178affcdc038"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d52a640d51fac0ee84dfef854cc3bb"><td class="memItemLeft" align="right" valign="top"><a id="ae7d52a640d51fac0ee84dfef854cc3bb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>TransactionUpdateMemberTotalSpent</b> (const <a class="el" href="class_transaction.html">Transaction</a> newTransaction)</td></tr>
+<tr class="separator:ae7d52a640d51fac0ee84dfef854cc3bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5ef47dccee63a1fafebc78cccd57bb1"><td class="memItemLeft" align="right" valign="top"><a id="aa5ef47dccee63a1fafebc78cccd57bb1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>TransactionUpdateMemberRebate</b> (const <a class="el" href="class_transaction.html">Transaction</a> newTransaction)</td></tr>
+<tr class="separator:aa5ef47dccee63a1fafebc78cccd57bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5e011a926e8b4d35097a7b06d08d353"><td class="memItemLeft" align="right" valign="top"><a id="ad5e011a926e8b4d35097a7b06d08d353"></a>
+QList&lt; <a class="el" href="class_transaction.html">Transaction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetAllTransactions</b> ()</td></tr>
+<tr class="separator:ad5e011a926e8b4d35097a7b06d08d353"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5548272ea745a70e74fa2ad8bd813f0e"><td class="memItemLeft" align="right" valign="top"><a id="a5548272ea745a70e74fa2ad8bd813f0e"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>CalcGrossSales</b> ()</td></tr>
+<tr class="separator:a5548272ea745a70e74fa2ad8bd813f0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a336e9ed6e7bd33f10c369321d3246b7a"><td class="memItemLeft" align="right" valign="top"><a id="a336e9ed6e7bd33f10c369321d3246b7a"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>CalcGrossSalesByDate</b> (QDate tDate)</td></tr>
+<tr class="separator:a336e9ed6e7bd33f10c369321d3246b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfc8f678c6dfc4225772a1ed73db2e48"><td class="memItemLeft" align="right" valign="top"><a id="abfc8f678c6dfc4225772a1ed73db2e48"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>CalcGrossSalesByMember</b> (int buyersID)</td></tr>
+<tr class="separator:abfc8f678c6dfc4225772a1ed73db2e48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a506ef708818457200abe6e883cbf84ab"><td class="memItemLeft" align="right" valign="top"><a id="a506ef708818457200abe6e883cbf84ab"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>CalcGrossSalesByMember</b> (QString bName)</td></tr>
+<tr class="separator:a506ef708818457200abe6e883cbf84ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5e21fcdd119fdc62d7d76018cbdc1e7"><td class="memItemLeft" align="right" valign="top"><a id="ae5e21fcdd119fdc62d7d76018cbdc1e7"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>CalcGrossSalesByMember</b> (MemberType mType)</td></tr>
+<tr class="separator:ae5e21fcdd119fdc62d7d76018cbdc1e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a1a8f5fad0dce3381baeefcd02acf4f"><td class="memItemLeft" align="right" valign="top"><a id="a9a1a8f5fad0dce3381baeefcd02acf4f"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>CalcGrossSalesByItem</b> (QString itemName)</td></tr>
+<tr class="separator:a9a1a8f5fad0dce3381baeefcd02acf4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a582912a647136bf2da053535070cfcce"><td class="memItemLeft" align="right" valign="top"><a id="a582912a647136bf2da053535070cfcce"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>GetTotalShoppers</b> (MemberType mType)</td></tr>
+<tr class="separator:a582912a647136bf2da053535070cfcce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add65a1ed937a4f8ed0bb3aada12f00c0"><td class="memItemLeft" align="right" valign="top"><a id="add65a1ed937a4f8ed0bb3aada12f00c0"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>GetTotalShoppersByDate</b> (QDate, MemberType mType)</td></tr>
+<tr class="separator:add65a1ed937a4f8ed0bb3aada12f00c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3865bcd00fd7fe0a0b53d258044960a7"><td class="memItemLeft" align="right" valign="top"><a id="a3865bcd00fd7fe0a0b53d258044960a7"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>GetTotalShoppersByItem</b> (QString itemName, MemberType mType)</td></tr>
+<tr class="separator:a3865bcd00fd7fe0a0b53d258044960a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada82cd13fd36808cb0a47aa3fd1f85e2"><td class="memItemLeft" align="right" valign="top"><a id="ada82cd13fd36808cb0a47aa3fd1f85e2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>AddItem</b> (const <a class="el" href="class_item.html">Item</a> &amp;newItem)</td></tr>
 <tr class="separator:ada82cd13fd36808cb0a47aa3fd1f85e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8eb0099d4749c691d243ac5ca806c30"><td class="memItemLeft" align="right" valign="top"><a id="ae8eb0099d4749c691d243ac5ca806c30"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveItem</b> (const <a class="el" href="class_item.html">Item</a> &amp;item)</td></tr>
 <tr class="separator:ae8eb0099d4749c691d243ac5ca806c30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef56b936402215d9e4675c7688160e35"><td class="memItemLeft" align="right" valign="top"><a id="aef56b936402215d9e4675c7688160e35"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>ItemExists</b> (const <a class="el" href="class_item.html">Item</a> &amp;item) const</td></tr>
+<tr class="separator:aef56b936402215d9e4675c7688160e35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54eaafb835b4d8ae4f205419c1b8c1d2"><td class="memItemLeft" align="right" valign="top"><a id="a54eaafb835b4d8ae4f205419c1b8c1d2"></a>
+<a class="el" href="class_item.html">Item</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetItem</b> (QString itemName)</td></tr>
+<tr class="separator:a54eaafb835b4d8ae4f205419c1b8c1d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c5953c6e821792f2b720a0913c492b5"><td class="memItemLeft" align="right" valign="top"><a id="a6c5953c6e821792f2b720a0913c492b5"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>GetItemPrice</b> (QString itemName)</td></tr>
+<tr class="separator:a6c5953c6e821792f2b720a0913c492b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a493b6c8e195842cc287cc3338bcd16"><td class="memItemLeft" align="right" valign="top"><a id="a9a493b6c8e195842cc287cc3338bcd16"></a>
 QList&lt; <a class="el" href="class_item.html">Item</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetAllItems</b> ()</td></tr>
 <tr class="separator:a9a493b6c8e195842cc287cc3338bcd16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77808e923dc7acdf78a468a5dcef023f"><td class="memItemLeft" align="right" valign="top"><a id="a77808e923dc7acdf78a468a5dcef023f"></a>
+QStringList&#160;</td><td class="memItemRight" valign="bottom"><b>GetAllItemNames</b> ()</td></tr>
+<tr class="separator:a77808e923dc7acdf78a468a5dcef023f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a987f90b871cb3ae67cb89ea1cc324995"><td class="memItemLeft" align="right" valign="top"><a id="a987f90b871cb3ae67cb89ea1cc324995"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isOpen</b> () const</td></tr>
 <tr class="separator:a987f90b871cb3ae67cb89ea1cc324995"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639cfdc44d6faa7848f0c51f3b9003ad"><td class="memItemLeft" align="right" valign="top"><a id="a639cfdc44d6faa7848f0c51f3b9003ad"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>GetValidDates</b> (QDate &amp;earliestDate, QDate &amp;latestDate)</td></tr>
+<tr class="separator:a639cfdc44d6faa7848f0c51f3b9003ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a3d41dae808e8eb17d62a83c0b8a257c3"><td class="memItemLeft" align="right" valign="top"><a id="a3d41dae808e8eb17d62a83c0b8a257c3"></a>
+static <a class="el" href="class_d_b_manager.html">DBManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b> ()</td></tr>
+<tr class="separator:a3d41dae808e8eb17d62a83c0b8a257c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -115,7 +211,9 @@ Private Attributes</h2></td></tr>
 QSqlDatabase&#160;</td><td class="memItemRight" valign="bottom"><b>bulkdb</b></td></tr>
 <tr class="separator:a98bdcc2ff763cf208e71d24b6d7c8f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Manages data stored within the bulkclub database file. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>C:/Users/Kevin/Documents/GitHub/Bulk-Club/BulkClub/<a class="el" href="dbmanager_8h_source.html">dbmanager.h</a></li>
 <li>C:/Users/Kevin/Documents/GitHub/Bulk-Club/BulkClub/dbmanager.cpp</li>
 </ul>

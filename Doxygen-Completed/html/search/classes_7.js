@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['transaction',['Transaction',['../class_transaction.html',1,'']]]
+  ['proxymodel',['ProxyModel',['../class_proxy_model.html',1,'']]]
 ];

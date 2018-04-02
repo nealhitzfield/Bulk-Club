@@ -10,6 +10,9 @@
 
 const double TAX_RATE = 0.0775;
 
+/**
+* @brief Contains property values of a transaction from the database.
+*/
 class Transaction
 {
 private:

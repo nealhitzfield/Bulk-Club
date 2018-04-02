@@ -13,6 +13,9 @@ namespace Ui {
 class additemwindow;
 }
 
+/**
+* @brief Receives input for adding new items.
+*/
 class additemwindow : public QDialog
 {
     Q_OBJECT

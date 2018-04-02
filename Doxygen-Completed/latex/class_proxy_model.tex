@@ -1,0 +1,86 @@
+\hypertarget{class_proxy_model}{}\section{Proxy\+Model Class Reference}
+\label{class_proxy_model}\index{Proxy\+Model@{Proxy\+Model}}
+
+
+Proxy Model used for sorting/filtering.  
+
+
+
+
+{\ttfamily \#include $<$models.\+h$>$}
+
+Inheritance diagram for Proxy\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_proxy_model}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_proxy_model_a8c3cd5525d76edb13d4655b02f1b4f53}\label{class_proxy_model_a8c3cd5525d76edb13d4655b02f1b4f53}} 
+void {\bfseries set\+Transaction\+Date} (Q\+Date trans\+Date)
+\item 
+\mbox{\Hypertarget{class_proxy_model_a6b207f08e2f082bd381853e9f0ffe94c}\label{class_proxy_model_a6b207f08e2f082bd381853e9f0ffe94c}} 
+void {\bfseries set\+Buyers\+ID} (int buyers\+ID)
+\item 
+\mbox{\Hypertarget{class_proxy_model_a879ffef7c9b4d862631e34f95d361eed}\label{class_proxy_model_a879ffef7c9b4d862631e34f95d361eed}} 
+void {\bfseries set\+Buyers\+Name} (Q\+String buyers\+Name)
+\item 
+\mbox{\Hypertarget{class_proxy_model_abc75683febee225bc7a3b7fd300ca7d1}\label{class_proxy_model_abc75683febee225bc7a3b7fd300ca7d1}} 
+void {\bfseries set\+Item\+Name} (Q\+String item\+Name)
+\item 
+\mbox{\Hypertarget{class_proxy_model_a49341f56f8b76b7d3510bc45baffc1d7}\label{class_proxy_model_a49341f56f8b76b7d3510bc45baffc1d7}} 
+void {\bfseries set\+Member\+Type} (Member\+Type member\+Type)
+\item 
+\mbox{\Hypertarget{class_proxy_model_a9725fcef2eacae520140b65dac84ea89}\label{class_proxy_model_a9725fcef2eacae520140b65dac84ea89}} 
+void {\bfseries reset\+Filter} ()
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_proxy_model_a643b0f70391c4181a27b089f0d41d190}\label{class_proxy_model_a643b0f70391c4181a27b089f0d41d190}} 
+void {\bfseries update\+Total} (double price)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_proxy_model_aaf0330aa8b9eaa66cced6a5bb2b12594}\label{class_proxy_model_aaf0330aa8b9eaa66cced6a5bb2b12594}} 
+{\bfseries Proxy\+Model} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_proxy_model_a1e9a122098418c6e82dd9e34a21f1d0f}\label{class_proxy_model_a1e9a122098418c6e82dd9e34a21f1d0f}} 
+bool {\bfseries filter\+Accepts\+Row} (int source\+\_\+row, const Q\+Model\+Index \&source\+\_\+parent) const
+\item 
+\mbox{\Hypertarget{class_proxy_model_af81a126c2e3d5222c2bfd6c6643d8fd7}\label{class_proxy_model_af81a126c2e3d5222c2bfd6c6643d8fd7}} 
+Q\+Variant {\bfseries header\+Data} (int section, Qt\+::\+Orientation orientation, int role) const
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_proxy_model_a4344a1574770f9c7fd17632c09b1d436}\label{class_proxy_model_a4344a1574770f9c7fd17632c09b1d436}} 
+Filter {\bfseries filter\+Type}
+\item 
+\mbox{\Hypertarget{class_proxy_model_aad65e1f7c525732aae071b0c2d024049}\label{class_proxy_model_aad65e1f7c525732aae071b0c2d024049}} 
+Q\+Date {\bfseries t\+Date}
+\item 
+\mbox{\Hypertarget{class_proxy_model_ad12b592896da63b73912d4faf3b02d7c}\label{class_proxy_model_ad12b592896da63b73912d4faf3b02d7c}} 
+int {\bfseries b\+ID}
+\item 
+\mbox{\Hypertarget{class_proxy_model_a602f932d290e7f58d1d313277ba9c5f5}\label{class_proxy_model_a602f932d290e7f58d1d313277ba9c5f5}} 
+Q\+String {\bfseries i\+Name}
+\item 
+\mbox{\Hypertarget{class_proxy_model_a5b323a26dfe4ab7c375ad6142a0a9e48}\label{class_proxy_model_a5b323a26dfe4ab7c375ad6142a0a9e48}} 
+Q\+String {\bfseries b\+Name}
+\item 
+\mbox{\Hypertarget{class_proxy_model_ae21e40b3803656450588ce6102c7be1b}\label{class_proxy_model_ae21e40b3803656450588ce6102c7be1b}} 
+Member\+Type {\bfseries m\+Type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Proxy Model used for sorting/filtering. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/\mbox{\hyperlink{models_8h}{models.\+h}}\item 
+C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/models.\+cpp\end{DoxyCompactItemize}

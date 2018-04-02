@@ -1,13 +1,28 @@
 \hypertarget{class_member}{}\section{Member Class Reference}
 \label{class_member}\index{Member@{Member}}
+
+
+Contains property values of a member from the database.  
+
+
+
+
+{\ttfamily \#include $<$member.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_member_a2ad24a730bad2d8636d9d4645b5dc70d}\label{class_member_a2ad24a730bad2d8636d9d4645b5dc70d}} 
+{\bfseries Member} (Q\+String name, int id, int renew\+Cost)
+\item 
+\mbox{\Hypertarget{class_member_a09c25b792a83337fc4b5f937112b3203}\label{class_member_a09c25b792a83337fc4b5f937112b3203}} 
+{\bfseries Member} (Q\+String name, int id, double rebate\+Amt)
 \item 
 \mbox{\Hypertarget{class_member_a92d505b92f58ef6bee3599677eee51a5}\label{class_member_a92d505b92f58ef6bee3599677eee51a5}} 
 {\bfseries Member} (Q\+String name, int id, Member\+Type m\+Type, Q\+Date exp\+Date)
 \item 
-\mbox{\Hypertarget{class_member_a317912a29e377858dfae8873ac5a77ff}\label{class_member_a317912a29e377858dfae8873ac5a77ff}} 
-{\bfseries Member} (Q\+String name, int id, Member\+Type m\+Type, Q\+Date exp\+Date, double tot\+Spent, double rebate\+Amt)
+\mbox{\Hypertarget{class_member_aabc8f461658702d2612db6c64c93302c}\label{class_member_aabc8f461658702d2612db6c64c93302c}} 
+{\bfseries Member} (Q\+String name, int id, Member\+Type m\+Type, Q\+Date exp\+Date, double rebate\+Amt, double tot\+Spent)
 \item 
 \mbox{\Hypertarget{class_member_aaba370b742cfe75151f5da331b9c677f}\label{class_member_aaba370b742cfe75151f5da331b9c677f}} 
 Q\+String {\bfseries Get\+Member\+Name} () const
@@ -21,11 +36,17 @@ Q\+String {\bfseries Get\+Membership\+Type\+String} () const
 \mbox{\Hypertarget{class_member_aca64d3629776abdac055ae0140021aa3}\label{class_member_aca64d3629776abdac055ae0140021aa3}} 
 Q\+String {\bfseries Get\+Expiration\+Date\+String} () const
 \item 
+\mbox{\Hypertarget{class_member_adf6de50fe7517be7cd2a009bffc615b5}\label{class_member_adf6de50fe7517be7cd2a009bffc615b5}} 
+double {\bfseries Get\+Rebate} () const
+\item 
 \mbox{\Hypertarget{class_member_a19cb2fa14badadbd3eb5eea4f94179d4}\label{class_member_a19cb2fa14badadbd3eb5eea4f94179d4}} 
 double {\bfseries Get\+Total\+Spent} () const
 \item 
-\mbox{\Hypertarget{class_member_adf6de50fe7517be7cd2a009bffc615b5}\label{class_member_adf6de50fe7517be7cd2a009bffc615b5}} 
-double {\bfseries Get\+Rebate} () const
+\mbox{\Hypertarget{class_member_ab7f45754db08f7b1f586e2a43b4dfffe}\label{class_member_ab7f45754db08f7b1f586e2a43b4dfffe}} 
+int {\bfseries Get\+Renew\+Cost} () const
+\item 
+\mbox{\Hypertarget{class_member_a7cb29a17a2bed42772a22af7cdf4aec4}\label{class_member_a7cb29a17a2bed42772a22af7cdf4aec4}} 
+bool {\bfseries is\+Executive} () const
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -42,15 +63,21 @@ Member\+Type {\bfseries membership}
 \mbox{\Hypertarget{class_member_a697e8d1fc0417da55627350df5e02b47}\label{class_member_a697e8d1fc0417da55627350df5e02b47}} 
 Q\+Date {\bfseries expiration\+Date}
 \item 
+\mbox{\Hypertarget{class_member_a351d6d0f9eafd12525300d937bb4438b}\label{class_member_a351d6d0f9eafd12525300d937bb4438b}} 
+double {\bfseries rebate}
+\item 
 \mbox{\Hypertarget{class_member_ab2ca88932004e0c2005bbf837a5d6d58}\label{class_member_ab2ca88932004e0c2005bbf837a5d6d58}} 
 double {\bfseries total\+Spent}
 \item 
-\mbox{\Hypertarget{class_member_a351d6d0f9eafd12525300d937bb4438b}\label{class_member_a351d6d0f9eafd12525300d937bb4438b}} 
-double {\bfseries rebate}
+\mbox{\Hypertarget{class_member_a3612665d378d6ccaaaaad560d6ba70db}\label{class_member_a3612665d378d6ccaaaaad560d6ba70db}} 
+int {\bfseries member\+Renewal}
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+Contains property values of a member from the database. 
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/member.\+h\item 
+C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/\mbox{\hyperlink{member_8h}{member.\+h}}\item 
 C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/member.\+cpp\end{DoxyCompactItemize}

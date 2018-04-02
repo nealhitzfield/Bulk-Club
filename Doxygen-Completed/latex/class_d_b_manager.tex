@@ -1,13 +1,37 @@
 \hypertarget{class_d_b_manager}{}\section{D\+B\+Manager Class Reference}
 \label{class_d_b_manager}\index{D\+B\+Manager@{D\+B\+Manager}}
+
+
+Manages data stored within the bulkclub database file.  
+
+
+
+
+{\ttfamily \#include $<$dbmanager.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_d_b_manager_af1069c944914668fb2bf3a0f18da556b}\label{class_d_b_manager_af1069c944914668fb2bf3a0f18da556b}} 
-{\bfseries D\+B\+Manager} (const Q\+String \&db\+Filename)
+\mbox{\Hypertarget{class_d_b_manager_a14fa55f5fc5808730566dbc7724dbc99}\label{class_d_b_manager_a14fa55f5fc5808730566dbc7724dbc99}} 
+{\bfseries D\+B\+Manager} (const \mbox{\hyperlink{class_d_b_manager}{D\+B\+Manager}} \&)=delete
+\item 
+\mbox{\Hypertarget{class_d_b_manager_adae25ff25c9a6d385aad1f77c6b5ec95}\label{class_d_b_manager_adae25ff25c9a6d385aad1f77c6b5ec95}} 
+void {\bfseries operator=} (const \mbox{\hyperlink{class_d_b_manager}{D\+B\+Manager}} \&)=delete
 \item 
 \mbox{\Hypertarget{class_d_b_manager_ac9fc43d8d42f0de24c2daae2135195aa}\label{class_d_b_manager_ac9fc43d8d42f0de24c2daae2135195aa}} 
 bool {\bfseries Verify\+Login} (const \mbox{\hyperlink{class_credentials}{Credentials}} \&credentials, Q\+String \&employee\+Type)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a40cf58eb81b82abebe7df72edddab87e}\label{class_d_b_manager_a40cf58eb81b82abebe7df72edddab87e}} 
+bool {\bfseries Is\+Database\+Populated} ()
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a7f80a2ac0360dd2ba6fc18431dd9ef6c}\label{class_d_b_manager_a7f80a2ac0360dd2ba6fc18431dd9ef6c}} 
+bool {\bfseries Set\+Populated\+Flag} ()
+\item 
+\mbox{\Hypertarget{class_d_b_manager_aa580524cb93affde099ac37e9ee468d7}\label{class_d_b_manager_aa580524cb93affde099ac37e9ee468d7}} 
+bool {\bfseries Populate\+Members} ()
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a7e023e13095712a08c2b7a47656d8d7e}\label{class_d_b_manager_a7e023e13095712a08c2b7a47656d8d7e}} 
+bool {\bfseries Populate\+Transactions} ()
 \item 
 \mbox{\Hypertarget{class_d_b_manager_af7cfff555a5cd6c0cb191fe377033062}\label{class_d_b_manager_af7cfff555a5cd6c0cb191fe377033062}} 
 bool {\bfseries Add\+Member} (const \mbox{\hyperlink{class_member}{Member}} \&new\+Member)
@@ -15,8 +39,8 @@ bool {\bfseries Add\+Member} (const \mbox{\hyperlink{class_member}{Member}} \&ne
 \mbox{\Hypertarget{class_d_b_manager_af0857aec484261da158486c6609a9637}\label{class_d_b_manager_af0857aec484261da158486c6609a9637}} 
 bool {\bfseries Remove\+Member} (const \mbox{\hyperlink{class_member}{Member}} \&member)
 \item 
-\mbox{\Hypertarget{class_d_b_manager_abca86413cfbad97d5c8540d675fcc43a}\label{class_d_b_manager_abca86413cfbad97d5c8540d675fcc43a}} 
-bool {\bfseries Member\+Exists} (const \mbox{\hyperlink{class_member}{Member}} \&member)
+\mbox{\Hypertarget{class_d_b_manager_ae55ecc834d2785d09ec7c01a9ea1284a}\label{class_d_b_manager_ae55ecc834d2785d09ec7c01a9ea1284a}} 
+bool {\bfseries Member\+Exists} (const int member\+ID)
 \item 
 \mbox{\Hypertarget{class_d_b_manager_ada9b21cf66caf785534d0072acb14530}\label{class_d_b_manager_ada9b21cf66caf785534d0072acb14530}} 
 \mbox{\hyperlink{class_member}{Member}} {\bfseries Get\+Member} (int member\+ID)
@@ -24,8 +48,62 @@ bool {\bfseries Member\+Exists} (const \mbox{\hyperlink{class_member}{Member}} \
 \mbox{\Hypertarget{class_d_b_manager_ad76ac83a09292bf6cbceab84a94f86cd}\label{class_d_b_manager_ad76ac83a09292bf6cbceab84a94f86cd}} 
 Q\+List$<$ \mbox{\hyperlink{class_member}{Member}} $>$ {\bfseries Get\+All\+Members} ()
 \item 
+\mbox{\Hypertarget{class_d_b_manager_af1cac75a2d8acbff34cc6c15a2bec6b2}\label{class_d_b_manager_af1cac75a2d8acbff34cc6c15a2bec6b2}} 
+Q\+List$<$ \mbox{\hyperlink{class_member}{Member}} $>$ {\bfseries Get\+Upgrades} ()
+\item 
+\mbox{\Hypertarget{class_d_b_manager_ab966716ab5a3b66bda01edffc65c51e6}\label{class_d_b_manager_ab966716ab5a3b66bda01edffc65c51e6}} 
+Q\+List$<$ \mbox{\hyperlink{class_member}{Member}} $>$ {\bfseries Get\+Downgrades} ()
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a0f85b120f3664ed2f71a916534d666d1}\label{class_d_b_manager_a0f85b120f3664ed2f71a916534d666d1}} 
+Q\+List$<$ \mbox{\hyperlink{class_member}{Member}} $>$ {\bfseries Get\+Expirations} (int month)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a3e2214c52bd0958e4b34aac3b3c8fbcb}\label{class_d_b_manager_a3e2214c52bd0958e4b34aac3b3c8fbcb}} 
+Q\+List$<$ \mbox{\hyperlink{class_member}{Member}} $>$ {\bfseries Get\+Rebates} ()
+\item 
 \mbox{\Hypertarget{class_d_b_manager_ab49f55667f4141f5cdb8da1c7e64fba7}\label{class_d_b_manager_ab49f55667f4141f5cdb8da1c7e64fba7}} 
 bool {\bfseries Add\+Transaction} (const \mbox{\hyperlink{class_transaction}{Transaction}} \&new\+Transaction)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a0fb486dbd34ea77233e9d3135dfaf491}\label{class_d_b_manager_a0fb486dbd34ea77233e9d3135dfaf491}} 
+bool {\bfseries Transaction\+Exists} (const \mbox{\hyperlink{class_transaction}{Transaction}} \&transaction)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_afa249651a4fc308b2860178affcdc038}\label{class_d_b_manager_afa249651a4fc308b2860178affcdc038}} 
+bool {\bfseries Transaction\+Update\+Inventory} (const \mbox{\hyperlink{class_transaction}{Transaction}} new\+Transaction)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_ae7d52a640d51fac0ee84dfef854cc3bb}\label{class_d_b_manager_ae7d52a640d51fac0ee84dfef854cc3bb}} 
+bool {\bfseries Transaction\+Update\+Member\+Total\+Spent} (const \mbox{\hyperlink{class_transaction}{Transaction}} new\+Transaction)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_aa5ef47dccee63a1fafebc78cccd57bb1}\label{class_d_b_manager_aa5ef47dccee63a1fafebc78cccd57bb1}} 
+bool {\bfseries Transaction\+Update\+Member\+Rebate} (const \mbox{\hyperlink{class_transaction}{Transaction}} new\+Transaction)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_ad5e011a926e8b4d35097a7b06d08d353}\label{class_d_b_manager_ad5e011a926e8b4d35097a7b06d08d353}} 
+Q\+List$<$ \mbox{\hyperlink{class_transaction}{Transaction}} $>$ {\bfseries Get\+All\+Transactions} ()
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a5548272ea745a70e74fa2ad8bd813f0e}\label{class_d_b_manager_a5548272ea745a70e74fa2ad8bd813f0e}} 
+double {\bfseries Calc\+Gross\+Sales} ()
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a336e9ed6e7bd33f10c369321d3246b7a}\label{class_d_b_manager_a336e9ed6e7bd33f10c369321d3246b7a}} 
+double {\bfseries Calc\+Gross\+Sales\+By\+Date} (Q\+Date t\+Date)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_abfc8f678c6dfc4225772a1ed73db2e48}\label{class_d_b_manager_abfc8f678c6dfc4225772a1ed73db2e48}} 
+double {\bfseries Calc\+Gross\+Sales\+By\+Member} (int buyers\+ID)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a506ef708818457200abe6e883cbf84ab}\label{class_d_b_manager_a506ef708818457200abe6e883cbf84ab}} 
+double {\bfseries Calc\+Gross\+Sales\+By\+Member} (Q\+String b\+Name)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_ae5e21fcdd119fdc62d7d76018cbdc1e7}\label{class_d_b_manager_ae5e21fcdd119fdc62d7d76018cbdc1e7}} 
+double {\bfseries Calc\+Gross\+Sales\+By\+Member} (Member\+Type m\+Type)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a9a1a8f5fad0dce3381baeefcd02acf4f}\label{class_d_b_manager_a9a1a8f5fad0dce3381baeefcd02acf4f}} 
+double {\bfseries Calc\+Gross\+Sales\+By\+Item} (Q\+String item\+Name)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a582912a647136bf2da053535070cfcce}\label{class_d_b_manager_a582912a647136bf2da053535070cfcce}} 
+int {\bfseries Get\+Total\+Shoppers} (Member\+Type m\+Type)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_add65a1ed937a4f8ed0bb3aada12f00c0}\label{class_d_b_manager_add65a1ed937a4f8ed0bb3aada12f00c0}} 
+int {\bfseries Get\+Total\+Shoppers\+By\+Date} (Q\+Date, Member\+Type m\+Type)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a3865bcd00fd7fe0a0b53d258044960a7}\label{class_d_b_manager_a3865bcd00fd7fe0a0b53d258044960a7}} 
+int {\bfseries Get\+Total\+Shoppers\+By\+Item} (Q\+String item\+Name, Member\+Type m\+Type)
 \item 
 \mbox{\Hypertarget{class_d_b_manager_ada82cd13fd36808cb0a47aa3fd1f85e2}\label{class_d_b_manager_ada82cd13fd36808cb0a47aa3fd1f85e2}} 
 bool {\bfseries Add\+Item} (const \mbox{\hyperlink{class_item}{Item}} \&new\+Item)
@@ -33,11 +111,32 @@ bool {\bfseries Add\+Item} (const \mbox{\hyperlink{class_item}{Item}} \&new\+Ite
 \mbox{\Hypertarget{class_d_b_manager_ae8eb0099d4749c691d243ac5ca806c30}\label{class_d_b_manager_ae8eb0099d4749c691d243ac5ca806c30}} 
 bool {\bfseries Remove\+Item} (const \mbox{\hyperlink{class_item}{Item}} \&item)
 \item 
+\mbox{\Hypertarget{class_d_b_manager_aef56b936402215d9e4675c7688160e35}\label{class_d_b_manager_aef56b936402215d9e4675c7688160e35}} 
+bool {\bfseries Item\+Exists} (const \mbox{\hyperlink{class_item}{Item}} \&item) const
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a54eaafb835b4d8ae4f205419c1b8c1d2}\label{class_d_b_manager_a54eaafb835b4d8ae4f205419c1b8c1d2}} 
+\mbox{\hyperlink{class_item}{Item}} {\bfseries Get\+Item} (Q\+String item\+Name)
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a6c5953c6e821792f2b720a0913c492b5}\label{class_d_b_manager_a6c5953c6e821792f2b720a0913c492b5}} 
+double {\bfseries Get\+Item\+Price} (Q\+String item\+Name)
+\item 
 \mbox{\Hypertarget{class_d_b_manager_a9a493b6c8e195842cc287cc3338bcd16}\label{class_d_b_manager_a9a493b6c8e195842cc287cc3338bcd16}} 
 Q\+List$<$ \mbox{\hyperlink{class_item}{Item}} $>$ {\bfseries Get\+All\+Items} ()
 \item 
+\mbox{\Hypertarget{class_d_b_manager_a77808e923dc7acdf78a468a5dcef023f}\label{class_d_b_manager_a77808e923dc7acdf78a468a5dcef023f}} 
+Q\+String\+List {\bfseries Get\+All\+Item\+Names} ()
+\item 
 \mbox{\Hypertarget{class_d_b_manager_a987f90b871cb3ae67cb89ea1cc324995}\label{class_d_b_manager_a987f90b871cb3ae67cb89ea1cc324995}} 
 bool {\bfseries is\+Open} () const
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a639cfdc44d6faa7848f0c51f3b9003ad}\label{class_d_b_manager_a639cfdc44d6faa7848f0c51f3b9003ad}} 
+bool {\bfseries Get\+Valid\+Dates} (Q\+Date \&earliest\+Date, Q\+Date \&latest\+Date)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_d_b_manager_a3d41dae808e8eb17d62a83c0b8a257c3}\label{class_d_b_manager_a3d41dae808e8eb17d62a83c0b8a257c3}} 
+static \mbox{\hyperlink{class_d_b_manager}{D\+B\+Manager}} \& {\bfseries instance} ()
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -47,7 +146,10 @@ Q\+Sql\+Database {\bfseries bulkdb}
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+Manages data stored within the bulkclub database file. 
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/dbmanager.\+h\item 
+C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/\mbox{\hyperlink{dbmanager_8h}{dbmanager.\+h}}\item 
 C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/dbmanager.\+cpp\end{DoxyCompactItemize}

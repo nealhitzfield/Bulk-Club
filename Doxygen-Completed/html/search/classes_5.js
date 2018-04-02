@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['member',['Member',['../class_member.html',1,'']]],
-  ['membermodel',['MemberModel',['../class_member_model.html',1,'']]]
+  ['loginwindow',['LoginWindow',['../class_ui_1_1_login_window.html',1,'Ui::LoginWindow'],['../class_login_window.html',1,'LoginWindow']]]
 ];

@@ -1,5 +1,14 @@
 \hypertarget{class_admin_window}{}\section{Admin\+Window Class Reference}
 \label{class_admin_window}\index{Admin\+Window@{Admin\+Window}}
+
+
+Window for administrative functions.  
+
+
+
+
+{\ttfamily \#include $<$adminwindow.\+h$>$}
+
 Inheritance diagram for Admin\+Window\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -12,8 +21,14 @@ Inheritance diagram for Admin\+Window\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_admin_window_a2e6bb3162aebae122abc71e1086b9541}\label{class_admin_window_a2e6bb3162aebae122abc71e1086b9541}} 
 void {\bfseries send\+Selected\+ID} (int id)
 \item 
+\mbox{\Hypertarget{class_admin_window_a5270281321fda37c184eec8d71741a79}\label{class_admin_window_a5270281321fda37c184eec8d71741a79}} 
+void {\bfseries send\+Selected\+Name} (Q\+String item\+Name)
+\item 
 \mbox{\Hypertarget{class_admin_window_ad4114115ca5ea21c9959b6d35d9884f7}\label{class_admin_window_ad4114115ca5ea21c9959b6d35d9884f7}} 
 void {\bfseries send\+Model} (\mbox{\hyperlink{class_member_model}{Member\+Model}} $\ast$mod)
+\item 
+\mbox{\Hypertarget{class_admin_window_ae49b563c2006f8bf84aea31b1e24276a}\label{class_admin_window_ae49b563c2006f8bf84aea31b1e24276a}} 
+void {\bfseries send\+Model} (\mbox{\hyperlink{class_item_model}{Item\+Model}} $\ast$mod)
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -30,14 +45,32 @@ void {\bfseries on\+\_\+add\+Member\+Button\+\_\+clicked} ()
 \mbox{\Hypertarget{class_admin_window_a8c3cf24ae2f2e441639b8f2a3b318a19}\label{class_admin_window_a8c3cf24ae2f2e441639b8f2a3b318a19}} 
 void {\bfseries on\+\_\+remove\+Member\+Button\+\_\+clicked} ()
 \item 
-\mbox{\Hypertarget{class_admin_window_a0dc5f886f2767ba3d17da0113168fa3b}\label{class_admin_window_a0dc5f886f2767ba3d17da0113168fa3b}} 
-void {\bfseries update\+View} ()
-\item 
 \mbox{\Hypertarget{class_admin_window_ac723fe967e1c49191addbea8ce544f9a}\label{class_admin_window_ac723fe967e1c49191addbea8ce544f9a}} 
 void {\bfseries remove\+Member} ()
 \item 
 \mbox{\Hypertarget{class_admin_window_ae8dd3cfbbbb415ddc4500ed32a752a50}\label{class_admin_window_ae8dd3cfbbbb415ddc4500ed32a752a50}} 
 void {\bfseries on\+\_\+members\+Table\+\_\+clicked} (const Q\+Model\+Index \&index)
+\item 
+\mbox{\Hypertarget{class_admin_window_aaff02ef0ba11fff530f3b452a314344c}\label{class_admin_window_aaff02ef0ba11fff530f3b452a314344c}} 
+void {\bfseries on\+\_\+items\+Table\+\_\+clicked} (const Q\+Model\+Index \&index)
+\item 
+\mbox{\Hypertarget{class_admin_window_a2124b4c1c17e5304b5b836e86c2dcaa6}\label{class_admin_window_a2124b4c1c17e5304b5b836e86c2dcaa6}} 
+void {\bfseries on\+\_\+add\+Item\+Button\+\_\+clicked} ()
+\item 
+\mbox{\Hypertarget{class_admin_window_a68908f105ccb9b59a6633c475f49cf54}\label{class_admin_window_a68908f105ccb9b59a6633c475f49cf54}} 
+void {\bfseries on\+\_\+remove\+Item\+Button\+\_\+clicked} ()
+\item 
+\mbox{\Hypertarget{class_admin_window_acc030ee24589408438cd643c512a1945}\label{class_admin_window_acc030ee24589408438cd643c512a1945}} 
+void {\bfseries remove\+Item} ()
+\item 
+\mbox{\Hypertarget{class_admin_window_ab76dc76762081f6b697e72a19fc44a60}\label{class_admin_window_ab76dc76762081f6b697e72a19fc44a60}} 
+void {\bfseries update\+Item\+View} ()
+\item 
+\mbox{\Hypertarget{class_admin_window_a96d1b92ba3008ee2bb0d689812b178c5}\label{class_admin_window_a96d1b92ba3008ee2bb0d689812b178c5}} 
+void {\bfseries update\+Member\+View} ()
+\item 
+\mbox{\Hypertarget{class_admin_window_a6a969766e3ed768c11fcf3d698a75ee8}\label{class_admin_window_a6a969766e3ed768c11fcf3d698a75ee8}} 
+void {\bfseries on\+\_\+tab\+Widget\+\_\+tab\+Bar\+Clicked} ()
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -51,15 +84,24 @@ void {\bfseries on\+\_\+members\+Table\+\_\+clicked} (const Q\+Model\+Index \&in
 \mbox{\Hypertarget{class_admin_window_adac3343d645364a16cf8a970a3e8b12a}\label{class_admin_window_adac3343d645364a16cf8a970a3e8b12a}} 
 \mbox{\hyperlink{class_item_model}{Item\+Model}} $\ast$ {\bfseries i\+Model}
 \item 
-\mbox{\Hypertarget{class_admin_window_a5d706087ad7f29389a98d0b732794819}\label{class_admin_window_a5d706087ad7f29389a98d0b732794819}} 
-\mbox{\hyperlink{class_d_b_manager}{D\+B\+Manager}} {\bfseries bulkdb}
+\mbox{\Hypertarget{class_admin_window_a1f486154ede97643b14c5cdbbbc81979}\label{class_admin_window_a1f486154ede97643b14c5cdbbbc81979}} 
+\mbox{\hyperlink{class_upgrade_model}{Upgrade\+Model}} $\ast$ {\bfseries u\+Model}
+\item 
+\mbox{\Hypertarget{class_admin_window_aa3b441553db7ec8a809f173824942ba4}\label{class_admin_window_aa3b441553db7ec8a809f173824942ba4}} 
+\mbox{\hyperlink{class_downgrade_model}{Downgrade\+Model}} $\ast$ {\bfseries d\+Model}
 \item 
 \mbox{\Hypertarget{class_admin_window_a019852d3390ef26cb634709e41f59764}\label{class_admin_window_a019852d3390ef26cb634709e41f59764}} 
 int {\bfseries selected\+ID}
+\item 
+\mbox{\Hypertarget{class_admin_window_a13177aa3fd835f2fb9eecbfa86f8b465}\label{class_admin_window_a13177aa3fd835f2fb9eecbfa86f8b465}} 
+Q\+String {\bfseries selected\+Name}
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+Window for administrative functions. 
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/adminwindow.\+h\item 
+C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/\mbox{\hyperlink{adminwindow_8h}{adminwindow.\+h}}\item 
 C\+:/\+Users/\+Kevin/\+Documents/\+Git\+Hub/\+Bulk-\/\+Club/\+Bulk\+Club/adminwindow.\+cpp\end{DoxyCompactItemize}
